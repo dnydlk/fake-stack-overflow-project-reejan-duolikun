@@ -1,0 +1,16 @@
+.fso-order-btn {
+    background: #ffffff;
+    font-size: 14px;
+    border: #cccccc 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.fso-order-btn:hover {
+    background: #f9f9fa
+
+}
+
+.fso-order-btn:active {
+    background: #eff0f1
+}

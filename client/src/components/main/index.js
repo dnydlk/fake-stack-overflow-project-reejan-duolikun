@@ -1,6 +1,7 @@
 import "./index.css";
 import React, { useState } from "react";
 import SideBarNav from "./sideBarNav";
+import QuestionPage from "./questionPage";
 
 const Main = ({ search = "", title, setQuestionPage }) => {
     console.log("🚀 ~ Main ~ title:", title);
@@ -15,9 +16,8 @@ const Main = ({ search = "", title, setQuestionPage }) => {
     console.log("🚀 ~ Main ~ setQid:", setQid);
     console.log("🚀 ~ Main ~ qid:", qid);
     let selected = "";
-    console.log("🚀 ~ Main ~ selected:", selected);
+
     let content = null;
-    console.log("🚀 ~ Main ~ content:", content);
 
     const handleQuestions = () => {
         setQuestionPage();
@@ -50,23 +50,60 @@ const Main = ({ search = "", title, setQuestionPage }) => {
     };
     console.log("🚀 ~ handleNewAnswer ~ handleNewAnswer:", handleNewAnswer);
 
-    // const getQuestionPage = (order = "newest", search = "") => {
-    //     return (
-    //         <QuestionPage
-    //             title_text={title}
-    //             order={order}
-    //             search={search}
-    //             setQuestionOrder={setQuestionOrder}
-    //             clickTag={clickTag}
-    //             handleAnswer={handleAnswer}
-    //             handleNewQuestion={handleNewQuestion}
-    //         />
-    //     );
-    // };
+    const getQuestionPage = (order = "newest", search = "") => {
+        return (
+            <QuestionPage
+                title_text={title}
+                order={order}
+                search={search}
+                setQuestionOrder={setQuestionOrder}
+                clickTag={clickTag}
+                handleAnswer={handleAnswer}
+                handleNewQuestion={handleNewQuestion}
+            />
+        );
+    };
+
+    switch (page) {
+        case "home": {
+            selected = "q";
+            content = getQuestionPage(questionOrder.toLowerCase(), search);
+            break;
+        }
+        // case "tag": {
+        //     selected = "t";
+        //     content = <TagPage clickTag={clickTag} handleNewQuestion={handleNewQuestion} />;
+        //     break;
+        // }
+        // case "answer": {
+        //     selected = "";
+        //     content = <AnswerPage qid={qid} handleNewQuestion={handleNewQuestion} handleNewAnswer={handleNewAnswer} />;
+        //     break;
+        // }
+        // case "newQuestion": {
+        //     selected = "";
+        //     content = <NewQuestion handleQuestions={handleQuestions} />;
+        //     break;
+        // }
+        // case "newAnswer": {
+        //     selected = "";
+        //     content = <NewAnswer qid={qid} handleAnswer={handleAnswer} />;
+        //     break;
+        // }
+        default:
+            selected = "q";
+            content = getQuestionPage();
+            break;
+    }
 
     return (
-        <div id="main-content" className="fso-main d-flex flex-column">
-            <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} />
+        <div id="main-content" className="fso-main ">
+            {/*//- Sidebar Navigation  */}
+                <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} />
+            {/*//- Right Main Content  */}
+            <div id="right_main" className="fso-right-main">
+                {content}
+            </div>
         </div>
     );
 };

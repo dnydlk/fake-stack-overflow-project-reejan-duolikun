@@ -4,7 +4,9 @@
     justify-content: space-around; */
     height: 10%;
     width: 100%;
-    background: #dddddd;
+    /* background: #dddddd; */
+    background: #ffffff;
+    border-bottom: 1px solid #dddddd;
 }
 
 /* .fso-title {
@@ -18,6 +20,7 @@
 } */
 
 .fso-logo {
-    height: 70px
+    height: 70px;
+    margin-bottom: 0px;
     /* float: left; */
 }

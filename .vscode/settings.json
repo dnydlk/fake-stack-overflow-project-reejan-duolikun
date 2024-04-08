@@ -59,5 +59,11 @@
             "italic": true,
             "strikethrough": false
         }
+    ],
+    "cSpell.words": [
+        "bluebtn",
+        "btns",
+        "qcnt",
+        "qlist"
     ]
 }
