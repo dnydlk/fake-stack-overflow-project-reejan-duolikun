@@ -1,0 +1,23 @@
+.fso-header {
+    /* display: flex;
+    align-items: center;
+    justify-content: space-around; */
+    height: 10%;
+    width: 100%;
+    background: #dddddd;
+}
+
+/* .fso-title {
+    font-size: 32px;
+    font-weight: 800;
+} */
+
+/* .fso-search-bar {  
+    margin-right: auto;
+    width: 50%;
+} */
+
+.fso-logo {
+    height: 70px
+    /* float: left; */
+}
