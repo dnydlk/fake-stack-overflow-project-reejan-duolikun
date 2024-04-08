@@ -17,7 +17,7 @@ const registerUser = async(req, res) => {
             return res.status(400).json({
                 status: "failed",
                 data: [],
-                message: "This email is already registered. Please try loggin in instead.",
+                message: "This email is already registered. Please try logging in instead.",
             });
         const savedUser = await newUser.save(); // save new user into the database
         res.status(200).json({
