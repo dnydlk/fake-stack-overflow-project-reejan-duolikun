@@ -40,7 +40,7 @@ const QuestionPage = ({
                 ))}
             </div>
             {title_text === "Search Results" && !qlist.length && (
-                <div className="bold_title right_padding">No Questions Found</div>
+                <div className="bold_title fso-right-padding">No Questions Found</div>
             )}
         </>
     );
