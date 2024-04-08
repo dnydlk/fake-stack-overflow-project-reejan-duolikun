@@ -1,0 +1,18 @@
+/* All the CSS related to answers Page*/
+.fso-answer {
+    display: flex;
+    flex-direction: row;
+    border-bottom: #cccccc 1px solid;
+}
+
+.fso-answer-text {
+    width: 75%;
+}
+
+.fso-answer-author-block {
+    margin-left: 5%;
+}
+
+.fso-answer-author-name {
+    color: green;
+}

@@ -1,0 +1,20 @@
+.fso-question-body {
+    display: flex;
+    flex-direction: row;
+    border-bottom: #cccccc 1px solid;
+    border-top: #cccccc 1px solid;
+}
+
+.fso-answer-question-view {
+    width: 15%;
+}
+
+.fso-answer-question-text {
+    width: 90%;
+}
+
+.fso-answer-question-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+}

@@ -2,21 +2,14 @@ import "./index.css";
 import React, { useState } from "react";
 import SideBarNav from "./sideBarNav";
 import QuestionPage from "./questionPage";
+import AnswerPage from "./answerPage";
 
 const Main = ({ search = "", title, setQuestionPage }) => {
-    console.log("🚀 ~ Main ~ title:", title);
-    console.log("🚀 ~ Main ~ search:", search);
     const [page, setPage] = useState("home");
-    console.log("🚀 ~ Main ~ setPage:", setPage);
-    console.log("🚀 ~ Main ~ page:", page);
     const [questionOrder, setQuestionOrder] = useState("newest");
-    console.log("🚀 ~ Main ~ setQuestionOrder:", setQuestionOrder);
-    console.log("🚀 ~ Main ~ questionOrder:", questionOrder);
     const [qid, setQid] = useState("");
-    console.log("🚀 ~ Main ~ setQid:", setQid);
     console.log("🚀 ~ Main ~ qid:", qid);
     let selected = "";
-
     let content = null;
 
     const handleQuestions = () => {
@@ -32,18 +25,15 @@ const Main = ({ search = "", title, setQuestionPage }) => {
         setQid(qid);
         setPage("answer");
     };
-    console.log("🚀 ~ handleAnswer ~ handleAnswer:", handleAnswer);
 
-    const clickTag = (tname) => {
-        setQuestionPage("[" + tname + "]", tname);
+    const clickTag = (tagName) => {
+        setQuestionPage("[" + tagName + "]", tagName);
         setPage("home");
     };
-    console.log("🚀 ~ clickTag ~ clickTag:", clickTag);
 
     const handleNewQuestion = () => {
         setPage("newQuestion");
     };
-    console.log("🚀 ~ handleNewQuestion ~ handleNewQuestion:", handleNewQuestion);
 
     const handleNewAnswer = () => {
         setPage("newAnswer");
@@ -75,11 +65,11 @@ const Main = ({ search = "", title, setQuestionPage }) => {
         //     content = <TagPage clickTag={clickTag} handleNewQuestion={handleNewQuestion} />;
         //     break;
         // }
-        // case "answer": {
-        //     selected = "";
-        //     content = <AnswerPage qid={qid} handleNewQuestion={handleNewQuestion} handleNewAnswer={handleNewAnswer} />;
-        //     break;
-        // }
+        case "answer": {
+            selected = "";
+            content = <AnswerPage qid={qid} handleNewQuestion={handleNewQuestion} handleNewAnswer={handleNewAnswer} />;
+            break;
+        }
         // case "newQuestion": {
         //     selected = "";
         //     content = <NewQuestion handleQuestions={handleQuestions} />;
