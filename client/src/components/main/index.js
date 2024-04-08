@@ -8,7 +8,7 @@ const Main = ({ search = "", title, setQuestionPage }) => {
     const [page, setPage] = useState("home");
     const [questionOrder, setQuestionOrder] = useState("newest");
     const [qid, setQid] = useState("");
-    console.log("🚀 ~ Main ~ qid:", qid);
+    
     let selected = "";
     let content = null;
 

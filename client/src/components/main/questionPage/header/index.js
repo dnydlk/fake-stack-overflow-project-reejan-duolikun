@@ -5,7 +5,7 @@ const QuestionHeader = ({ title_text, qcnt, setQuestionOrder, handleNewQuestion 
     return (
         <div>
             <div className="fso-space-between fso-right-padding">
-                <div className="fso-bold-title">{title_text}</div>
+                <div data-cy-test="main-page-header" className="fso-bold-title">{title_text}</div>
                 <button
                     className="fso-blue-btn"
                     onClick={() => {

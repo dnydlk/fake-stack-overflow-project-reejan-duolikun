@@ -2,11 +2,8 @@ import "./index.css";
 import React, { useState } from "react";
 
 const Header = ({ search, setQuestionPage }) => {
-    console.log("🚀 ~ Header ~ setQuestionPage:", setQuestionPage);
     // set the value of the search bar to the search state
     const [value, setValue] = useState(search);
-    console.log("🚀 ~ Header ~ setValue:", setValue);
-    console.log("🚀 ~ Header ~ value:", value);
 
     return (
         <div id="fso-header" className="fso-header d-flex align-items-center justify-content-around">
