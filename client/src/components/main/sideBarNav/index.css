@@ -1,0 +1,38 @@
+.fso-sideBarNav {
+    /* display: flex;
+    flex-direction: column; */
+    width: 15%;
+    /* border-right: dashed; */
+    border-right: 1px solid #cccccc;
+    height: 100%;
+    padding: 4% 0 4% 0;
+    /* align-items: center; */
+}
+
+.fso-menu_button:first-child {
+    margin-top: 0;
+}
+
+.fso-menu_button {
+    height: 40px;
+    width: 80%;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    text-align: center;
+    line-height: 40px;
+    color: black;
+    cursor: pointer;
+}
+
+.fso-menu_button:hover {
+    background: #cccccc;
+}
+
+.fso-menu_button:active {
+    background: #b6b6b6;
+}
+
+.fso-menu_selected {
+    background: #cccccc;
+}
