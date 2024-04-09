@@ -41,4 +41,3 @@
 #             - name: Run Cypress Tests in Client
 #               run: npx cypress run
 #               working-directory: ./client
-
