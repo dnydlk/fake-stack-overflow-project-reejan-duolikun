@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+//* Custom command to get an element by data-cy-test attribute
+//* getDateCyTest: name of the custom command
+//* dateCyTestSelector: contains the value of the data-cy-test attribute in the element
+//* Usage: cy.get('[data-cy-test="main-page-header"]')
+Cypress.Commands.add('getDateCyTest', (dateCyTestSelector) => {
+    return cy.get(`[data-cy-test=${dateCyTestSelector}]`);
+ })

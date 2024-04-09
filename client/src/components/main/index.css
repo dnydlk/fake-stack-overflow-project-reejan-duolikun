@@ -1,0 +1,66 @@
+.fso-main {
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+}
+
+.fso-right-main {
+    width: 85%;
+    overflow: auto;
+}
+
+.fso-space-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fso-right-padding {
+    padding: 2% 0 2% 2%;
+}
+
+.fso-bold-title {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 40px;
+}
+
+.fso-blue-btn {
+    background: hsl(210, 77%, 46%);
+    color: #ffffff;
+    border: hsl(210, 77%, 46%) 1px solid;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 9px 12px 9px 12px;
+    margin-right: 5%;
+}
+
+.fso-blue-btn:hover {
+    background: hsl(210, 77%, 51%);
+}
+
+.fso-blue-btn:active {
+    background: hsl(210, 77%, 46%);
+}
+
+.fso-btn-indicator-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* This will push child elements to the extremes of the container */
+    width: 100%;
+}
+
+.fso-form-postBtn {
+    background: #3090e2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.fso-mandatory-indicator {
+    font-size: 0.8rem;
+    color: red;
+    margin-top: 10px;
+}

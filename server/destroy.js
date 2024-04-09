@@ -11,7 +11,7 @@ async function dropDatabase() {
     // Drop the database
     await mongoose.connection.db.dropDatabase();
 
-    console.log("Database dropped successfully");
+    console.log("\nDatabase dropped successfully\n");
   } catch (error) {
     console.error("Error dropping database:", error);
   } finally {

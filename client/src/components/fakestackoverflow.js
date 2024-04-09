@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import Header from "./header";
+import Main from "./main";
 
 export default function fakeStackOverflow() {
+    const [search, setSearch] = useState("")
+    const [mainTitle, setMainTitle] = useState("All Questions");
+
+    const setQuestionPage = (search = "", title = "All Questions") => {
+        setSearch(search);
+        setMainTitle(title);
+    };
+
     return (
-        <div>
-            Implement Fake Stack Overflow
-        </div>
+        <>
+            <Header search={search} setQuestionPage={setQuestionPage} />
+            <Main title={mainTitle} search={search} setQuestionPage={setQuestionPage} />
+        </>
     );
 }
