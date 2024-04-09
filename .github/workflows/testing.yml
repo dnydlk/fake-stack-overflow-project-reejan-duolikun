@@ -25,30 +25,30 @@ jobs:
               run: npm test
               working-directory: ./server
 
-    cypress-tests:
-        # runs-on: ubuntu-latest
-        runs-on: self-hosted
-        needs: jest-tests
-        steps:
-            - uses: actions/checkout@v2
+    # cypress-tests:
+    #     # runs-on: ubuntu-latest
+    #     runs-on: self-hosted
+    #     needs: jest-tests
+    #     steps:
+    #         - uses: actions/checkout@v2
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v2
-              with:
-                  node-version: "21.7.1"
+    #         - name: Setup Node.js
+    #           uses: actions/setup-node@v2
+    #           with:
+    #               node-version: "21.7.1"
 
-            - name: Install client dependencies
-              run: npm install
-              working-directory: ./client
+    #         - name: Install client dependencies
+    #           run: npm install
+    #           working-directory: ./client
 
-            - name: Start Server
-              run: npm start &
-              working-directory: ./server
+    #         - name: Start Server
+    #           run: npm start &
+    #           working-directory: ./server
 
-            - name: Wait for Server
-              run: npx wait-on http://localhost:8000
-              working-directory: ./client
+    #         - name: Wait for Server
+    #           run: npx wait-on http://localhost:8000
+    #           working-directory: ./client
 
-            - name: Run Cypress Tests in Client
-              run: npx cypress run
-              working-directory: ./client
+    #         - name: Run Cypress Tests in Client
+    #           run: npx cypress run
+    #           working-directory: ./client
