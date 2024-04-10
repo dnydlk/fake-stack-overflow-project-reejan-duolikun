@@ -8,58 +8,59 @@ on:
 
 jobs:
     # jest-tests:
-        # runs-on: ubuntu-latest
-        # runs-on: self-hosted
-        # steps:
-        #     - uses: actions/checkout@v2
-        #     - name: Setup Node.js
-        #       uses: actions/setup-node@v2
-        #       with:
-        #           node-version: "21.7.1"
+    # runs-on: ubuntu-latest
+    # runs-on: self-hosted
+    # steps:
+    #     - uses: actions/checkout@v2
+    #     - name: Setup Node.js
+    #       uses: actions/setup-node@v2
+    #       with:
+    #           node-version: "21.7.1"
 
-        #     - name: Install server dependencies
-        #       run: npm ci
-        #       working-directory: ./server
+    #     - name: Install server dependencies
+    #       run: npm ci
+    #       working-directory: ./server
 
-        #     - name: Run Jest Tests in Server
-        #       run: npm test
-        #       working-directory: ./server
+    #     - name: Run Jest Tests in Server
+    #       run: npm test
+    #       working-directory: ./server
 
     # cypress-tests:
-        # runs-on: ubuntu-latest
-        # runs-on: self-hosted
-        # needs: jest-tests
-        # steps:
-        #     - uses: actions/checkout@v2
+    # runs-on: ubuntu-latest
+    # runs-on: self-hosted
+    # needs: jest-tests
+    # steps:
+    #     - uses: actions/checkout@v2
 
-        #     - name: Setup Node.js
-        #       uses: actions/setup-node@v2
-        #       with:
-        #           node-version: "21.7.1"
+    #     - name: Setup Node.js
+    #       uses: actions/setup-node@v2
+    #       with:
+    #           node-version: "21.7.1"
 
-        #     - name: Install client dependencies
-        #       run: npm install
-        #       working-directory: ./client
+    #     - name: Install client dependencies
+    #       run: npm install
+    #       working-directory: ./client
 
-        #     - name: Start Server
-        #       run: npm start &
-        #       working-directory: ./server
+    #     - name: Start Server
+    #       run: npm start &
+    #       working-directory: ./server
 
-        #     - name: Wait for Server
-        #       run: npx wait-on http://localhost:8000
-        #       working-directory: ./client
+    #     - name: Wait for Server
+    #       run: npx wait-on http://localhost:8000
+    #       working-directory: ./client
 
-        #     - name: Run Cypress Tests in Client
-        #       run: npx cypress run
-        #       working-directory: ./client
+    #     - name: Run Cypress Tests in Client
+    #       run: npx cypress run
+    #       working-directory: ./client
 
-        #       #  start the client server
-        #     - name: Start client server
-        #       run: npm start
-        #       working-directory: ./client 
-    
-    self-hosted:
-        runs-on: dny-runner
+    #       #  start the client server
+    #     - name: Start client server
+    #       run: npm start
+    #       working-directory: ./client
+
+    setup:
+        runs-on: joy-hoted
+
         steps:
             - name: Checkout code
             - uses: actions/checkout@v2
@@ -87,16 +88,16 @@ jobs:
             - name: Run mongod if not running
               if: steps.check_mongod_running.outcome == 'failure'
               run: mongod --config /opt/homebrew/etc/mongod.conf --fork
-            
+
             - name: Set DB_URL variable
               run: echo "DB_URL=mongodb://localhost:27017/fake_so" >> $GITHUB_ENV
-            
+
             - name: Run destroy.js
               env:
                   DB_URL: ${{ env.DB_URL }}
               run: node remove_db.js $DB_URL
               working-directory: server/
-            
+
             - name: Start the node server
               run: node server.js > server.log 2>&1 &
               working-directory: server/
@@ -112,7 +113,7 @@ jobs:
             - name: Install testing dependencies
               run: npm install cypress
               working-directory: client/
-            
+
             - name: Run e2e tests
               run: npx cypress run --spec cypress/e2e/
               working-directory: client/
