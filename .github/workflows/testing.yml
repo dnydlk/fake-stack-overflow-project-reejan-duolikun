@@ -43,7 +43,7 @@ jobs:
       - name: Run destroy.js
         env:
           DB_URL: ${{ env.DB_URL }}
-        run: node remove_db.js $DB_URL
+        run: node destroy.js $DB_URL
         working-directory: server/
 
       - name: Start the node server
