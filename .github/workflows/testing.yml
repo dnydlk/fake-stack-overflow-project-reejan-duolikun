@@ -31,10 +31,9 @@ jobs:
         run: npm install
         working-directory: server/
 
-      # # Jest tests
-      # - name: Run Jest tests
-      #   run: npm test
-      #   working-directory: server/
+      - name: Run Jest tests
+        run: npm test
+        working-directory: server/
 
       - name: Check if mongod is running
         run: ps aux | grep -v grep | grep mongod || echo "mongod is not running"
