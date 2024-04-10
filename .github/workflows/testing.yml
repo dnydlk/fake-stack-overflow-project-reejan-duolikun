@@ -8,7 +8,7 @@ on:
 
 jobs:
     setup:
-        runs-on: dny-runner
+        runs-on: dny-runner 
 
         steps:
             - name: Checkout code
