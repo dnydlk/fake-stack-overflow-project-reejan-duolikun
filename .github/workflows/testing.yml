@@ -1,3 +1,6 @@
+# Follow the format of the file below
+# DO NOT USE formatter on this file in order to let GitHub Actions work properly
+
 name: Continuous Integration Tests
 
 on:
@@ -8,7 +11,7 @@ on:
 
 jobs:
   setup:
-    runs-on: self-hosted 
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,11 +25,16 @@ jobs:
         if: steps.check-node_installed.outcome == 'failure'
         uses: actions/setup-node@v2
         with:
-            node-version: "21.7.1"
+          node-version: "21.7.1"
 
       - name: Install dependencies in server directory
         run: npm install
         working-directory: server/
+
+      # # Jest tests
+      # - name: Run Jest tests
+      #   run: npm test
+      #   working-directory: server/
 
       - name: Check if mongod is running
         run: ps aux | grep -v grep | grep mongod || echo "mongod is not running"
@@ -62,8 +70,12 @@ jobs:
         run: npm install cypress
         working-directory: client/
 
-      - name: Run e2e tests
+      - name: Run Cypress e2e tests
         run: npx cypress run --spec cypress/e2e/
+        working-directory: client/
+
+      - name: Run Cypress component tests
+        run: npx cypress run-ct --spec cypress/component/
         working-directory: client/
 
       - name: Kill the node server process

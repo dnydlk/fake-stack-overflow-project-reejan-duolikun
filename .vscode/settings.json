@@ -2,11 +2,11 @@
     // Formatting
     "editor.formatOnSave": false,
     "editor.indentSize": "tabSize",
-    "editor.tabSize": 4,
+    "editor.tabSize": 2,
     "javascript.format.semicolons": "insert",
     "typescript.format.semicolons": "insert",
     // Extension: Prettier
-    "prettier.tabWidth": 4,
+    "prettier.tabWidth": 2,
     "prettier.semi": true,
     // Extension: Better Comments
     "better-comments.multilineComments": true,
@@ -60,13 +60,5 @@
             "strikethrough": false
         }
     ],
-    "cSpell.words": [
-        "bluebtn",
-        "btns",
-        "fakestackoverflow",
-        "hamkalo",
-        "qcnt",
-        "qlist",
-        "testdev"
-    ]
+    "cSpell.words": ["bluebtn", "btns", "fakestackoverflow", "hamkalo", "qcnt", "qlist", "testdev"]
 }
