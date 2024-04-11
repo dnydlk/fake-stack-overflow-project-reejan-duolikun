@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "./header";
 import Main from "./main";
 
-export default function fakeStackOverflow() {
+export default function FakeStackOverflow() {
     const [search, setSearch] = useState("")
     const [mainTitle, setMainTitle] = useState("All Questions");
 

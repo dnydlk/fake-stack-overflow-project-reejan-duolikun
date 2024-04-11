@@ -8,4 +8,10 @@ const registerUser = async (user) => {
     return res;
 };
 
-export { registerUser };
+// To login
+const loginUser = async (user) => {
+    const res = await api.post(`${USER_API_URL}/loginUser`, user);
+    return res;
+};
+
+export { registerUser, loginUser};

@@ -55,6 +55,7 @@ const Main = ({ search = "", title, setQuestionPage }) => {
     };
 
     switch (page) {
+             
         case "home": {
             selected = "q";
             content = getQuestionPage(questionOrder.toLowerCase(), search);
