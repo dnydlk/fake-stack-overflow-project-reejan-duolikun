@@ -1,7 +1,5 @@
 const Tag = require("../models/tags");
 const Question = require("../models/questions");
-const Answer = require("../models/answers");
-const { get } = require("mongoose");
 
 const addTag = async (tagName) => {
     // check if tag already exists

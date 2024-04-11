@@ -95,7 +95,7 @@ describe("Unit tests for utils/question.js", () => {
   });
 
   // getQuestionsByOrder
-  test("getQuestionsByOrder(newest)", async () => {
+  test("getQuestionsByOrder returns questions sorted by newest", async () => {
     const questions = [
       {
         _id: "6616ba13b10a621bb4792967",
@@ -121,7 +121,7 @@ describe("Unit tests for utils/question.js", () => {
     expect(result[2]._id.toString()).toEqual("6616ba13b10a621bb4792967");
   });
 
-  test("getQuestionsByOrder(unanswered)", async () => {
+  test("getQuestionsByOrder returns questions sorted by unanswered", async () => {
     mockingoose(Question).toReturn(_questions, "find");
 
     const result = await getQuestionsByOrder("unanswered");
@@ -131,7 +131,7 @@ describe("Unit tests for utils/question.js", () => {
     expect(result[1]._id.toString()).toEqual("65e9b9b44c052f0a08ecade0");
   });
 
-  test("getQuestionsByOrder(active)", async () => {
+  test("getQuestionsByOrder returns questions sorted by active", async () => {
     mockingoose(Question).toReturn(_questions, "find");
 
     const result = await getQuestionsByOrder("active");
@@ -144,24 +144,24 @@ describe("Unit tests for utils/question.js", () => {
   });
 
   // filterQuestionsBySearch
-  test("filterQuestionsBySearch(empty string)", () => {
+  test("filterQuestionsBySearch returns 4 question objects if search is empty", () => {
     const result = filterQuestionsBySearch(_questions, "");
     expect(result.length).toEqual(4);
   });
 
-  test("filterQuestionsBySearch(one keyword)", () => {
+  test("filterQuestionsBySearch returns 1 question object if search is one keyword that matches one question", () => {
     const result = filterQuestionsBySearch(_questions, "Programmatically");
     expect(result.length).toEqual(1);
     expect(result[0]._id).toEqual("65e9b716ff0e892116b2de09");
   });
 
-  test("filterQuestionsBySearch(one tag)", () => {
+  test("filterQuestionsBySearch returns 2 question objects if search is one tag that matches two questions", () => {
     const result = filterQuestionsBySearch(_questions, "[android-studio]");
     expect(result.length).toEqual(1);
     expect(result[0]._id).toEqual("65e9b58910afe6e94fc6e6dc");
   });
 
-  test("filterQuestionsBySearch(multiple tags)", () => {
+  test("filterQuestionsBySearch returns 2 question objects if search is two tags that match two questions", () => {
     const result = filterQuestionsBySearch(_questions, "[javascript] [android-studio]");
     expect(result.length).toEqual(2);
     expect(result[0]._id).toEqual("65e9b58910afe6e94fc6e6dc");
@@ -169,7 +169,7 @@ describe("Unit tests for utils/question.js", () => {
   });
 
   // addTag
-  test("addTag should return the tag id if the tag exists", async () => {
+  test("addTag returns the tag id if the tag already exists", async () => {
     mockingoose(Tag).toReturn(_tag1, "findOne");
 
     let result = await addTag("react");
@@ -185,7 +185,7 @@ describe("Unit tests for utils/question.js", () => {
     expect(result.toString()).toEqual(_tag4._id);
   });
 
-  test("addTag should return the new tag id if the tag does not exist", async () => {
+  test("addTag returns the tag id if the tag does not exist", async () => {
     mockingoose(Tag).toReturn(null, "findOne");
     mockingoose(Tag).toReturn(_tag1, "save");
 
