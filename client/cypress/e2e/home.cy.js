@@ -6,7 +6,7 @@
 
 describe("Home Page", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/home");
   });
   // Header
   it("successfully shows logo image", () => {
@@ -103,7 +103,7 @@ describe("Home Page", () => {
   it("successfully highlights 'Questions' link when on the home page", () => {
     cy.getDateCyTest("nav-question").should("have.css", "background-color", "rgb(191, 191, 191)");
   });
-  it.only("successfully highlights 'Tags' link when on clicked", () => {
+  it("successfully highlights 'Tags' link when on clicked", () => {
     cy.getDateCyTest("nav-tag").click().should("have.css", "background-color", "rgb(191, 191, 191)");
   });
 });
