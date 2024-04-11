@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // baseUrl is set to "http://localhost:3000" in cypress.config.js
 // function getDateCyTest(selector) defined in cypress/support/commands.js
 
@@ -107,30 +106,4 @@ describe("Home Page", () => {
   it.only("successfully highlights 'Tags' link when on clicked", () => {
     cy.getDateCyTest("nav-tag").click().should("have.css", "background-color", "rgb(191, 191, 191)");
   });
-  
-=======
-describe("Home Page 1", () => {
-    beforeEach(() => { 
-        cy.visit("/");
-    
-    })
-    // it.skip: skip this test
-    // it.skip("successfully shows All Questions string", () => {
-    //     // baseUrl is set to "http://localhost:3000" in cypress.config.js
-    //     // cy.visit("/"); // moved to beforeEach
-    //     // cy.contains("All Questions");
-    //     // cy.get('[data-cy-test="main-page-header"]').contains(/All Questions/i);
-    //     // cy.get('[data-cy-test="main-page-header"]').should("contain.text", "All Questions");
-    //     cy.getDateCyTest("main-page-header").should("contain.text", "All Questions");
-    // });
-    // it.only: run only this test
-    it.only("successfully shows All Questions string", () => {
-        // baseUrl is set to "http://localhost:3000" in cypress.config.js
-        // cy.visit("/"); // moved to beforeEach
-        // cy.contains("All Questions");
-        // cy.get('[data-cy-test="main-page-header"]').contains(/All Questions/i);
-        // cy.get('[data-cy-test="main-page-header"]').should("contain.text", "All Questions");
-        cy.getDateCyTest("main-page-header").should("contain.text", "All Questions");
-    });
->>>>>>> 4eacc3441203458f7c18d8b095162c0b7478367a
 });
