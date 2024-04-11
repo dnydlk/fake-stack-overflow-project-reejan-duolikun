@@ -1,0 +1,7 @@
+.fso-order-btns {
+    margin-right: 5%;
+}
+
+.fso-question-list:last-child {
+    border-bottom: #000000 1px dashed;
+}

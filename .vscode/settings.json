@@ -1,0 +1,64 @@
+{
+    // Formatting
+    "editor.formatOnSave": false,
+    "editor.indentSize": "tabSize",
+    "editor.tabSize": 2,
+    "javascript.format.semicolons": "insert",
+    "typescript.format.semicolons": "insert",
+    // Extension: Prettier
+    "prettier.tabWidth": 2,
+    "prettier.semi": true,
+    // Extension: Better Comments
+    "better-comments.multilineComments": true,
+    "better-comments.tags": [
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+            "strikethrough": false
+        },
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+            "strikethrough": false
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+            "strikethrough": true
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false,
+            "strikethrough": false
+        },
+        {
+            "tag": "*",
+            "color": "#98C379",
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": false,
+            "strikethrough": false
+        },
+        {
+            "tag": "- ",
+            "color": "hsl(180, 100%, 48%)",
+            "backgroundColor": "transparent",
+            "bold": true,
+            "italic": true,
+            "strikethrough": false
+        }
+    ],
+    "cSpell.words": ["bluebtn", "btns", "fakestackoverflow", "hamkalo", "qcnt", "qlist", "testdev"]
+}

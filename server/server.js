@@ -1,15 +1,21 @@
 // Application server
 
+// Use express to create a server
 const express = require("express");
+// Use mongoose to connect to MongoDB
 const mongoose = require("mongoose");
+// Use cors to allow cross-origin requests
 const cors = require("cors");
 
-const { MONGO_URL, CLIENT_URL, port } = require("./config");
+// Import the configuration settings
+const { MONGO_URL, port, CLIENT_URL } = require("./config");
 
+// Connect to MongoDB
 mongoose.connect(MONGO_URL);
 
 const app = express();
 
+// Allow cross-origin requests
 app.use(
     cors({
         credentials: true,
@@ -17,6 +23,7 @@ app.use(
     })
 );
 
+// Parse incoming requests with JSON payloads
 app.use(express.json());
 
 app.get("/", (_, res) => {
@@ -24,7 +31,16 @@ app.get("/", (_, res) => {
     res.end();
 });
 
+// Import the controllers
+const questionController = require("./controller/question");
+const tagController = require("./controller/tag");
+const answerController = require("./controller/answer");
 const authController = require("./controller/auth.js");
+
+// Use the controllers
+app.use("/question", questionController);
+app.use("/tag", tagController);
+app.use("/answer", answerController);
 app.use("/user", authController);
 
 let server = app.listen(port, () => {
@@ -38,4 +54,5 @@ process.on("SIGINT", () => {
     process.exit(0);
 });
 
-module.exports = server
+// Export the server for testing
+module.exports = server;
