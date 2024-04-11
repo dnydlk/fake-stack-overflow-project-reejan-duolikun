@@ -50,7 +50,8 @@ describe("Home Page", () => {
       cy.wrap($el).should("contain.text", qTitles[index]);
     });
   });
-  it("successfully shows all questions' answers count & view count", () => {
+  //! Will need to remove & repopulate the database for these tests to work
+  it.skip("successfully shows all questions' answers count & view count", () => {
     const qAnswers = ["1 answers", "2 answers", "3 answers", "2 answers"];
     const qViews = ["103 views", "200 views", "121 views", "10 views"];
     cy.getDateCyTest("post-stats").each(($el, index) => {
