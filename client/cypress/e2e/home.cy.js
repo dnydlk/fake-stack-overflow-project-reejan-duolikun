@@ -4,7 +4,7 @@
 // cy.get('[data-cy-test="main-page-header"]').contains(/All Questions/i);
 // cy.get('[data-cy-test="main-page-header"]').should("contain.text", "All Questions");
 
-describe("Home Page", () => {
+describe("Home Page Should load correctly", () => {
   beforeEach(() => {
     cy.visit("/home");
   });
