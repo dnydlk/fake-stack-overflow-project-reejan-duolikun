@@ -7,17 +7,20 @@ import Welcome from "./components/welcome";
 import Login from "./components/loginPage";
 import SignUp from "./components/signUpPage";
 import FakeStackOverflow from "./components/fakestackoverflow";
+import { AuthProvider } from "./components/authContext";
 
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/home" element={<FakeStackOverflow />} />
-            </Routes>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Welcome />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/home" element={<FakeStackOverflow />} />
+                </Routes>
+            </Router>
+        </AuthProvider>
     );
 }
 

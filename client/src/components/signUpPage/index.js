@@ -3,7 +3,7 @@ import { registerUser} from "../../services/userService";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
-function SignupPage() {
+const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

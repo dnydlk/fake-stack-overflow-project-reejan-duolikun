@@ -1,9 +1,18 @@
 import "./index.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../authContext";
+import { useNavigate } from "react-router";
 
 const Header = ({ search, setQuestionPage }) => {
     // set the value of the search bar to the search state
     const [value, setValue] = useState(search);
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
 
     return (
         <div id="fso-header" className="fso-header d-flex align-items-center justify-content-around">
@@ -32,6 +41,11 @@ const Header = ({ search, setQuestionPage }) => {
             {/*//- User profile placeholder */}
             <div id="fso-user-profile" className="m-1">
                 <h2>user</h2>
+            </div>
+
+            {/* Add the logout button */}
+            <div>
+                <button className="logout-button" onClick={handleLogout}>Log Out</button>
             </div>
         </div>
     );

@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
-import "../../stylesheets/login.css";
 import { loginUser } from '../../services/userService';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../authContext';
+import "../../stylesheets/auth.css";
 
-function LoginPage() {
+const LoginPage = () => {
   // State variables to store user input for email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
- // Function to handle login action
-const handleLogin = async () => {
+  // Function to handle login action
+  const handleLogin = async () => {
     try {
       // Create an object containing the login credentials
       const loginData = {
@@ -27,18 +29,20 @@ const handleLogin = async () => {
         // Reset email and password fields after successful login attempt
         setEmail('');
         setPassword('');
-        // Here you can redirect the user to another page or perform any other action
+        
+        // Save the jwtToken in the context
+        setToken(response.data.token);
+        localStorage.setItem("jwtToken", response.data.token);
         navigate('/home');
       } else {
-        // If the request fails, throw an error or handle it accordingly
+        setToken(null);
+        localStorage.removeItem("jwtToken");
         throw new Error('Login failed');
       }
     } catch (error) {
       console.error('Error:', error.message);
-      // Handle error
     }
   };
-  
 
   return (
     <div className="login-container">
