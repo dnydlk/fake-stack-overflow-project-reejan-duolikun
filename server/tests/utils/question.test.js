@@ -1,9 +1,21 @@
 // Unit tests for utils/question.js
 
 const mockingoose = require("mockingoose");
-const Question = require("../models/questions");
-const Tag = require("../models/tags");
-const { addTag, getQuestionsByOrder, filterQuestionsBySearch } = require("../utils/question");
+const Question = require("../../models/questions");
+const Tag = require("../../models/tags");
+const {
+  addTag,
+  getQuestionsByOrder,
+  filterQuestionsBySearch,
+  getNewestQuestion,
+  getUnansweredQuestion,
+  getActiveQuestion,
+  parseTags,
+  parseKeyword,
+  checkTagInQuestion,
+  checkKeywordInQuestion,
+  setNewestAnswerDate,
+} = require("../../utils/question");
 Question.schema.path("answers", Array);
 
 const _tag1 = {
@@ -192,4 +204,79 @@ describe("Unit tests for utils/question.js", () => {
     let result = await addTag("react");
     expect(result.toString()).toEqual(_tag1._id);
   });
+
+  // getNewestQuestion
+  test("getNewestQuestion returns questions sorted by ask_date_time in descending order", async () => {
+    mockingoose(Question).toReturn(_questions, "find");
+
+    const result = await getNewestQuestion();
+
+    expect(result.length).toEqual(4);
+    expect(result[0]._id.toString()).toEqual("65e9b716ff0e892116b2de09");
+    expect(result[1]._id.toString()).toEqual("65e9b9b44c052f0a08ecade0");
+    expect(result[2]._id.toString()).toEqual("65e9b5a995b6c7045a30d823");
+    expect(result[3]._id.toString()).toEqual("65e9b58910afe6e94fc6e6dc");
+  });
+
+  // getUnansweredQuestion
+  test("getUnansweredQuestion returns questions with no answers", async () => {
+    mockingoose(Question).toReturn(_questions, "find");
+
+    const result = await getUnansweredQuestion();
+
+    expect(result.length).toEqual(2);
+    expect(result[0]._id.toString()).toEqual("65e9b716ff0e892116b2de09");
+    expect(result[1]._id.toString()).toEqual("65e9b9b44c052f0a08ecade0");
+  });
+
+  // getActiveQuestion
+  test("getActiveQuestion returns questions sorted by newest answer date", async () => {
+    mockingoose(Question).toReturn(_questions, "find");
+
+    const result = await getActiveQuestion();
+
+    expect(result.length).toEqual(4);
+    expect(result[0]._id.toString()).toEqual("65e9b5a995b6c7045a30d823");
+    expect(result[1]._id.toString()).toEqual("65e9b58910afe6e94fc6e6dc");
+    expect(result[2]._id.toString()).toEqual("65e9b716ff0e892116b2de09");
+    expect(result[3]._id.toString()).toEqual("65e9b9b44c052f0a08ecade0");
+  });
+
+  // parseTags
+  test("parseTags returns an array of tags", () => {
+    const result = parseTags("[react] [javascript] [android-studio]");
+    expect(result.length).toEqual(3);
+    expect(result[0]).toEqual("react");
+    expect(result[1]).toEqual("javascript");
+    expect(result[2]).toEqual("android-studio");
+  });
+
+  // parseKeyword
+  test("parseKeyword returns a string", () => {
+    const result = parseKeyword("Programmatically navigate using React router");
+    expect(result).toEqual(["Programmatically", "navigate", "using", "React", "router"]);
+  });
+
+  // checkTagInQuestion
+  test("checkTagInQuestion returns true if the question contains the tag", () => {
+    const result = checkTagInQuestion(_questions[0], ["android-studio"]);
+    expect(result).toEqual(true);
+  });
+
+  test("checkTagInQuestion returns false if the question does not contain the tag", () => {
+    const result = checkTagInQuestion(_questions[0], ["react"]);
+    expect(result).toEqual(false);
+  });
+
+  // checkKeywordInQuestion
+  test("checkKeywordInQuestion returns true if the question contains the keyword", () => {
+    const result = checkKeywordInQuestion(_questions[3], ["Programmatically", "navigate", "using", "React", "router"]);
+    expect(result).toEqual(true);
+  });
+
+  test("checkKeywordInQuestion returns false if the question does not contain the keyword", () => {
+    const result = checkKeywordInQuestion(_questions[3], ["storage"]);
+    expect(result).toEqual(false);
+  });
+
 });
