@@ -17,12 +17,13 @@ const Header = ({ search, setQuestionPage }) => {
     return (
         <div id="fso-header" className="fso-header d-flex align-items-center justify-content-around">
             {/*//- Image of Stack Overflow */}
-            <img src="logo_stack_overflow.png" alt="icon of fake stack overflow" className="fso-logo mb-2" />
+            <img src="logo_stack_overflow.png" alt="icon of fake stack overflow" className="fso-logo mb-2" data-cy-test="logo" />
 
             {/*//- Search bar */}
             {/* todo: adjust the width in css? */}
             <input
                 id="searchBar"
+                data-cy-test="search-bar"
                 className="form-control w-75 me-2"
                 placeholder="Search ..."
                 type="text"
@@ -39,7 +40,7 @@ const Header = ({ search, setQuestionPage }) => {
             />
 
             {/*//- User profile placeholder */}
-            <div id="fso-user-profile" className="m-1">
+            <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
                 <h2>user</h2>
             </div>
 

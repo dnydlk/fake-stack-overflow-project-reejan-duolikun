@@ -25,24 +25,24 @@ const QuestionPage = ({
     }, [order, search]);
 
     return (
-        <>
-            {/*//- Question Header */}
-            <QuestionHeader
-                title_text={title_text}
-                qcnt={qlist.length}
-                setQuestionOrder={setQuestionOrder}
-                handleNewQuestion={handleNewQuestion}
-            />
-            {/*//- Question List */}
-            <div id="question_list" className="question_list">
-                {qlist.map((q, idx) => (
-                    <Question q={q} key={idx} clickTag={clickTag} handleAnswer={handleAnswer} />
-                ))}
-            </div>
-            {title_text === "Search Results" && !qlist.length && (
-                <div className="bold_title fso-right-padding">No Questions Found</div>
-            )}
-        </>
+      <>
+        {/*//- Question Header */}
+        <QuestionHeader
+          title_text={title_text}
+          qcnt={qlist.length}
+          setQuestionOrder={setQuestionOrder}
+          handleNewQuestion={handleNewQuestion}
+        />
+        {/*//- Question List */}
+        <div id="question-list" className="fso-question-list" data-cy-test="question-list">
+          {qlist.map((q, idx) => (
+            <Question q={q} key={idx} clickTag={clickTag} handleAnswer={handleAnswer}/>
+          ))}
+        </div>
+        {title_text === "Search Results" && !qlist.length && (
+          <div className="bold_title fso-right-padding" data-cy-test="no-questions-found">No Questions Found</div>
+        )}
+      </>
     );
 };
 export default QuestionPage;

@@ -55,17 +55,16 @@ const Main = ({ search = "", title, setQuestionPage }) => {
     };
 
     switch (page) {
-             
         case "home": {
             selected = "q";
             content = getQuestionPage(questionOrder.toLowerCase(), search);
             break;
         }
-        // case "tag": {
-        //     selected = "t";
-        //     content = <TagPage clickTag={clickTag} handleNewQuestion={handleNewQuestion} />;
-        //     break;
-        // }
+        case "tag": {
+            selected = "t";
+            // content = <TagPage clickTag={clickTag} handleNewQuestion={handleNewQuestion} />;
+            break;
+        }
         case "answer": {
             selected = "";
             content = <AnswerPage qid={qid} handleNewQuestion={handleNewQuestion} handleNewAnswer={handleNewAnswer} />;

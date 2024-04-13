@@ -9,11 +9,11 @@
     /* align-items: center; */
 }
 
-.fso-menu_button:first-child {
+.fso-menu-button:first-child {
     margin-top: 0;
 }
 
-.fso-menu_button {
+.fso-menu-button {
     height: 40px;
     width: 80%;
     margin-top: 20px;
@@ -25,14 +25,14 @@
     cursor: pointer;
 }
 
-.fso-menu_button:hover {
+.fso-menu-button:hover {
     background: #cccccc;
 }
 
-.fso-menu_button:active {
+.fso-menu-button:active {
     background: #b6b6b6;
 }
 
-.fso-menu_selected {
-    background: #cccccc;
+.fso-menu-selected {
+    background: #bfbfbf;
 }

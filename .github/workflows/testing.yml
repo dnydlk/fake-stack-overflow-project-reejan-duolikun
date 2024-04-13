@@ -53,6 +53,12 @@ jobs:
         run: node destroy.js $DB_URL
         working-directory: server/
 
+      - name: Run init.js
+        env:
+          DB_URL: ${{ env.DB_URL }}
+        run: node init.js $DB_URL
+        working-directory: server/
+
       - name: Start the node server
         run: node server.js > server.log 2>&1 &
         working-directory: server/

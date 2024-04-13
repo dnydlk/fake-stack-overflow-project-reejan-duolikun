@@ -163,6 +163,7 @@ const checkTagInQuestion = (q, tagListInSearch) => {
             }
         }
     }
+    return false;
 };
 
 // Iterate through all keywords in search and check if the keyword is in the question
@@ -172,6 +173,7 @@ const checkKeywordInQuestion = (q, searchKeywords) => {
             return true;
         }
     }
+    return false;
 };
 
-module.exports = { addTag, getQuestionsByOrder, filterQuestionsBySearch };
+module.exports = { addTag, getQuestionsByOrder, filterQuestionsBySearch, getNewestQuestion, getUnansweredQuestion, getActiveQuestion, parseTags, parseKeyword, checkTagInQuestion, checkKeywordInQuestion, setNewestAnswerDate };
