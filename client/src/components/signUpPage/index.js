@@ -8,11 +8,17 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); 
   const navigate = useNavigate();
 
  // Function to handle signup action
 const handleSubmit = async () => {
     try {
+      // Check if email and password are provided
+      if (!email || !password) {
+        throw new Error('Please provide both email and password');
+      }
+
       // Check if passwords match
       if (password !== confirmPassword) {
         throw new Error('Passwords do not match');
@@ -33,11 +39,12 @@ const handleSubmit = async () => {
         setEmail('');
         setPassword('');
         setConfirmPassword('');
+        setErrorMessage('');
         // Set success message
-        setSuccessMessage("Signup successful! Redirecting to the welcome page...");
+        setSuccessMessage("Signup successful! Redirecting to the login page...");
         // Navigate to the welcome page after a delay
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 2000); // Adjust delay as needed
       } else {
         // If the request fails, throw an error or handle it accordingly
@@ -45,7 +52,7 @@ const handleSubmit = async () => {
       }
     } catch (error) {
       console.error('Error:', error.message);
-      // Handle error
+      setErrorMessage(error.message);
     }
   };
   
@@ -60,6 +67,7 @@ const handleSubmit = async () => {
       </Link>
       <h2>Sign Up</h2>
       {successMessage && <div className="success-message">{successMessage}</div>}
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
       <div className="signup-form">
         <div className="form-group">
           <label htmlFor="email">Email:</label>
