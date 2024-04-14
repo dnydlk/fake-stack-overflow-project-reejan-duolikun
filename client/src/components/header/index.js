@@ -1,18 +1,23 @@
 import "./index.css";
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
-import { useNavigate } from "react-router";
 
 const Header = ({ search, setQuestionPage }) => {
     // set the value of the search bar to the search state
     const [value, setValue] = useState(search);
-    const { logout } = useContext(AuthContext);
+    const { token, setToken} = useContext(AuthContext);
     const navigate = useNavigate();
 
+    const handleLogin = () => {
+        navigate('/login');
+    }
+
     const handleLogout = () => {
-        logout();
+        setToken(null);
+        localStorage.removeItem("jwtToken");
         navigate('/');
-    };
+    }
 
     return (
         <div id="fso-header" className="fso-header d-flex align-items-center justify-content-around">
@@ -39,15 +44,20 @@ const Header = ({ search, setQuestionPage }) => {
                 }}
             />
 
-            {/*//- User profile placeholder */}
-            <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
-                <h2>user</h2>
+            <div>{token ? (
+                    <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
+                    <h2>user</h2>
+                    </div>
+                ) : (
+                    // Display login button if not logged in
+                    <button className="login-button" onClick={handleLogin}>Log In</button>
+                )}
             </div>
-
-            {/* Add the logout button */}
-            <div>
+            {token && (
+                // Display logout button if logged in
                 <button className="logout-button" onClick={handleLogout}>Log Out</button>
-            </div>
+            )}
+
         </div>
     );
 };

@@ -33,7 +33,7 @@ const LoginPage = () => {
         // Save the jwtToken in the context
         setToken(response.data.token);
         localStorage.setItem("jwtToken", response.data.token);
-        navigate('/home');
+        navigate('/');
       } else {
         setToken(null);
         localStorage.removeItem("jwtToken");
@@ -44,8 +44,16 @@ const LoginPage = () => {
     }
   };
 
+  const handleLogiClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="login-container">
+      <img src="logo_stack_overflow.png" 
+            alt="icon of fake stack overflow" 
+            className="fso-logo mb-2" 
+            data-cy-test="logo" onClick={handleLogiClick}/>
       <h2>Login</h2>
       <div className="login-form">
         <div className="form-group">
