@@ -52,6 +52,12 @@ const handleSubmit = async () => {
 
   return (
     <div className="signup-container">
+      <Link to="/"> 
+        <img src="logo_stack_overflow.png" 
+              alt="icon of fake stack overflow" 
+              className="fso-logo mb-2" 
+              data-cy-test="logo"/>
+      </Link>
       <h2>Sign Up</h2>
       {successMessage && <div className="success-message">{successMessage}</div>}
       <div className="signup-form">

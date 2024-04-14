@@ -9,12 +9,18 @@ const LoginPage = () => {
   // State variables to store user input for email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // Function to handle login action
   const handleLogin = async () => {
     try {
+
+      // Check if email and password are provided
+      if (!email || !password) {
+        throw new Error('Please provide both email and password');
+      }
       // Create an object containing the login credentials
       const loginData = {
         email: email,
@@ -41,20 +47,24 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error('Error:', error.message);
+      setErrorMessage(error.message);
     }
   };
 
-  const handleLogiClick = () => {
-    navigate("/");
-  };
+  // const handleLogoClick = () => {
+  //   navigate("/");
+  // };
 
   return (
     <div className="login-container">
-      <img src="logo_stack_overflow.png" 
-            alt="icon of fake stack overflow" 
-            className="fso-logo mb-2" 
-            data-cy-test="logo" onClick={handleLogiClick}/>
+      <Link to="/"> 
+        <img src="logo_stack_overflow.png" 
+              alt="icon of fake stack overflow" 
+              className="fso-logo mb-2" 
+              data-cy-test="logo"/>
+      </Link>
       <h2>Login</h2>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
       <div className="login-form">
         <div className="form-group">
           <label htmlFor="email">Email:</label>

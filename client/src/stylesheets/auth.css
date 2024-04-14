@@ -50,7 +50,7 @@ input {
 }
 
 .login-button:hover, .signup-button:hover{
-  background-color: #04AA6D;
+  background-color: #177452;
 }
 
 .signup-link, .login-link{
@@ -58,10 +58,22 @@ input {
 }
 
 .signup-link a, .signup-link a{
-  color: #007bff;
+  color: #04AA6D;
   text-decoration: none;
 }
 
 .signup-link a:hover, .login-link a:hover {
   text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.success-message {
+  color: green;
+  font-size: 14px;
+  margin-top: 5px;
 }
