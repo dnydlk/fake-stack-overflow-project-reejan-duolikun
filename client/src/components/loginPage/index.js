@@ -56,7 +56,7 @@ const LoginPage = () => {
   // };
 
   return (
-    <div className="login-container">
+    <div className="login-container" data-cy-test="login-container">
       <Link to="/"> 
         <img src="logo_stack_overflow.png" 
               alt="icon of fake stack overflow" 
@@ -64,7 +64,7 @@ const LoginPage = () => {
               data-cy-test="logo"/>
       </Link>
       <h2>Login</h2>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      {errorMessage && <div className="error-message" data-cy-test="errMsg">{errorMessage}</div>}
       <div className="login-form">
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -72,6 +72,7 @@ const LoginPage = () => {
             type="email"
             id="email"
             value={email}
+            data-cy-test="loginEmail"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -82,14 +83,15 @@ const LoginPage = () => {
             type="password"
             id="password"
             value={password}
+            data-cy-test="loginPassword"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button className="login-button" onClick={handleLogin}>Login</button>
+        <button className="login-button" onClick={handleLogin} data-cy-test="loginBtn">Login</button>
       </div>
-      <div className="signup-link">
-        {"Don't have an account?"} <Link to="/signup">Signup here</Link>
+      <div className="signup-link" data-cy-test="signUpLink">
+        {"Don't have an account?"} <Link to="/signup" >Signup here</Link>
       </div>
     </div>
   );

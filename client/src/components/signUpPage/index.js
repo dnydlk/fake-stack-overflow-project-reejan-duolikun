@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { registerUser} from "../../services/userService";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import "../../stylesheets/auth.css"
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -55,10 +56,10 @@ const handleSubmit = async () => {
       setErrorMessage(error.message);
     }
   };
-  
+
 
   return (
-    <div className="signup-container">
+    <div className="signup-container" data-cy-test="signup-container">
       <Link to="/"> 
         <img src="logo_stack_overflow.png" 
               alt="icon of fake stack overflow" 
@@ -67,7 +68,7 @@ const handleSubmit = async () => {
       </Link>
       <h2>Sign Up</h2>
       {successMessage && <div className="success-message">{successMessage}</div>}
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      {errorMessage && <div className="error-message" data-cy-test="errMsg">{errorMessage}</div>}
       <div className="signup-form">
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -76,6 +77,7 @@ const handleSubmit = async () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            data-cy-test="signUpEmail"
             required
           />
         </div>
@@ -86,6 +88,7 @@ const handleSubmit = async () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            data-cy-test="signUpPassword"
             required
           />
         </div>
@@ -96,12 +99,13 @@ const handleSubmit = async () => {
             id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            data-cy-test="signUpConfirmPwd"
             required
           />
         </div>
-        <button className="signup-button" onClick={handleSubmit}>Sign Up</button>
+        <button className="signup-button" onClick={handleSubmit} data-cy-test="signUpBtn">Sign Up</button>
       </div>
-      <div className="login-link">
+      <div className="login-link" data-cy-test="login-link">
         Already have an account? <Link to="/login">Login here</Link>
       </div>
     </div>
