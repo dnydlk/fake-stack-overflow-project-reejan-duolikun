@@ -43,7 +43,7 @@ const LoginPage = () => {
       } else {
         setToken(null);
         localStorage.removeItem("jwtToken");
-        throw new Error('Login failed');
+        throw new Error(response.response.data.message);
       }
     } catch (error) {
       console.error('Error:', error.message);

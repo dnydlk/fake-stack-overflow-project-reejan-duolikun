@@ -10,6 +10,8 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); 
+  const [isValid, setIsValid] = useState(true);
+  const [emailError, setEmailError] = useState('');
   const navigate = useNavigate();
 
  // Function to handle signup action
@@ -49,11 +51,40 @@ const handleSubmit = async () => {
         }, 2000); // Adjust delay as needed
       } else {
         // If the request fails, throw an error or handle it accordingly
-        throw new Error('Signup failed');
+        throw new Error(response.response.data.message);
       }
     } catch (error) {
       console.error('Error:', error.message);
       setErrorMessage(error.message);
+    }
+  };
+
+  const handlePwdChange = (event) => {
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+
+    // Regular expression to match passwords with at least 8 characters,
+    // including at least one letter and one number
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    // Check if the new password matches the regex pattern
+    setIsValid(passwordRegex.test(newPassword));
+  };
+
+  const validateEmail = (email) => {
+    // Regular expression for validating email addresses
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
+
+    if (!validateEmail(inputEmail)) {
+      setEmailError('Invalid email address');
+    } else {
+      setEmailError('');
     }
   };
 
@@ -76,10 +107,11 @@ const handleSubmit = async () => {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             data-cy-test="signUpEmail"
             required
           />
+          {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
@@ -87,10 +119,15 @@ const handleSubmit = async () => {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePwdChange}
             data-cy-test="signUpPassword"
             required
           />
+          {!isValid && (
+            <p style={{ color: 'red' }}>
+              Password must contain at least eight characters, including at least one letter and one number.
+            </p>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="confirmPassword">Confirm Password:</label>

@@ -17,6 +17,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/home" element={<FakeStackOverflow />} />
+                    <Route path="/" element={<FakeStackOverflow />} />
                 </Routes>
             </Router>
         </AuthProvider>
