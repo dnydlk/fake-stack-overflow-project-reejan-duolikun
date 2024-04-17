@@ -2,7 +2,7 @@ import "./index.css";
 
 const Input = ({ title, hint, id, mandatory = true, val, setState, err }) => {
     return (
-        <>
+        <div>
             <div className="fso-input-title" data-cy-test="fso-input-title">
                 {title}
                 {mandatory ? "*" : ""}
@@ -27,7 +27,7 @@ const Input = ({ title, hint, id, mandatory = true, val, setState, err }) => {
                     {err}
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

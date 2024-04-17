@@ -10,7 +10,7 @@ const Textarea = ({
     err,
 }) => {
     return (
-        <>
+        <div>
             <div className="fso-input-title" data-cy-test="fso-input-title">
                 {title}
                 {mandatory ? "*" : ""}
@@ -35,7 +35,7 @@ const Textarea = ({
                     {err}
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
