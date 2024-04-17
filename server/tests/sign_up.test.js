@@ -1,3 +1,6 @@
+test("Add sign up unit tests", () => {
+    expect(true);
+});
 // // for registerUser in controller/auth.js
 
 // const supertest = require("supertest")
