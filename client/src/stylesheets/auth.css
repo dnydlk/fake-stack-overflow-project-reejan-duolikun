@@ -28,7 +28,9 @@ input {
 }
 
 .login-button, .signup-button{
-  width: 100%;
+  /* width: 100%; */
+  width: 73px;
+  height: 40px;
   padding: 0.5rem;
   font-size: 1rem;
   background-color: #04AA6D;
@@ -39,7 +41,9 @@ input {
 }
 
 .logout-button{
-  width: 10%;
+  /* width: 100%; */
+  width: 73px;
+  height: 40px;
   padding: 0.5rem;
   font-size: 1rem;
   background-color: #04AA6D;
@@ -49,7 +53,7 @@ input {
   cursor: pointer;
 }
 
-.login-button:hover, .signup-button:hover{
+.login-button:hover, .signup-button:hover, .logout-button:hover  {
   background-color: #177452;
 }
 

@@ -6,23 +6,28 @@ import { AuthContext } from "../authContext";
 const Header = ({ search, setQuestionPage }) => {
     // set the value of the search bar to the search state
     const [value, setValue] = useState(search);
-    const { token, setToken} = useContext(AuthContext);
+    const { token, setToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        navigate('/login');
-    }
+        navigate("/login");
+    };
 
     const handleLogout = () => {
         setToken(null);
         localStorage.removeItem("jwtToken");
-        navigate('/');
-    }
+        navigate("/");
+    };
 
     return (
         <div id="fso-header" className="fso-header d-flex align-items-center justify-content-around">
             {/*//- Image of Stack Overflow */}
-            <img src="logo_stack_overflow.png" alt="icon of fake stack overflow" className="fso-logo mb-2" data-cy-test="logo" />
+            <img
+                src="logo_stack_overflow.png"
+                alt="icon of fake stack overflow"
+                className="fso-logo mb-2"
+                data-cy-test="logo"
+            />
 
             {/*//- Search bar */}
             {/* todo: adjust the width in css? */}
@@ -43,21 +48,20 @@ const Header = ({ search, setQuestionPage }) => {
                     }
                 }}
             />
-
-            <div>{token ? (
-                    <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
-                    <h2>user</h2>
-                    </div>
+            {/* // todo: remove the User test if token is found  */}
+            <div>
+                {token ? (
+                    // Display logout button if logged in
+                    <button className="logout-button" onClick={handleLogout}>
+                        Log Out
+                    </button>
                 ) : (
                     // Display login button if not logged in
-                    <button className="login-button" onClick={handleLogin}>Log In</button>
+                    <button className="login-button" onClick={handleLogin}>
+                        Log In
+                    </button>
                 )}
             </div>
-            {token && (
-                // Display logout button if logged in
-                <button className="logout-button" onClick={handleLogout}>Log Out</button>
-            )}
-
         </div>
     );
 };
