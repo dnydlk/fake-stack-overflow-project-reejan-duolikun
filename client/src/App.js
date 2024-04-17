@@ -3,21 +3,24 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./stylesheets/App.css";
-import Welcome from "./components/welcome";
+//import Welcome from "./components/welcome";
 import Login from "./components/loginPage";
 import SignUp from "./components/signUpPage";
 import FakeStackOverflow from "./components/fakestackoverflow";
+import { AuthProvider } from "./components/authContext";
 
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/home" element={<FakeStackOverflow />} />
-            </Routes>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/home" element={<FakeStackOverflow />} />
+                    <Route path="/" element={<FakeStackOverflow />} />
+                </Routes>
+            </Router>
+        </AuthProvider>
     );
 }
 

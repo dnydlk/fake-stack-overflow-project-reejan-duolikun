@@ -11,16 +11,18 @@
     "license": "ISC",
     "dependencies": {
         "bcrypt": "^5.1.1",
+        "bcryptjs": "^2.4.3",
         "cors": "*",
         "express": "*",
         "express-session": "*",
         "jest": "^29.7.0",
-        "jsonwebtoken": "*",
+        "jsonwebtoken": "^9.0.2",
         "mockingoose": "^2.16.2",
         "mongoose": "*",
         "mysql": "*"
     },
     "devDependencies": {
-        "eslint": "^8.54.0"
+        "eslint": "^8.54.0",
+        "supertest": "^6.3.4"
     }
 }

@@ -24,3 +24,7 @@
     margin-bottom: 0px;
     /* float: left; */
 }
+
+.fso-logo:hover {
+  opacity: 0.8;
+}

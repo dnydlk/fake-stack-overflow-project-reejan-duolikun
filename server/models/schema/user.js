@@ -17,5 +17,6 @@ module.exports = mongoose.Schema(
             select: false,
             max: 25,
         }
-    }
+    },
+    { collection: "User" }
 );
