@@ -8,6 +8,7 @@ import Login from "./components/loginPage";
 import SignUp from "./components/signUpPage";
 import FakeStackOverflow from "./components/fakestackoverflow";
 import { AuthProvider } from "./components/authContext";
+import Profile from "./components/profilePage";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/home" element={<FakeStackOverflow />} />
                     <Route path="/" element={<FakeStackOverflow />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
             </Router>
         </AuthProvider>

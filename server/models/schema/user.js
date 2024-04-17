@@ -16,7 +16,12 @@ module.exports = mongoose.Schema(
             required: "Your password is required",
             select: false,
             max: 25,
+        },
+        displayName: {
+            type: String,
+            max: 25,
         }
+
     },
     { collection: "User" }
 );

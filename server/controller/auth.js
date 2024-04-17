@@ -7,7 +7,7 @@ const router = express.Router();
 
 const registerUser = async(req, res) => {
   try {
-      const { email, password } = req.body;
+      const { email, password, displayName } = req.body;
 
       // Check if user already exists
       const existingUser = await User.findOne({ email });
@@ -24,6 +24,7 @@ const registerUser = async(req, res) => {
           const newUser = new User({
             email : email,
             password : hashedPwd,
+            displayName: displayName,
           });
 
           // save new user into the database

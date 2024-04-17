@@ -8,6 +8,7 @@ const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); 
   const [isValid, setIsValid] = useState(true);
@@ -30,7 +31,8 @@ const handleSubmit = async () => {
       // Create an object containing the signup data
       const signupData = {
         email: email,
-        password: password
+        password: password,
+        displayName: displayName
       };
   
       // Send a POST request to the backend with the signup data
@@ -43,6 +45,7 @@ const handleSubmit = async () => {
         setPassword('');
         setConfirmPassword('');
         setErrorMessage('');
+        setDisplayName('');
         // Set success message
         setSuccessMessage("Signup successful! Redirecting to the login page...");
         // Navigate to the welcome page after a delay
@@ -88,6 +91,10 @@ const handleSubmit = async () => {
     }
   };
 
+  const handleDiplayNameChange = (e) => {
+    const inputDisplayNameChange = e.target.value;
+    setDisplayName(inputDisplayNameChange);
+  };
 
   return (
     <div className="signup-container" data-cy-test="signup-container">
@@ -101,7 +108,7 @@ const handleSubmit = async () => {
       {successMessage && <div className="success-message">{successMessage}</div>}
       {errorMessage && <div className="error-message" data-cy-test="errMsg">{errorMessage}</div>}
       <div className="signup-form">
-        <div className="form-group">
+          <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -111,8 +118,8 @@ const handleSubmit = async () => {
             data-cy-test="signUpEmail"
             required
           />
+          </div>
           {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
-        </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
@@ -140,6 +147,17 @@ const handleSubmit = async () => {
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor='displayName'>Display Name:</label>
+          <input
+            type= "text"
+            id="displayName"
+            value={displayName}
+            onChange={handleDiplayNameChange}
+            data-cy-test="signUpDisplayName"
+            placeholder='optional'
+            />
+          </div>
         <button className="signup-button" onClick={handleSubmit} data-cy-test="signUpBtn">Sign Up</button>
       </div>
       <div className="login-link" data-cy-test="login-link">
