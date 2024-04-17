@@ -3,7 +3,6 @@ import React from "react";
 
 
 const SideBarNav = ({ selected = "", handleQuestions, handleTags }) => {
-    console.log("🚀 ~ SideBarNav ~ selected:", selected)
     return (
         <div id="sideBarNav" className="fso-sideBarNav d-flex flex-column align-items-center">
             <div

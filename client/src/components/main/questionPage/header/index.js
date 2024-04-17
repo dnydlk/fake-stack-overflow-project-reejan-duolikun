@@ -4,8 +4,8 @@ import { AuthContext } from "../../../authContext";
 import { useContext } from "react";
 
 const QuestionHeader = ({ title_text, qcnt, setQuestionOrder, handleNewQuestion }) => {
-    const { token } = useContext(AuthContext);
-    console.log("🚀 ~ QuestionHeader ~ token:", token)
+    // added || {} in order to prevent error in testing
+    const { token } = useContext(AuthContext) || {};
 
     return (
         <div>

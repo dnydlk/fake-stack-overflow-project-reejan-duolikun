@@ -45,7 +45,6 @@ const Main = ({ search = "", title, setQuestionPage }) => {
     const handleNewAnswer = () => {
         setPage("newAnswer");
     };
-    console.log("🚀 ~ handleNewAnswer ~ handleNewAnswer:", handleNewAnswer);
 
     const getQuestionPage = (order = "newest", search = "") => {
         return (

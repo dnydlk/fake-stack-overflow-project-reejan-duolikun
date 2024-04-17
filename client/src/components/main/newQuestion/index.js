@@ -17,6 +17,10 @@ const NewQuestion = ({ handleQuestions }) => {
     const [userNameErr, setUserNameErr] = useState("");
 
     const postQuestion = async () => {
+        setTitleErr("");
+        setTextErr("");
+        setTagErr("");
+        setUserNameErr("");
         let isValid = true;
         if (!title) {
             setTitleErr("Title cannot be empty");
