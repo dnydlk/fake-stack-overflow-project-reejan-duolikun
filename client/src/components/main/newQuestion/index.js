@@ -109,6 +109,7 @@ const NewQuestion = ({ handleQuestions }) => {
             <div className="fso-btn-indicator-container">
                 <button
                     className="fso-form-post-button"
+                    data-cy-test="fso-form-post-button"
                     onClick={() => {
                         postQuestion();
                     }}>
