@@ -62,7 +62,7 @@ describe("<Input />", () => {
         cy.getDateCyTest("fso-input-input")
             .type("t")
             .then(() => {
-                expect(setState).to.be.calledWith("t");
+                cy.wrap(setState).should("have.been.calledWith", "t");
             });
     });
 });

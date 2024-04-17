@@ -10,39 +10,7 @@ describe("Home Page Should load correctly", () => {
     cy.exec("node ../server/init.js mongodb://127.0.0.1:27017/fake_so");
     cy.visit("/home");
   });
-  //! removed because the below tests are covered in cypress component tests
-  // Header
-  // it("successfully shows logo image", () => {
-  //   cy.getDateCyTest("logo").should("exist");
-  // });
-  // it("successfully shows search bar", () => {
-  //   cy.getDateCyTest("search-bar").should("exist");
-  // });
-  // it("successfully shows user profile button", () => {
-  //   cy.getDateCyTest("user-profile").should("exist");
-  // });
-  //! removed because the below tests are covered in cypress component tests
-  // Main - Navigation
-  // it("successfully shows navigation buttons", () => {
-  //   cy.getDateCyTest("nav-question").should("contain.text", "Questions");
-  //   cy.getDateCyTest("nav-tag").should("contain.text", "Tags");
-  // });
-  //! removed because the below tests are covered in cypress component tests
-  // Main - Content
-  // it("successfully shows All Questions string", () => {
-  //   cy.getDateCyTest("main-page-header").should("contain.text", "All Questions");
-  // });
-  // it("successfully shows Ask a Question button", () => {
-  //   cy.getDateCyTest("ask-question-btn").should("contain.text", "Ask a Question");
-  // });
-  // it("successfully shows question count", () => {
-  //   cy.getDateCyTest("question-count").should("contain.text", "4 questions");
-  // });
-  // it("successfully shows filter buttons", () => {
-  //   cy.getDateCyTest("order-btn-Newest").should("contain.text", "Newest");
-  //   cy.getDateCyTest("order-btn-Active").should("contain.text", "Active");
-  //   cy.getDateCyTest("order-btn-Unanswered").should("contain.text", "Unanswered");
-  // });
+  
   // Main - Content - Questions
   it("successfully shows all questions", () => {
     const qTitles = [
@@ -55,6 +23,7 @@ describe("Home Page Should load correctly", () => {
       cy.wrap($el).should("contain.text", qTitles[index]);
     });
   });
+
   it("successfully shows all questions' answers count & view count", () => {
     const qAnswers = ["1 answer", "2 answers", "3 answers", "2 answers"];
     const qViews = ["103 views", "200 views", "121 views", "10 views"];
@@ -63,6 +32,7 @@ describe("Home Page Should load correctly", () => {
       cy.wrap($el).should("contain.text", qViews[index]);
     });
   });
+
   it("successfully shows all questions' authors & asked date", () => {
     const qAuthors = ["elephantCDE", "monkeyABC", "saltyPeter", "Joji John"];
     const qDates = [
@@ -105,13 +75,6 @@ describe("Home Page Should load correctly", () => {
     cy.getDateCyTest("order-btn-Unanswered").click();
     cy.getDateCyTest("question-count").should("contain.text", "0 questions");
   });
-  //! removed because the below tests are covered in cypress component tests
-  // it("successfully highlights 'Questions' link when on the home page", () => {
-  //   cy.getDateCyTest("nav-question").should("have.css", "background-color", "rgb(191, 191, 191)");
-  // });
-  // it("successfully highlights 'Tags' link when on clicked", () => {
-  //   cy.getDateCyTest("nav-tag").click().should("have.css", "background-color", "rgb(191, 191, 191)");
-  // });
 
   //todo: add e2e test after all the components are functionally complete
   // Add Question
