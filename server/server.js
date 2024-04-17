@@ -26,14 +26,6 @@ app.use(
 // Parse incoming requests with JSON payloads
 app.use(express.json());
 
-// Allow cross-origin requests
-app.use(
-    cors({
-        credentials: true,
-        origin: [CLIENT_URL],
-    })
-);
-
 // Parse incoming requests with JSON payloads
 app.use(express.json());
 

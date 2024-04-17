@@ -4,6 +4,7 @@ import SideBarNav from "./sideBarNav";
 import QuestionPage from "./questionPage";
 import AnswerPage from "./answerPage";
 import { useNavigate } from "react-router-dom";
+import NewQuestion from "./newQuestion";
 
 const Main = ({ search = "", title, setQuestionPage }) => {
     const [page, setPage] = useState("home");
@@ -76,11 +77,11 @@ const Main = ({ search = "", title, setQuestionPage }) => {
             content = <AnswerPage qid={qid} handleNewQuestion={handleNewQuestion} handleNewAnswer={handleNewAnswer} />;
             break;
         }
-        // case "newQuestion": {
-        //     selected = "";
-        //     content = <NewQuestion handleQuestions={handleQuestions} />;
-        //     break;
-        // }
+        case "newQuestion": {
+            selected = "";
+            content = <NewQuestion handleQuestions={handleQuestions} />;
+            break;
+        }
         // case "newAnswer": {
         //     selected = "";
         //     content = <NewAnswer qid={qid} handleAnswer={handleAnswer} />;

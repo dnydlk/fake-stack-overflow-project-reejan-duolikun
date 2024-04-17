@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const user = require("../user");
 
 // Schema for answers
 module.exports = mongoose.Schema(
     {
-        _id: { type: mongoose.Schema.Types.ObjectId, auto: true},
+        _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
         email: {
             type: String,
             required: "Your email is required",
@@ -16,7 +17,12 @@ module.exports = mongoose.Schema(
             required: "Your password is required",
             select: false,
             max: 25,
-        }
+        },
+        username: {
+            type: String,
+            required: "Your username is required",
+            unique: true,
+        },
     },
     { collection: "User" }
 );

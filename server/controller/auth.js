@@ -103,7 +103,7 @@ const loginUser = async (req, res) => {
   };
   
 
-// add appropirate HTTP verbs and their endpoints to the router
+// add appropriate HTTP verbs and their endpoints to the router
 router.post('/registerUser', registerUser);
 router.post('/loginUser', loginUser);
 

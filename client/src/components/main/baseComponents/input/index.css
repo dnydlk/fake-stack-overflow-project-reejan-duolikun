@@ -1,0 +1,26 @@
+.fso-input-title {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.fso-input-hint {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 5px;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+.fso-input-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.fso-input-error {
+    color: red;
+    margin-bottom: 20px;
+}
