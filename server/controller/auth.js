@@ -7,7 +7,7 @@ const router = express.Router();
 
 const registerUser = async(req, res) => {
   try {
-      const { email, password, displayName } = req.body;
+      const { email, password, userName } = req.body;
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
@@ -18,7 +18,7 @@ const registerUser = async(req, res) => {
             });
         
         // Check if username already exists
-        const existingUsername = await User.findOne({ username });
+        const existingUsername = await User.findOne({ userName });
         if (existingUsername)
             return res.status(400).json({
                 status: "failed",
@@ -31,17 +31,29 @@ const registerUser = async(req, res) => {
           const newUser = new User({
             email : email,
             password : hashedPwd,
-            displayName: displayName,
+            userName: userName,
           });
 
           // save new user into the database
           newUser
             .save()
             .then ((result) => {
+               // Create JWT token
+            const token = jwt.sign(
+                {
+                    userId: newUser._id,
+                    userEmail: newUser.email,
+                    userName: newUser.userName,
+                },
+                "RANDOM-TOKEN",
+                { expiresIn: "24h" }
+        );
               res.status(200).json({
                 status: "success",
+                email: newUser.email,
                 message:
                     "Your account has been successfully created.",
+                token
               });
             });
         });
@@ -84,7 +96,7 @@ const loginUser = async (req, res) => {
             {
                 userId: existingUser._id,
                 userEmail: existingUser.email,
-                userName: existingUser.username,
+                userName: existingUser.userName,
             },
             "RANDOM-TOKEN",
             { expiresIn: "24h" }

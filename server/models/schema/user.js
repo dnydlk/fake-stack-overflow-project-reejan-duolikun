@@ -18,7 +18,7 @@ module.exports = mongoose.Schema(
             select: false,
             max: 25,
         },
-        displayName: {
+        userName: {
             type: String,
             max: 25,
         }
