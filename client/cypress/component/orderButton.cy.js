@@ -1,4 +1,4 @@
-// function getDateCyTest(selector) defined in cypress/support/commands.js
+// function getDataCyTest(selector) defined in cypress/support/commands.js
 
 import OrderButton from "../../src/components/main/questionPage/header/orderButton";
 
@@ -7,28 +7,28 @@ describe("<OrderButton />", () => {
     const message = "Newest";
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     cy.mount(<OrderButton message={message} setQuestionOrder={setQuestionOrderSpy} />);
-    cy.getDateCyTest("order-btn-Newest").should("contain.text", "Newest");
+    cy.getDataCyTest("order-btn-Newest").should("contain.text", "Newest");
   })
 
   it("OrderButton shows Active button", () => { 
     const message = "Active";
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     cy.mount(<OrderButton message={message} setQuestionOrder={setQuestionOrderSpy} />);
-    cy.getDateCyTest("order-btn-Active").should("contain.text", "Active");
+    cy.getDataCyTest("order-btn-Active").should("contain.text", "Active");
   })
 
   it("OrderButton shows Unanswered button", () => { 
     const message = "Unanswered";
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     cy.mount(<OrderButton message={message} setQuestionOrder={setQuestionOrderSpy} />);
-    cy.getDateCyTest("order-btn-Unanswered").should("contain.text", "Unanswered");
+    cy.getDataCyTest("order-btn-Unanswered").should("contain.text", "Unanswered");
   })
 
   it("setQuestionOrder called when Newest button is clicked", () => { 
     const message = "Newest";
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     cy.mount(<OrderButton message={message} setQuestionOrder={setQuestionOrderSpy} />);
-    cy.getDateCyTest("order-btn-Newest").click();
+    cy.getDataCyTest("order-btn-Newest").click();
     cy.get("@setQuestionOrderSpy").should("have.been.called");
   })
 
@@ -36,7 +36,7 @@ describe("<OrderButton />", () => {
     const message = "Active";
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     cy.mount(<OrderButton message={message} setQuestionOrder={setQuestionOrderSpy} />);
-    cy.getDateCyTest("order-btn-Active").click();
+    cy.getDataCyTest("order-btn-Active").click();
     cy.get("@setQuestionOrderSpy").should("have.been.called");
   })
 
@@ -44,7 +44,7 @@ describe("<OrderButton />", () => {
     const message = "Unanswered";
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     cy.mount(<OrderButton message={message} setQuestionOrder={setQuestionOrderSpy} />);
-    cy.getDateCyTest("order-btn-Unanswered").click();
+    cy.getDataCyTest("order-btn-Unanswered").click();
     cy.get("@setQuestionOrderSpy").should("have.been.called");
   })
 })

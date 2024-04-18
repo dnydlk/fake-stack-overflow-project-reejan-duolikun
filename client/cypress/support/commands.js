@@ -30,8 +30,8 @@
  * https://docs.cypress.io/guides/references/best-practices#Selecting-Elements
  * @param {string} dateCyTestSelector
  * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
- * @example cy.getDateCyTest('main-page-header')
+ * @example cy.getDataCyTest('main-page-header')
  */
-Cypress.Commands.add('getDateCyTest', (dateCyTestSelector) => {
+Cypress.Commands.add('getDataCyTest', (dateCyTestSelector) => {
     return cy.get(`[data-cy-test=${dateCyTestSelector}]`);
  })

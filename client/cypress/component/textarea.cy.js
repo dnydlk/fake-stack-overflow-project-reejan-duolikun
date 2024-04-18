@@ -1,4 +1,4 @@
-// function getDateCyTest(selector) defined in cypress/support/commands.js
+// function getDataCyTest(selector) defined in cypress/support/commands.js
 import Textarea from "../../src/components/main/baseComponents/textarea";
 
 describe("<Textarea />", () => {
@@ -10,7 +10,7 @@ describe("<Textarea />", () => {
         const err = "Text cannot be empty";
 
         cy.mount(<Textarea title={title} hint={hint} val={val} setState={setState} err={err} />);
-        cy.getDateCyTest("fso-input-title").should("contain.text", title);
+        cy.getDataCyTest("fso-input-title").should("contain.text", title);
     });
 
     it("Textarea shows hint correctly", () => {
@@ -21,7 +21,7 @@ describe("<Textarea />", () => {
         const err = "Text cannot be empty";
 
         cy.mount(<Textarea title={title} hint={hint} val={val} setState={setState} err={err} />);
-        cy.getDateCyTest("fso-input-hint").should("contain.text", hint);
+        cy.getDataCyTest("fso-input-hint").should("contain.text", hint);
     });
 
     it("Textarea shows error correctly", () => {
@@ -32,7 +32,7 @@ describe("<Textarea />", () => {
         const err = "Text cannot be empty";
 
         cy.mount(<Textarea title={title} hint={hint} val={val} setState={setState} err={err} />);
-        cy.getDateCyTest("fso-input-error").should("contain.text", err);
+        cy.getDataCyTest("fso-input-error").should("contain.text", err);
     });
 
     it("Textarea calls setState correctly", () => {

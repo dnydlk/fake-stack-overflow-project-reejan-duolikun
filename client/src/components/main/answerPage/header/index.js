@@ -7,7 +7,7 @@ const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta }) => {
         <div id="answersHeader" className="fso-right-padding">
             {/*//- Question title */}
             <div className=" fso-space-between">
-                <div className="fso-bold-title fso-answer-question-title ">{title}</div>
+                <div className="fso-bold-title fso-answer-question-title" data-cy-test="answer-title">{title}</div>
                 {/*//- Ask a Question button  */}
                 <button
                     className="fso-blue-btn"

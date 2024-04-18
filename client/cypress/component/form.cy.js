@@ -1,4 +1,4 @@
-// function getDateCyTest(selector) defined in cypress/support/commands.js
+// function getDataCyTest(selector) defined in cypress/support/commands.js
 
 import Form from "../../src/components/main/baseComponents/form";
 import Input from "../../src/components/main/baseComponents/input";

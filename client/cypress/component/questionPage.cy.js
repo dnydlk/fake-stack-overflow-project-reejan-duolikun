@@ -1,4 +1,4 @@
-// function getDateCyTest(selector) defined in cypress/support/commands.js
+// function getDataCyTest(selector) defined in cypress/support/commands.js
 
 import QuestionPage from "../../src/components/main/questionPage";
 
@@ -43,8 +43,8 @@ describe("<QuestionPage />", () => {
         handleNewQuestion={handleNewQuestionSpy}
       />
     );
-    cy.getDateCyTest("question-list").within(() => { 
-      cy.getDateCyTest("question").should("have.length", qlist.length);
+    cy.getDataCyTest("question-list").within(() => { 
+      cy.getDataCyTest("question").should("have.length", qlist.length);
     })
   });
 
@@ -70,6 +70,6 @@ describe("<QuestionPage />", () => {
         handleNewQuestion={handleNewQuestionSpy}
       />
     );
-    cy.getDateCyTest("no-questions-found").should("exist");
+    cy.getDataCyTest("no-questions-found").should("exist");
   })
 })

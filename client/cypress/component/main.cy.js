@@ -1,4 +1,4 @@
-// function getDateCyTest(selector) defined in cypress/support/commands.js
+// function getDataCyTest(selector) defined in cypress/support/commands.js
 
 import Main from "../../src/components/main";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -14,7 +14,7 @@ describe("<Main />", () => {
                 <Main title={title} search={search} setQuestionPage={setQuestionPage} />{" "}
             </Router>
         );
-        cy.getDateCyTest("main-page-header").should("contain.text", title);
+        cy.getDataCyTest("main-page-header").should("contain.text", title);
     });
 
     it("Main shows question count", () => {
@@ -26,7 +26,7 @@ describe("<Main />", () => {
                 <Main title={title} search={search} setQuestionPage={setQuestionPage} />{" "}
             </Router>
         );
-        cy.getDateCyTest("question-count").should("contain.text", "0 questions");
+        cy.getDataCyTest("question-count").should("contain.text", "0 questions");
     });
 
     it("Main shows filter buttons", () => {
@@ -38,8 +38,8 @@ describe("<Main />", () => {
                 <Main title={title} search={search} setQuestionPage={setQuestionPage} />{" "}
             </Router>
         );
-        cy.getDateCyTest("order-btn-Newest").should("contain.text", "Newest");
-        cy.getDateCyTest("order-btn-Active").should("contain.text", "Active");
-        cy.getDateCyTest("order-btn-Unanswered").should("contain.text", "Unanswered");
+        cy.getDataCyTest("order-btn-Newest").should("contain.text", "Newest");
+        cy.getDataCyTest("order-btn-Active").should("contain.text", "Active");
+        cy.getDataCyTest("order-btn-Unanswered").should("contain.text", "Unanswered");
     });
 });

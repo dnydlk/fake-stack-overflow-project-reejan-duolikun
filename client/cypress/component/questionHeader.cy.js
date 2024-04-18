@@ -1,4 +1,4 @@
-// function getDateCyTest(selector) defined in cypress/support/commands.js
+// function getDataCyTest(selector) defined in cypress/support/commands.js
 
 import QuestionHeader from "../../src/components/main/questionPage/header";
 
@@ -9,7 +9,7 @@ describe("<QuestionHeader />", () => {
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     const handleNewQuestionSpy = cy.spy().as("handleNewQuestionSpy");
     cy.mount(<QuestionHeader title_text={title_text} qcnt={qcnt} setQuestionOrder={setQuestionOrderSpy} handleNewQuestion={handleNewQuestionSpy} />);
-    cy.getDateCyTest("main-page-header").should("contain.text", title_text);
+    cy.getDataCyTest("main-page-header").should("contain.text", title_text);
   })
 
   it("QuestionHeader shows Ask a Question button", () => { 
@@ -18,7 +18,7 @@ describe("<QuestionHeader />", () => {
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     const handleNewQuestionSpy = cy.spy().as("handleNewQuestionSpy");
     cy.mount(<QuestionHeader title_text={title_text} qcnt={qcnt} setQuestionOrder={setQuestionOrderSpy} handleNewQuestion={handleNewQuestionSpy} />);
-    cy.getDateCyTest("ask-question-btn").should("contain.text", "Ask a Question");
+    cy.getDataCyTest("ask-question-btn").should("contain.text", "Ask a Question");
   })
 
   it("QuestionHeader shows question count", () => { 
@@ -27,6 +27,6 @@ describe("<QuestionHeader />", () => {
     const setQuestionOrderSpy = cy.spy().as("setQuestionOrderSpy");
     const handleNewQuestionSpy = cy.spy().as("handleNewQuestionSpy");
     cy.mount(<QuestionHeader title_text={title_text} qcnt={qcnt} setQuestionOrder={setQuestionOrderSpy} handleNewQuestion={handleNewQuestionSpy} />);
-    cy.getDateCyTest("question-count").should("contain.text", "1 questions");
+    cy.getDataCyTest("question-count").should("contain.text", "1 questions");
   })
 })
