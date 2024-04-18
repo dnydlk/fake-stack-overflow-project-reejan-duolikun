@@ -15,7 +15,7 @@ const QuestionBody = ({ views, text, askBy, meta }) => {
                     {askBy}
                 </div>
                 <div className="fso-answer-question-meta" data-cy-test="answer-page-question-asked-meta">
-                    asked{meta}
+                    asked {meta}
                 </div>
             </div>
         </div>
