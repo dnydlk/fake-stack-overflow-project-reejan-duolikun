@@ -18,11 +18,10 @@ module.exports = mongoose.Schema(
             select: false,
             max: 25,
         },
-        username: {
+        displayName: {
             type: String,
-            required: "Your username is required",
-            unique: true,
-        },
+            max: 25,
+        }
     },
     { collection: "User" }
 );

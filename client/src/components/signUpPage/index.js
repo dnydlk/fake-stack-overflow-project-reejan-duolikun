@@ -5,16 +5,15 @@ import { useNavigate } from "react-router-dom";
 import "../../stylesheets/auth.css";
 
 const SignupPage = () => {
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const [isValid, setIsValid] = useState(true);
-    const [emailError, setEmailError] = useState("");
-    const [usernameError, setUsernameError] = useState("");
-    const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); 
+  const [isValid, setIsValid] = useState(true);
+  const [emailError, setEmailError] = useState('');
+  const navigate = useNavigate();
 
     // Function to handle signup action
     const handleSubmit = async () => {
@@ -24,43 +23,44 @@ const SignupPage = () => {
                 throw new Error("Please provide both email and password");
             }
 
-            // Check if passwords match
-            if (password !== confirmPassword) {
-                throw new Error("Passwords do not match");
-            }
-
-            // Create an object containing the signup data
-            const signupData = {
-                email: email,
-                password: password,
-                username: username,
-            };
-
-            // Send a POST request to the backend with the signup data
-            const response = await registerUser(signupData);
-
-            // Check if the request was successful
-            if (response.status == 200) {
-                // Reset email, password, and confirmPassword fields after successful signup attempt
-                setEmail("");
-                setPassword("");
-                setConfirmPassword("");
-                setErrorMessage("");
-                // Set success message
-                setSuccessMessage("Signup successful! Redirecting to the login page...");
-                // Navigate to the welcome page after a delay
-                setTimeout(() => {
-                    navigate("/login");
-                }, 2000); // Adjust delay as needed
-            } else {
-                // If the request fails, throw an error or handle it accordingly
-                throw new Error(response.response.data.message);
-            }
-        } catch (error) {
-            console.error("Error:", error.message);
-            setErrorMessage(error.message);
-        }
-    };
+      // Check if passwords match
+      if (password !== confirmPassword) {
+        throw new Error('Passwords do not match');
+      }
+  
+      // Create an object containing the signup data
+      const signupData = {
+        email: email,
+        password: password,
+        displayName: displayName
+      };
+  
+      // Send a POST request to the backend with the signup data
+      const response = await registerUser(signupData);
+  
+      // Check if the request was successful
+      if (response.status == 200) {
+        // Reset email, password, and confirmPassword fields after successful signup attempt
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setErrorMessage('');
+        setDisplayName('');
+        // Set success message
+        setSuccessMessage("Signup successful! Redirecting to the login page...");
+        // Navigate to the welcome page after a delay
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000); // Adjust delay as needed
+      } else {
+        // If the request fails, throw an error or handle it accordingly
+        throw new Error(response.response.data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+      setErrorMessage(error.message);
+    }
+  };
 
     const handlePwdChange = (event) => {
         const newPassword = event.target.value;
@@ -91,115 +91,80 @@ const SignupPage = () => {
         }
     };
 
-    const validateUsername = (username) => {
-        // Regular expression for validating username
-        const usernameRegex = /^[a-zA-Z0-9_]{6,20}$/;
+  const handleDiplayNameChange = (e) => {
+    const inputDisplayNameChange = e.target.value;
+    setDisplayName(inputDisplayNameChange);
+  };
 
-        // Prohibit reserved words
-        const reservedWords = ["admin", "moderator", "superuser", "user"];
-        if (reservedWords.includes(username.toLowerCase())) {
-            return false;
-        }
-
-        // Prohibit special characters & non-alphanumeric characters
-        if (!usernameRegex.test(username)) {
-            return false;
-        }
-
-        return true;
-    };
-
-    const handleUsernameChange = (e) => {
-        const inputUsername = e.target.value;
-        setUsername(inputUsername);
-
-        if (!validateUsername(inputUsername)) {
-            setUsernameError("Invalid username");
-        } else {
-            setUsernameError("");
-        }
-    };
-
-    return (
-        <div className="signup-container" data-cy-test="signup-container">
-            <Link to="/">
-                <img
-                    src="logo_stack_overflow.png"
-                    alt="icon of fake stack overflow"
-                    className="fso-logo mb-2"
-                    data-cy-test="logo"
-                />
-            </Link>
-            <h2>Sign Up</h2>
-            {successMessage && <div className="success-message">{successMessage}</div>}
-            {errorMessage && (
-                <div className="error-message" data-cy-test="errMsg">
-                    {errorMessage}
-                </div>
-            )}
-            <div className="signup-form">
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        data-cy-test="signUpEmail"
-                        required
-                    />
-                    {emailError && <span style={{ color: "red" }}>{emailError}</span>}
-                </div>
-                <div className="form-group">
-                    <label htmlFor="username">Username:</label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={handleUsernameChange}
-                            data-cy-test="signUpUsername"
-                            required
-                        />
-                        {usernameError && <span style={{ color: "red" }}>{usernameError}</span>}
-                    
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={handlePwdChange}
-                        data-cy-test="signUpPassword"
-                        required
-                    />
-                    {!isValid && (
-                        <p style={{ color: "red" }}>
-                            Password must contain at least eight characters, including at least one letter and one
-                            number.
-                        </p>
-                    )}
-                </div>
-                <div className="form-group">
-                    <label htmlFor="confirmPassword">Confirm Password:</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        data-cy-test="signUpConfirmPwd"
-                        required
-                    />
-                </div>
-                <button className="signup-button" onClick={handleSubmit} data-cy-test="signUpBtn">
-                    Sign Up
-                </button>
-            </div>
-            <div className="login-link" data-cy-test="login-link">
-                Already have an account? <Link to="/login">Login here</Link>
-            </div>
+  return (
+    <div className="signup-container" data-cy-test="signup-container">
+      <Link to="/"> 
+        <img src="logo_stack_overflow.png" 
+              alt="icon of fake stack overflow" 
+              className="fso-logo mb-2" 
+              data-cy-test="logo"/>
+      </Link>
+      <h2>Sign Up</h2>
+      {successMessage && <div className="success-message">{successMessage}</div>}
+      {errorMessage && <div className="error-message" data-cy-test="errMsg">{errorMessage}</div>}
+      <div className="signup-form">
+          <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            data-cy-test="signUpEmail"
+            required
+          />
+          </div>
+          {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePwdChange}
+            data-cy-test="signUpPassword"
+            required
+          />
+          {!isValid && (
+            <p style={{ color: 'red' }}>
+              Password must contain at least eight characters, including at least one letter and one number.
+            </p>
+          )}
         </div>
-    );
-};
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            data-cy-test="signUpConfirmPwd"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor='displayName'>Display Name:</label>
+          <input
+            type= "text"
+            id="displayName"
+            value={displayName}
+            onChange={handleDiplayNameChange}
+            data-cy-test="signUpDisplayName"
+            placeholder='optional'
+            />
+          </div>
+        <button className="signup-button" onClick={handleSubmit} data-cy-test="signUpBtn">Sign Up</button>
+      </div>
+      <div className="login-link" data-cy-test="login-link">
+        Already have an account? <Link to="/login">Login here</Link>
+      </div>
+    </div>
+  );
+}
 
 export default SignupPage;

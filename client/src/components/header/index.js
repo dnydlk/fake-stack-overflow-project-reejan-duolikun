@@ -19,6 +19,10 @@ const Header = ({ search, setQuestionPage }) => {
         navigate("/");
     };
 
+    const handleProfile = () => {
+        navigate('/profile');
+    }
+    
     return (
         <div id="fso-header" className="fso-header d-flex align-items-center justify-content-around">
             {/*//- Image of Stack Overflow */}
@@ -48,13 +52,11 @@ const Header = ({ search, setQuestionPage }) => {
                     }
                 }}
             />
-            {/* // todo: remove the User test if token is found  */}
-            <div>
-                {token ? (
-                    // Display logout button if logged in
-                    <button className="logout-button" onClick={handleLogout}>
-                        Log Out
-                    </button>
+
+            <div>{token ? (
+                    <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
+                    <button className="userProfile" onClick={handleProfile}>user</button>
+                    </div>
                 ) : (
                     // Display login button if not logged in
                     <button className="login-button" onClick={handleLogin}>
