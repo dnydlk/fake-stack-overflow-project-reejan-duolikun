@@ -53,6 +53,7 @@ const registerUser = async(req, res) => {
               res.status(200).json({
                 status: "success",
                 email: newUser.email,
+                userId: newUser._id,
                 message:
                     "Your account has been successfully created.",
                 token
@@ -108,6 +109,7 @@ const loginUser = async (req, res) => {
         res.status(200).json({
             status: "success",
             email: existingUser.email,
+            userId: existingUser._id,
             message: "Login successful.",
             token,
         });
