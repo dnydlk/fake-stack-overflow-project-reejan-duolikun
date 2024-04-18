@@ -3,6 +3,7 @@
 let Tag = require("./models/tags");
 let Answer = require("./models/answers");
 let Question = require("./models/questions");
+let User = require("./models/user");
 
 const mongoose = require("mongoose");
 
@@ -45,6 +46,17 @@ function questionCreate(title, text, tags, answers, asked_by, ask_date_time, vie
 
     let newQuestion = new Question(questionDetail);
     return newQuestion.save();
+}
+
+// Create a user
+function userCreate(email, password, username) { 
+    userDetail = {
+        email: email,
+        password: password,
+        username: username,
+    };
+    let newUser = new User(userDetail);
+    return newUser.save();
 }
 
 const init = async () => {
@@ -129,6 +141,9 @@ const init = async () => {
         new Date("2023-03-10T14:28:01"),
         103
     );
+
+    // Create users
+    await userCreate("test@test.com", "q1234567", "admin")
 
     // Close the database connection if it is open
     if (db) db.close();

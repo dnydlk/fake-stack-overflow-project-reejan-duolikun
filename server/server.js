@@ -26,6 +26,9 @@ app.use(
 // Parse incoming requests with JSON payloads
 app.use(express.json());
 
+// Parse incoming requests with JSON payloads
+app.use(express.json());
+
 app.get("/", (_, res) => {
     res.send("Fake SO Server Dummy Endpoint");
     res.end();
@@ -35,11 +38,13 @@ app.get("/", (_, res) => {
 const questionController = require("./controller/question");
 const tagController = require("./controller/tag");
 const answerController = require("./controller/answer");
+const authController = require("./controller/auth.js");
 
 // Use the controllers
 app.use("/question", questionController);
 app.use("/tag", tagController);
 app.use("/answer", answerController);
+app.use("/user", authController);
 
 let server = app.listen(port, () => {
     console.log(`Server starts at http://localhost:${port}`);

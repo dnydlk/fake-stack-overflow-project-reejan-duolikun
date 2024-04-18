@@ -1,7 +1,7 @@
 {
     // Formatting
     "editor.formatOnSave": false,
-    "editor.indentSize": "tabSize",
+    "editor.indentSize": 4,
     "editor.tabSize": 4,
     "javascript.format.semicolons": "insert",
     "typescript.format.semicolons": "insert",
@@ -65,7 +65,10 @@
         "btns",
         "fakestackoverflow",
         "hamkalo",
+        "Joji",
         "qcnt",
-        "qlist"
+        "qlist",
+        "signup",
+        "testdev"
     ]
 }
