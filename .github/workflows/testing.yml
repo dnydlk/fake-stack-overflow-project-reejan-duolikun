@@ -5,9 +5,7 @@ name: Continuous Integration Tests
 
 on:
   pull_request:
-    branches: [main, testdev]
-  push:
-    branches: [main, testdev]
+    branches: [main]
 
 jobs:
   setup:
