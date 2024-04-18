@@ -18,6 +18,7 @@ const Header = ({ search, setQuestionPage }) => {
         localStorage.removeItem("jwtToken");
         navigate("/");
     };
+    console.log("🚀 ~ handleLogout ~ handleLogout:", handleLogout)
 
     const handleProfile = () => {
         navigate('/profile');

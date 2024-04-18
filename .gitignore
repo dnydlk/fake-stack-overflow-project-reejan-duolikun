@@ -103,3 +103,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# cypress screen shots
+client/cypress/screenshots
