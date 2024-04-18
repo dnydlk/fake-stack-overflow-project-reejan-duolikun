@@ -35,7 +35,6 @@ const Header = ({ search, setQuestionPage }) => {
             />
 
             {/*//- Search bar */}
-            {/* todo: adjust the width in css? */}
             <input
                 id="searchBar"
                 data-cy-test="search-bar"
