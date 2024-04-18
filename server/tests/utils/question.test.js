@@ -279,4 +279,12 @@ describe("Unit tests for utils/question.js", () => {
     expect(result).toEqual(false);
   });
 
+  test("setNewestAnswerDate returns the question with the newest answer date", () => { 
+    const question = _questions[0];
+    let result = setNewestAnswerDate(question, question.answers[0].ans_date_time);
+    result = setNewestAnswerDate(question, question.answers[1].ans_date_time);
+    expect(question._id).toEqual("65e9b58910afe6e94fc6e6dc");
+    expect(question.new_ans_date).toEqual(new Date("2024-03-02T02:02:02"));
+  });
+
 });
