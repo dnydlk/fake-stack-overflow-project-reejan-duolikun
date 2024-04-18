@@ -46,7 +46,7 @@ describe("<AnswerPage />", () => {
         cy.getDataCyTest("answer-page-answer-count").should("contain.text", "1Answer");
     });
 
-    it.only("successfully triggers handleNewAnswer", () => {
+    it("successfully triggers handleNewAnswer", () => {
         cy.getDataCyTest("answer-page-post-answer").click();
         cy.get("@handleNewAnswerSpy").should("have.been.called");
     });

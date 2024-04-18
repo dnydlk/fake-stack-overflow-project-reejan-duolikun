@@ -24,7 +24,7 @@ describe("<Header />", () => {
     cy.getDataCyTest("user-profile").should("exist");
   });
 
-  it.only("Search bar shows search text entered by user", () => { 
+  it("Search bar shows search text entered by user", () => { 
     const setQuestionPageSpy = cy.spy().as("setQuestionPageSpy");
     const search = "test";
     // Provide mocked context values
@@ -43,6 +43,8 @@ describe("<Header />", () => {
   it("setQuestionPage called when enter is pressed in search", () => {
     const setQuestionPageSpy = cy.spy().as("setQuestionPageSpy");
     const search = "";
+    const token = "fakeToken";
+    const setToken = cy.stub();
     cy.mount(
       <AuthContext.Provider value={{ token, setToken }}>
         <MemoryRouter>

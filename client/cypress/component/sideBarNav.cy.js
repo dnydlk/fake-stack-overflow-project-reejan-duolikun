@@ -37,7 +37,7 @@ describe("<SideBarNav />", () => {
     cy.get("@handleQuestionsSpy").should("have.been.called");
   })
 
-  it.only("handleTags called when Tags button is clicked", () => {
+  it("handleTags called when Tags button is clicked", () => {
     const selected = "";
     const handleQuestionsSpy = cy.spy().as("handleQuestionsSpy");
     const handleTagsSpy = cy.spy().as("handleTagsSpy");

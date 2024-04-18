@@ -125,7 +125,7 @@ describe("Home Page Should load correctly", () => {
         
     });
 
-    it.only("Add a new answer", () => {
+    it("Add a new answer", () => {
         cy.getDataCyTest("post-title").contains("Quick question about storage on android").click();
         cy.getDataCyTest("answer-page-post-answer").click();
         cy.get("#answerUsernameInput").type("testUser");

@@ -23,6 +23,6 @@ describe("<QuestionBody />", () => {
         const askBy = "Test Ask By";
         const meta = "Test Meta";
         cy.mount(<QuestionBody text={text} askBy={askBy} meta={meta} />);
-        cy.getDataCyTest("answer-page-meta").should("have.text", `asked${meta}`);
+        cy.getDataCyTest("answer-page-question-asked-meta").should("have.text", `asked${meta}`);
     });
 })
