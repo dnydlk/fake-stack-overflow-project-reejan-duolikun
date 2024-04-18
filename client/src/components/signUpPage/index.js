@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import { registerUser } from "../../services/userService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../../stylesheets/auth.css";
+import { AuthContext } from "../authContext";
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [displayName, setDisplayName] = useState('');
+  const [userName, setUserName] = useState('');
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); 
   const [isValid, setIsValid] = useState(true);
   const [emailError, setEmailError] = useState('');
+  const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
     // Function to handle signup action
@@ -32,7 +34,7 @@ const SignupPage = () => {
       const signupData = {
         email: email,
         password: password,
-        displayName: displayName
+        userName: userName
       };
   
       // Send a POST request to the backend with the signup data
@@ -45,13 +47,16 @@ const SignupPage = () => {
         setPassword('');
         setConfirmPassword('');
         setErrorMessage('');
-        setDisplayName('');
+        setUserName('');
         // Set success message
         setSuccessMessage("Signup successful! Redirecting to the login page...");
-        // Navigate to the welcome page after a delay
+        // Navigate to the home page after a delay
         setTimeout(() => {
-          navigate("/login");
-        }, 2000); // Adjust delay as needed
+           // Save the jwtToken in the context
+          setToken(response.data.token);
+          localStorage.setItem("jwtToken", response.data.token);
+          navigate("/home");
+        }, 500); // Adjust delay as needed
       } else {
         // If the request fails, throw an error or handle it accordingly
         throw new Error(response.response.data.message);
@@ -91,9 +96,9 @@ const SignupPage = () => {
         }
     };
 
-  const handleDiplayNameChange = (e) => {
-    const inputDisplayNameChange = e.target.value;
-    setDisplayName(inputDisplayNameChange);
+  const handleUserNameChange = (e) => {
+    const inputUserNameChange = e.target.value;
+    setUserName(inputUserNameChange);
   };
 
   return (
@@ -148,13 +153,13 @@ const SignupPage = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor='displayName'>Display Name:</label>
+          <label htmlFor='userName'>User Name:</label>
           <input
             type= "text"
-            id="displayName"
-            value={displayName}
-            onChange={handleDiplayNameChange}
-            data-cy-test="signUpDisplayName"
+            id="userName"
+            value={userName}
+            onChange={handleUserNameChange}
+            data-cy-test="signUpUserName"
             placeholder='optional'
             />
           </div>
