@@ -17,13 +17,15 @@ const registerUser = async(req, res) => {
                 message: "This email is already registered. Please try logging in instead.",
             });
         
-        // Check if username already exists
-        const existingUsername = await User.findOne({ userName });
-        if (existingUsername)
-            return res.status(400).json({
-                status: "failed",
-                message: "This username is already taken. Please try another one.",
-            });
+        // Check if username already exists if provided
+        if (userName && userName != "") {
+            const existingUsername = await User.findOne({ userName });
+            if (existingUsername)
+                return res.status(400).json({
+                    status: "failed",
+                    message: "This username is already taken. Please try another one.",
+                });
+        }
 
         // hash the password
         bcrypt.hash(password, 10).then((hashedPwd) => {
@@ -31,7 +33,7 @@ const registerUser = async(req, res) => {
           const newUser = new User({
             email : email,
             password : hashedPwd,
-            userName: userName,
+            userName: userName != "" ? userName : email.split('@')[0],
           });
 
           // save new user into the database
