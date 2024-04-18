@@ -69,10 +69,11 @@ const Header = ({ search, setQuestionPage }) => {
             </div>
             {token && (
                 // Display logout button if logged in
-                <button className="logout-button" onClick={handleLogout}>
-                    {" "}
-                    Log Out
-                </button>
+                <div>
+                    <button className="logout-button" onClick={handleLogout}>
+                        Log Out
+                    </button>
+                </div>
             )}
         </div>
     );

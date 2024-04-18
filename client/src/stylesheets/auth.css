@@ -40,11 +40,11 @@ input {
 }
 
 .logout-button{
-  width: 100px;
+  width: 80px;
   height: 40px;
   padding: 0.5rem;
   font-size: 1rem;
-  background-color: #04AA6D;
+  background-color: hsl(158, 95%, 35%);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -52,7 +52,7 @@ input {
 }
 
 .login-button:hover, .signup-button:hover, .logout-button:hover  {
-  background-color: #177452;
+  background-color: hsl(158, 95%, 37%);
 }
 
 .signup-link, .login-link{
