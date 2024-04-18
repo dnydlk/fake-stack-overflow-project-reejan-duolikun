@@ -43,6 +43,28 @@
     background: #1b75d0;
 }
 
+.fso-user-profile {
+    background: #1b75d0;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 18px;
+    margin-right: 5%;
+    width: 80px;
+    height: 40px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.fso-user-profile:hover {
+    background: #2282e2;
+}
+
+.fso-user-profile:active {
+    background: #1b75d0;
+}
+
 .fso-btn-indicator-container {
     display: flex;
     align-items: center;

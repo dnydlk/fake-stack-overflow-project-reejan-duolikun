@@ -54,9 +54,12 @@ const Header = ({ search, setQuestionPage }) => {
                 }}
             />
 
-            <div>{token ? (
+            <div>
+                {token ? (
                     <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
-                    <button className="userProfile" onClick={handleProfile}>user</button>
+                        <button className="fso-user-profile" onClick={handleProfile}>
+                            Profile
+                        </button>
                     </div>
                 ) : (
                     // Display login button if not logged in
@@ -67,7 +70,10 @@ const Header = ({ search, setQuestionPage }) => {
             </div>
             {token && (
                 // Display logout button if logged in
-                <button className="logout-button" onClick={handleLogout}> Log Out</button>
+                <button className="logout-button" onClick={handleLogout}>
+                    {" "}
+                    Log Out
+                </button>
             )}
         </div>
     );
