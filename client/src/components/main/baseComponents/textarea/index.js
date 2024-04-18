@@ -23,7 +23,6 @@ const Textarea = ({
             <textarea
                 id={id}
                 className="fso-input-input"
-                data-cy-test="fso-input-input"
                 type="text"
                 value={val}
                 onInput={(e) => {

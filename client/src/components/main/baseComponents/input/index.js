@@ -15,7 +15,6 @@ const Input = ({ title, hint, id, mandatory = true, val, setState, err }) => {
             <input
                 id={id}
                 className="fso-input-input"
-                data-cy-test="fso-input-input"
                 type="text"
                 value={val}
                 onChange={(e) => {

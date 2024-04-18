@@ -15,19 +15,19 @@ describe("<Login />", () => {
       </AuthContext.Provider>
     );
     // Check if the login form is displayed
-    cy.getDateCyTest("login-container").should("exist");
+    cy.getDataCyTest("login-container").should("exist");
 
     // Check if the email input field is present
-    cy.getDateCyTest("loginEmail").should("exist").should("have.attr", "type", "email");
+    cy.getDataCyTest("loginEmail").should("exist").should("have.attr", "type", "email");
 
     // Check if the password input field is present
-    cy.getDateCyTest("loginPassword").should("exist").should("have.attr", "type", "password");
+    cy.getDataCyTest("loginPassword").should("exist").should("have.attr", "type", "password");
 
     // Check if the login button is present
-    cy.getDateCyTest("loginBtn").should("exist").should("contain", "Login");
+    cy.getDataCyTest("loginBtn").should("exist").should("contain", "Login");
 
     // Check if the signup link is present
-    cy.getDateCyTest("signUpLink").should("exist").should("contain", "Signup here");
+    cy.getDataCyTest("signUpLink").should("exist").should("contain", "Signup here");
   });
 
   it("displays error message when no email or password provided", () => {
@@ -40,10 +40,10 @@ describe("<Login />", () => {
       </AuthContext.Provider>
     );
     // Click on the login button without providing email and password
-    cy.getDateCyTest("loginBtn").click();
+    cy.getDataCyTest("loginBtn").click();
 
     // Check if the error message is displayed
-    cy.getDateCyTest("errMsg").should("exist").should("contain", "Please provide both email and password");
+    cy.getDataCyTest("errMsg").should("exist").should("contain", "Please provide both email and password");
   });
 
   it("displays error message for invalid login", () => {
@@ -64,15 +64,15 @@ describe("<Login />", () => {
     }).as("loginRequest");
 
     // Enter email and password
-    cy.getDateCyTest("loginEmail").type("test@example.com");
-    cy.getDateCyTest("loginPassword").type("password");
+    cy.getDataCyTest("loginEmail").type("test@example.com");
+    cy.getDataCyTest("loginPassword").type("password");
 
     // Click on the login button
-    cy.getDateCyTest("loginBtn").click();
+    cy.getDataCyTest("loginBtn").click();
 
     // Wait for the login request to complete and check if error message is displayed
     // cy.wait("@loginRequest");
-    // cy.getDateCyTest("errMsg").should("exist").should("contain", "Login failed");
+    // cy.getDataCyTest("errMsg").should("exist").should("contain", "Login failed");
   });
 
 });

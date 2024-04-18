@@ -1,37 +1,17 @@
 const express = require("express");
 const Question = require("../models/questions");
-// const Answer = require("../models/answers");
-const { addTag, getQuestionsByOrder, filterQuestionsBySearch } = require("../utils/question");
-
+const Answer = require("../models/answers");
 const router = express.Router();
 
-// To get Questions by Filter
-const getQuestionsByFilter = async (req, res) => {
-    const { order, search } = req.query;
-    const questions = await getQuestionsByOrder(order);
-    const filteredQuestions = filterQuestionsBySearch(questions, search);
-    res.json(filteredQuestions);
-};
-
-// To get Questions by Id
-const getQuestionById = async (req, res) => {
-    const { qid } = req.params;
-    const question = await Question.findOneAndUpdate({ _id: qid }, { $inc: { views: 1 } }).populate("answers");
-    res.json(question);
-};
-
-// To add Question
-const addQuestion = async (req, res) => {
-    const question = req.body;
-    question.tags = await Promise.all(question.tags.map((tagName) => addTag(tagName)));
-    const result = await Question.create(question);
-
-    res.status(200).json(result);
-};
+// To add Answer
+const addAnswer = async (req, res) => {
+    const { qid, ans } = req.body;
+    const newAnswer = await Answer.create(ans);
+    await Question.findOneAndUpdate({ _id: qid }, { $push: { answers: newAnswer._id } });
+    res.status(200).send(newAnswer);
+}
 
 // Routers
-router.get("/getQuestion", getQuestionsByFilter);
-router.get("/getQuestionById/:qid", getQuestionById);
-router.post("/addQuestion", addQuestion);
+router.post("/addAnswer", addAnswer);
 
 module.exports = router;

@@ -37,7 +37,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
 
             {/*//- Answer Count  */}
             {question && question.answers && question.answers.length !== 0 && (
-                <div className="d-flex m-1">
+                <div className="d-flex m-1" data-cy-test="answer-page-answer-count">
                     <div className="fso-bold-title ms-2 mt-1">{question.answers.length}</div>
                     {question.answers.length === 1 ? (
                         <div className="fso-bold-title ms-2 mt-1">Answer</div>
@@ -57,10 +57,11 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
             {/*//- Answer Question button */}
             <button
                 className="fso-blue-btn fso-ans-button"
+                data-cy-test="answer-page-post-answer"
                 onClick={() => {
                     handleNewAnswer();
                 }}>
-                Answer Question
+                Post Your Answer
             </button>
         </>
     );

@@ -1,4 +1,4 @@
-// function getDateCyTest(selector) defined in cypress/support/commands.js
+// function getDataCyTest(selector) defined in cypress/support/commands.js
 
 import Header from "../../src/components/header";
 import { AuthContext } from "../../src/components/authContext";
@@ -19,12 +19,12 @@ describe("<Header />", () => {
         </MemoryRouter>
       </AuthContext.Provider>
     );
-    cy.getDateCyTest("logo").should("exist");
-    cy.getDateCyTest("search-bar").should("exist");
-    cy.getDateCyTest("user-profile").should("exist");
+    cy.getDataCyTest("logo").should("exist");
+    cy.getDataCyTest("search-bar").should("exist");
+    cy.getDataCyTest("user-profile").should("exist");
   });
 
-  it.only("Search bar shows search text entered by user", () => { 
+  it("Search bar shows search text entered by user", () => { 
     const setQuestionPageSpy = cy.spy().as("setQuestionPageSpy");
     const search = "test";
     // Provide mocked context values
@@ -37,12 +37,14 @@ describe("<Header />", () => {
         </MemoryRouter>
       </AuthContext.Provider>
     );
-    cy.getDateCyTest("search-bar").should("have.value", search);
+    cy.getDataCyTest("search-bar").should("have.value", search);
   })
 
   it("setQuestionPage called when enter is pressed in search", () => {
     const setQuestionPageSpy = cy.spy().as("setQuestionPageSpy");
     const search = "";
+    const token = "fakeToken";
+    const setToken = cy.stub();
     cy.mount(
       <AuthContext.Provider value={{ token, setToken }}>
         <MemoryRouter>
@@ -50,7 +52,7 @@ describe("<Header />", () => {
         </MemoryRouter>
       </AuthContext.Provider>
     );
-    cy.getDateCyTest("search-bar").type("test").type("{enter}");
+    cy.getDataCyTest("search-bar").type("test").type("{enter}");
     cy.get("@setQuestionPageSpy").should("have.been.calledWith", "test", "Search Results");
   });
 

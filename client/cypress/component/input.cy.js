@@ -1,4 +1,4 @@
-// function getDateCyTest(selector) defined in cypress/support/commands.js
+// function getDataCyTest(selector) defined in cypress/support/commands.js
 import Input from "../../src/components/main/baseComponents/input";
 
 describe("<Input />", () => {
@@ -14,7 +14,7 @@ describe("<Input />", () => {
         cy.mount(
             <Input title={title} hint={hint} id={id} mandatory={mandatory} val={val} setState={setState} err={err} />
         );
-        cy.getDateCyTest("fso-input-title").should("contain.text", title + "*");
+        cy.getDataCyTest("fso-input-title").should("contain.text", title + "*");
     });
 
     it("Input shows hint correctly", () => {
@@ -29,7 +29,7 @@ describe("<Input />", () => {
         cy.mount(
             <Input title={title} hint={hint} id={id} mandatory={mandatory} val={val} setState={setState} err={err} />
         );
-        cy.getDateCyTest("fso-input-hint").should("contain.text", hint);
+        cy.getDataCyTest("fso-input-hint").should("contain.text", hint);
     });
 
     it("Input shows error correctly", () => {
@@ -44,7 +44,7 @@ describe("<Input />", () => {
         cy.mount(
             <Input title={title} hint={hint} id={id} mandatory={mandatory} val={val} setState={setState} err={err} />
         );
-        cy.getDateCyTest("fso-input-error").should("contain.text", err);
+        cy.getDataCyTest("fso-input-error").should("contain.text", err);
     });
 
     it("Input calls setState correctly", () => {
@@ -59,7 +59,7 @@ describe("<Input />", () => {
         cy.mount(
             <Input title={title} hint={hint} id={id} mandatory={mandatory} val={val} setState={setState} err={err} />
         );
-        cy.getDateCyTest("fso-input-input")
+        cy.get("#formTitleInput")
             .type("t")
             .then(() => {
                 cy.wrap(setState).should("have.been.calledWith", "t");

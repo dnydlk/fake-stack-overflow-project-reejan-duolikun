@@ -26,7 +26,7 @@
 }
 
 .fso-blue-btn {
-    background: hsl(210, 77%, 46%);
+    background: #1b75d0;
     color: #ffffff;
     border: hsl(210, 77%, 46%) 1px solid;
     border-radius: 5px;
@@ -36,11 +36,33 @@
 }
 
 .fso-blue-btn:hover {
-    background: hsl(210, 77%, 51%);
+    background: #2282e2;
 }
 
 .fso-blue-btn:active {
-    background: hsl(210, 77%, 46%);
+    background: #1b75d0;
+}
+
+.fso-user-profile {
+    background: #1b75d0;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 18px;
+    margin-right: 5%;
+    width: 80px;
+    height: 40px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.fso-user-profile:hover {
+    background: #2282e2;
+}
+
+.fso-user-profile:active {
+    background: #1b75d0;
 }
 
 .fso-btn-indicator-container {
@@ -51,12 +73,16 @@
 }
 
 .fso-form-post-button {
-    background: #3090e2;
+    background: #1b75d0;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.fso-form-post-button:hover {
+    background: #2282e2;
 }
 
 .fso-mandatory-indicator {
