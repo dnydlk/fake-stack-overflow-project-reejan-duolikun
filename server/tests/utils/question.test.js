@@ -279,6 +279,7 @@ describe("Unit tests for utils/question.js", () => {
     expect(result).toEqual(false);
   });
 
+  // setNewestAnswerDate
   test("setNewestAnswerDate returns the question with the newest answer date", () => { 
     const question = _questions[0];
     let result = setNewestAnswerDate(question, question.answers[0].ans_date_time);
