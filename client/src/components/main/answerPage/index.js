@@ -60,7 +60,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
                 onClick={() => {
                     handleNewAnswer();
                 }}>
-                Answer Question
+                Post Your Answer
             </button>
         </>
     );

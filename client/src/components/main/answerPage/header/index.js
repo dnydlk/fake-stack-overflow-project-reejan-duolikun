@@ -14,7 +14,7 @@ const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta }) => {
                     onClick={() => {
                         handleNewQuestion();
                     }}>
-                    Ask a Question
+                    Ask Question
                 </button>
             </div>
             <div className="d-flex">

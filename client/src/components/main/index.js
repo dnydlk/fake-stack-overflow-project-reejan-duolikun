@@ -5,6 +5,7 @@ import QuestionPage from "./questionPage";
 import AnswerPage from "./answerPage";
 import { useNavigate } from "react-router-dom";
 import NewQuestion from "./newQuestion";
+import NewAnswer from "./newAnswer";
 
 const Main = ({ search = "", title, setQuestionPage }) => {
     const [page, setPage] = useState("home");
@@ -81,11 +82,11 @@ const Main = ({ search = "", title, setQuestionPage }) => {
             content = <NewQuestion handleQuestions={handleQuestions} />;
             break;
         }
-        // case "newAnswer": {
-        //     selected = "";
-        //     content = <NewAnswer qid={qid} handleAnswer={handleAnswer} />;
-        //     break;
-        // }
+        case "newAnswer": {
+            selected = "";
+            content = <NewAnswer qid={qid} handleAnswer={handleAnswer} />;
+            break;
+        }
         default:
             selected = "q";
             content = getQuestionPage();
