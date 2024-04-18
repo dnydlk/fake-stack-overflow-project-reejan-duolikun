@@ -28,14 +28,21 @@ describe("<NewAnswer />", () => {
         cy.getDataCyTest("fso-input-error").should("exist");
     });
     
-    //todo: fix this test
-    // it.only("Click on post answer button should call handleAnswer", () => {
-    //     const qid = "fakeQid";
-    //     const handleAnswerSpy = cy.spy().as("handleAnswerSpy")
-    //     cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswerSpy} />);
-    //     cy.get("#answerUsernameInput").type("test");
-    //     cy.get("#answerTextInput").type("test");
-    //     cy.getDataCyTest("answer-page-post-answer-button").click();
-    //     cy.get("@handleAnswerSpy").should("have.been.calledOnce");
-    // })
+    it("Click on post answer button should call handleAnswer", () => {
+        const qid = "fakeQid";
+        const handleAnswerSpy = cy.stub().as("handleAnswerSpy");
+        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswerSpy} />);
+        cy.get("#answerUsernameInput").type("test");
+        cy.get("#answerTextInput").type("test");
+        cy.intercept("POST", "http://localhost:8000/answer/addAnswer", {
+            statusCode: 200,
+            body: {
+                _id: "12345",
+                message: "Answer added successfully",
+            },
+        }).as("addAnswer");
+        cy.getDataCyTest("answer-page-post-answer-button").click();
+        cy.get("@handleAnswerSpy").should("have.been.calledOnce");
+    });
+
 })
