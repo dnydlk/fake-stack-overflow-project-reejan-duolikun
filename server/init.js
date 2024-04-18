@@ -143,7 +143,8 @@ const init = async () => {
     );
 
     // Create users
-    await userCreate("test@test.com", "q1234567", "admin")
+    await userCreate("test@test.com", "$2b$10$1lwitWGO5Om2CYqhaacfUOHfpiOX5bFr5Uuy5tSrWQQxt3oc281rC", "testing");
+    // password: q1234567
 
     // Close the database connection if it is open
     if (db) db.close();

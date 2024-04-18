@@ -62,6 +62,7 @@ const NewAnswer = ({ qid, handleAnswer }) => {
             <div className="fso-btn-indicator-container">
                 <button
                     className="fso-form-post-button"
+                    data-cy-test="answer-page-post-answer-button"
                     onClick={() => {
                         postAnswer();
                     }}>

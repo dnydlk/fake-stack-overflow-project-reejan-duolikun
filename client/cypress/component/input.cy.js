@@ -59,7 +59,7 @@ describe("<Input />", () => {
         cy.mount(
             <Input title={title} hint={hint} id={id} mandatory={mandatory} val={val} setState={setState} err={err} />
         );
-        cy.getDataCyTest("fso-input-input")
+        cy.get("#formTitleInput")
             .type("t")
             .then(() => {
                 cy.wrap(setState).should("have.been.calledWith", "t");
