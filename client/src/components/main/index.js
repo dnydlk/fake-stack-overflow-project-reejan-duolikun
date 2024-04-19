@@ -6,6 +6,7 @@ import AnswerPage from "./answerPage";
 import { useNavigate } from "react-router-dom";
 import NewQuestion from "./newQuestion";
 import NewAnswer from "./newAnswer";
+import ProfilePage from "./profilePage";
 
 const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
     const [page, setPage] = useState(currentPage);
@@ -89,6 +90,7 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
         }
         case "profile": {
             selected = "";
+            content = <ProfilePage />
             break;
         }
         default:

@@ -14,4 +14,10 @@ const loginUser = async (user) => {
     return res;
 };
 
-export { registerUser, loginUser};
+// To post user info
+const updateUserInfo = async (user) => {
+    const res = await api.post(`${USER_API_URL}/updateUser`, user);
+    return res;
+}
+
+export { registerUser, loginUser, updateUserInfo};
