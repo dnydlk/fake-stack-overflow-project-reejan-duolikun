@@ -1,17 +1,4 @@
-const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
-];
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 const getMetaData = (date) => {
     const now = new Date();
@@ -25,13 +12,7 @@ const getMetaData = (date) => {
         let h = Math.floor(diffs / 3600);
         return h + " hours ago";
     } else if (diffs < 60 * 60 * 24 * 365) {
-        return (
-            months[date.getMonth()] +
-            " " +
-            getDateHelper(date) +
-            " at " +
-            date.toTimeString().slice(0, 8)
-        );
+        return months[date.getMonth()] + " " + getDateHelper(date) + " at " + date.toTimeString().slice(0, 8);
     } else {
         return (
             months[date.getMonth()] +
@@ -68,12 +49,7 @@ const validateHyperlink = (text) => {
     // Check each match to see if the URL starts with https://
 
     for (const match of matches) {
-        if (
-            !match[1].length ||
-            !match[2].length ||
-            !match[2].startsWith("https://") ||
-            !match[2].slice(8).length
-        ) {
+        if (!match[1].length || !match[2].length || !match[2].startsWith("https://") || !match[2].slice(8).length) {
             isValid = false;
             break; // No need to check further, one invalid URL is enough to return false
         }
@@ -85,10 +61,7 @@ const validateHyperlink = (text) => {
 const handleHyperlink = (text = "") => {
     const pattern = /\[([^\]]*)\]\(([^)]*)\)/g;
 
-    const replacedText = text.replace(
-        pattern,
-        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
-    );
+    const replacedText = text.replace(pattern, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
 
     return <div dangerouslySetInnerHTML={{ __html: replacedText }} />;
 };
