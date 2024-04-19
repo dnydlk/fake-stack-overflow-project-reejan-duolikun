@@ -18,7 +18,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
     }, [qid]);
 
     return (
-        <>
+        <div id="answer-page">
             {/*//- Question title */}
             <AnswerHeader
                 ansCount={question && question.answers && question.answers.length}
@@ -51,7 +51,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
             {question &&
                 question.answers &&
                 question.answers.map((a, idx) => (
-                    <Answer key={idx} text={a.text} ansBy={a.ans_by} meta={getMetaData(new Date(a.ans_date_time))} />
+                    <Answer key={idx} answer={a}/>
                 ))}
 
             {/*//- Answer Question button */}
@@ -63,7 +63,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
                 }}>
                 Post Your Answer
             </button>
-        </>
+        </div>
     );
 };
 
