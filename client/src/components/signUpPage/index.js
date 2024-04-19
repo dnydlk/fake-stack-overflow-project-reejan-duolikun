@@ -55,6 +55,7 @@ const SignupPage = () => {
            // Save the jwtToken in the context
           setToken(response.data.token);
           localStorage.setItem("jwtToken", response.data.token);
+          localStorage.setItem("userId", response.data.userId);
           navigate("/home");
         }, 500); // Adjust delay as needed
       } else {
