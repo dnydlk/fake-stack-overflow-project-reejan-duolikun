@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 import NewQuestion from "./newQuestion";
 import NewAnswer from "./newAnswer";
 
-const Main = ({ search = "", title, setQuestionPage }) => {
-    const [page, setPage] = useState("home");
+const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
+    const [page, setPage] = useState(currentPage);
     const [questionOrder, setQuestionOrder] = useState("newest");
     const [qid, setQid] = useState("");
     const navigate = useNavigate();
@@ -85,6 +85,10 @@ const Main = ({ search = "", title, setQuestionPage }) => {
         case "newAnswer": {
             selected = "";
             content = <NewAnswer qid={qid} handleAnswer={handleAnswer} />;
+            break;
+        }
+        case "profile": {
+            selected = "";
             break;
         }
         default:

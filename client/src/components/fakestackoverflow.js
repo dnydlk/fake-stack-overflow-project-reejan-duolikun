@@ -25,7 +25,7 @@ export default function FakeStackOverflow() {
     return (
         <>
             <Header search={search} setQuestionPage={setQuestionPage} />
-            <Main title={mainTitle} search={search} setQuestionPage={setQuestionPage} />
+            <Main title={mainTitle} search={search} setQuestionPage={setQuestionPage}/>
         </>
     );
 }
