@@ -124,8 +124,19 @@ const loginUser = async (req, res) => {
     }
 };
 
+const getUserInfo = async (req, res) => {
+    try {
+        const {userId} = req.params;
+        const existingUser = await User.findById(userId);
+        res.send(existingUser);
+    } catch (err) {
+        res.json({ error: "User not found" });
+    }
+}
+
 // Routers
 router.post("/registerUser", registerUser);
 router.post("/loginUser", loginUser);
+router.get("/get-user-info/:userId", getUserInfo);
 
 module.exports = router;

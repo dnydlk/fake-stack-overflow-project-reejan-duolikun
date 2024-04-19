@@ -14,4 +14,10 @@ const loginUser = async (user) => {
     return res;
 };
 
-export { registerUser, loginUser};
+// Get user info
+const getUserInfo = async (userId) => { 
+    const res = await api.get(`${USER_API_URL}/get-user-info/${userId}`);
+    return res.data;
+}
+
+export { registerUser, loginUser, getUserInfo};
