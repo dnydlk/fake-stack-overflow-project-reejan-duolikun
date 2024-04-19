@@ -8,7 +8,7 @@ import Login from "./components/loginPage";
 import SignUp from "./components/signUpPage";
 import FakeStackOverflow from "./components/fakestackoverflow";
 import { AuthProvider } from "./components/authContext";
-import Profile from "./components/profilePage";
+import Profile from "./components/profile";
 
 function App() {
     return (

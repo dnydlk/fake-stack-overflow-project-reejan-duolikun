@@ -20,25 +20,30 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
     const handleQuestions = () => {
         setQuestionPage();
         setPage("home");
+        navigate("/");
     };
 
     const handleTags = () => {
         setPage("tag");
+        navigate("/");
     };
 
     const handleAnswer = (qid) => {
         setQid(qid);
         setPage("answer");
+        navigate("/");
     };
 
     const clickTag = (tagName) => {
         setQuestionPage("[" + tagName + "]", tagName);
         setPage("home");
+        navigate("/");
     };
 
     const handleNewQuestion = (token) => {
         if (token) {
             setPage("newQuestion");
+            navigate("/");
         } else {
             navigate("/login")
         }
@@ -46,6 +51,7 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
 
     const handleNewAnswer = () => {
         setPage("newAnswer");
+        navigate("/");
     };
 
     const getQuestionPage = (order = "newest", search = "") => {

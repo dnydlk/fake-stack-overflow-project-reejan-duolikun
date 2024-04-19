@@ -5,7 +5,7 @@ import ProfileInfo from './profileInfo';
 import EditProfile from './editProfile';
 
 const ProfilePage = () => {
-    const [activeLink, setActiveLink] = useState('activities');
+    const [activeLink, setActiveLink] = useState('profile');
 
 
     const handleNavClick = (eventKey) => {
@@ -27,11 +27,12 @@ const ProfilePage = () => {
             <div className="navDiv">
                 <Nav variant="pills" activeKey={activeLink} onSelect={handleNavClick}>
                     <Nav.Item>
-                        <Nav.Link eventKey="activities">Activities</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
                         <Nav.Link eventKey="profile">Profile</Nav.Link>
                     </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="activities">Activities</Nav.Link>
+                    </Nav.Item>
+                    
                 </Nav>
             </div>
             <div className="editProfile">
