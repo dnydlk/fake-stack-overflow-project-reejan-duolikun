@@ -92,7 +92,7 @@ const Main = ({ search = "", title, setQuestionPage }) => {
         }
         case "newAnswer": {
             selected = "";
-            content = <NewAnswer qid={qid} handleAnswer={handleAnswer} />;
+            content = <NewAnswer qid={qid} handleAnswer={handleAnswer} currentUser={currentUser} />;
             break;
         }
         default:
