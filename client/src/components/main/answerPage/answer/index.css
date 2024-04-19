@@ -16,3 +16,36 @@
 .fso-answer-author-name {
     color: green;
 }
+
+.fso-answer-votes {
+    font-weight: bold;
+}
+
+.fso-answer-vote-button {
+    cursor: pointer;
+    border-radius: 60%;
+    width: 35px;
+    height: 35px;
+    border: none;
+}
+
+.fso-answer-vote-button:hover {
+    background-color: #FBDBC0;
+}
+
+.fso-answer-vote-button:active {
+    background-color: hsl(210, 77%, 46%);
+}
+
+.fso-answer-vote-button-up {
+    width: 15px;
+    height: 15px;
+    margin-bottom: 1px;
+}
+
+.fso-answer-vote-button-down {
+    width: 15px;
+    height: 15px;
+    margin-bottom: 1px;
+    transform: rotate(180deg);
+}

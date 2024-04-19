@@ -21,12 +21,14 @@ function tagCreate(name) {
 }
 
 // Create an answer
-function answerCreate(text, ans_by, ans_date_time) {
+function answerCreate(text, ans_by, ans_date_time, votes) {
     let answerDetail = { text: text };
     // Add ans_by
     if (ans_by != false) answerDetail.ans_by = ans_by;
     // Add ans_date_time
     if (ans_date_time != false) answerDetail.ans_date_time = ans_date_time;
+    // Add votes
+    if (votes != false) answerDetail.votes = votes;
     // Create the answer
     let answer = new Answer(answerDetail);
     return answer.save();
@@ -59,6 +61,17 @@ function userCreate(email, password, username) {
     return newUser.save();
 }
 
+// Create a vote
+function voteCreate(user, answer, voteType) { 
+    voteDetail = {
+        user: user,
+        answer: answer,
+        voteType: voteType,
+    };
+    let newVote = new Vote(voteDetail);
+    return newVote.save();
+}
+
 const init = async () => {
     console.log("insert test data into the database");
     // Create tags
@@ -74,33 +87,39 @@ const init = async () => {
     let a1 = await answerCreate(
         "React Router is mostly a wrapper around the history library. history handles interaction with the browser's window.history for you with its browser and hash histories. It also provides a memory history which is useful for environments that don't have a global history. This is particularly useful in mobile app development (react-native) and unit testing with Node.",
         "hamkalo",
-        new Date("2023-11-20T03:24:42")
+        new Date("2023-11-20T03:24:42"),
+        
     );
     let a2 = await answerCreate(
         "On my end, I like to have a single history object that I can carry even outside components. I like to have a single history.js file that I import on demand, and just manipulate it. You just have to change BrowserRouter to Router, and specify the history prop. This doesn't change anything for you, except that you have your own history object that you can manipulate as you want. You need to install history, the library used by react-router.",
         "azad",
-        new Date("2023-11-23T08:24:00")
+        new Date("2023-11-23T08:24:00"),
+        
     );
     let a3 = await answerCreate(
         "Consider using apply() instead; commit writes its data to persistent storage immediately, whereas apply will handle it in the background.",
         "abaya",
-        new Date("2023-11-18T09:24:00")
+        new Date("2023-11-18T09:24:00"),
+        
     );
     let a4 = await answerCreate(
         "YourPreference yourPrefrence = YourPreference.getInstance(context); yourPreference.saveData(YOUR_KEY,YOUR_VALUE);",
         "alia",
-        new Date("2023-11-12T03:30:00")
+        new Date("2023-11-12T03:30:00"),
+        
     );
     let a5 = await answerCreate(
         "I just found all the above examples just too confusing, so I wrote my own. ",
         "sana",
-        new Date("2023-11-01T15:24:19")
+        new Date("2023-11-01T15:24:19"),
+        
     );
     let a6 = await answerCreate("Storing content as BLOBs in databases.", "abhi3241", new Date("2023-02-19T18:20:59"));
     let a7 = await answerCreate(
         "Using GridFS to chunk and store content.",
         "mackson3332",
-        new Date("2023-02-22T17:19:00")
+        new Date("2023-02-22T17:19:00"),
+        
     );
     let a8 = await answerCreate("Store data in a SQLLite database.", "ihba001", new Date("2023-03-22T21:17:53"));
 
@@ -145,6 +164,10 @@ const init = async () => {
     // Create users
     await userCreate("test@test.com", "$2b$10$1lwitWGO5Om2CYqhaacfUOHfpiOX5bFr5Uuy5tSrWQQxt3oc281rC", "testing");
     // password: q1234567
+
+    // Create votes
+    // todo: copy from MongoDB Compass
+    // await voteCreate("616f9b3b3b3b3b3b3b3b3b3b", "616f9b3b3b3b3b3b3b3b3b3b", "upvote");
 
     // Close the database connection if it is open
     if (db) db.close();
