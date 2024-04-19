@@ -5,11 +5,12 @@ import Textarea from "../baseComponents/textarea";
 import { validateHyperlink } from "../../../tool";
 import { addQuestion } from "../../../services/questionService";
 
-const NewQuestion = ({ handleQuestions }) => {
+const NewQuestion = ({ handleQuestions, currentUser }) => {
+    console.log("🚀 ~ NewQuestion ~ currentUser:", currentUser)
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [tag, setTag] = useState("");
-    const [userName, setUserName] = useState("");
+    const [userName, setUserName] = useState(currentUser?.userName || "");
 
     const [titleErr, setTitleErr] = useState("");
     const [textErr, setTextErr] = useState("");
