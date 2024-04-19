@@ -6,6 +6,7 @@ import AnswerPage from "./answerPage";
 import { useNavigate } from "react-router-dom";
 import NewQuestion from "./newQuestion";
 import NewAnswer from "./newAnswer";
+import ProfilePage from "./profilePage";
 
 const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
     const [page, setPage] = useState(currentPage);
@@ -19,25 +20,30 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
     const handleQuestions = () => {
         setQuestionPage();
         setPage("home");
+        navigate("/");
     };
 
     const handleTags = () => {
         setPage("tag");
+        navigate("/");
     };
 
     const handleAnswer = (qid) => {
         setQid(qid);
         setPage("answer");
+        navigate("/");
     };
 
     const clickTag = (tagName) => {
         setQuestionPage("[" + tagName + "]", tagName);
         setPage("home");
+        navigate("/");
     };
 
     const handleNewQuestion = (token) => {
         if (token) {
             setPage("newQuestion");
+            navigate("/");
         } else {
             navigate("/login")
         }
@@ -45,6 +51,7 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
 
     const handleNewAnswer = () => {
         setPage("newAnswer");
+        navigate("/");
     };
 
     const getQuestionPage = (order = "newest", search = "") => {
@@ -89,6 +96,7 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
         }
         case "profile": {
             selected = "";
+            content = <ProfilePage />
             break;
         }
         default:

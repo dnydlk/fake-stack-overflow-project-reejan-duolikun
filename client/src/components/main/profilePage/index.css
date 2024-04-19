@@ -1,0 +1,22 @@
+.profile-container {
+    margin: auto;
+    padding: 20px;
+  }
+  
+.profile-header {
+    text-align: left;
+}
+
+.navDiv {
+    margin: 20px 5px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #FFFFFF;
+    background-color: #E7700D;
+}
+
+.nav-pills .nav-link {
+    border-radius: 20px;
+}
+  

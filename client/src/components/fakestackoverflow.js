@@ -9,14 +9,6 @@ export default function FakeStackOverflow() {
     const [search, setSearch] = useState("")
     const [mainTitle, setMainTitle] = useState("All Questions");
 
-    // if (loading) {
-    //     return null;
-    //   }
-    
-    // if (!token) {
-    // return <Navigate to="/login" replace />;
-    // }
-
     const setQuestionPage = (search = "", title = "All Questions") => {
         setSearch(search);
         setMainTitle(title);
@@ -25,7 +17,7 @@ export default function FakeStackOverflow() {
     return (
         <>
             <Header search={search} setQuestionPage={setQuestionPage} />
-            <Main title={mainTitle} search={search} setQuestionPage={setQuestionPage}/>
+            <Main title={mainTitle} search={search} setQuestionPage={setQuestionPage} currentPage="home"/>
         </>
     );
 }
