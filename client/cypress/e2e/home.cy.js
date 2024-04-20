@@ -122,7 +122,6 @@ describe("Home Page Should load correctly", () => {
         cy.getDataCyTest("post-title").each(($el, index) => {
             cy.wrap($el).should("contain.text", qTitles[index]);
         });
-        
     });
 
     it("Add a new answer", () => {
@@ -132,5 +131,5 @@ describe("Home Page Should load correctly", () => {
         cy.get("#answerTextInput").type("New Answer Body");
         cy.getDataCyTest("answer-page-post-answer-button").click();
         cy.getDataCyTest("answer-page-answer").should("contain.text", "New Answer Body");
-    })
+    });
 });

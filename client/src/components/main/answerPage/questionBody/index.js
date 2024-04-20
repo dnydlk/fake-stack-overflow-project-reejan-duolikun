@@ -4,7 +4,7 @@ import { handleHyperlink } from "../../../../tool";
 
 // Component for the Question's Body
 const QuestionBody = ({ views, text, askBy, meta }) => {
-    console.log("🚀 ~ QuestionBody ~ views:", views)
+    console.log("🚀 ~ QuestionBody ~ views:", views);
     return (
         <div id="questionBody" className="fso-question-body fso-right-padding">
             <div className="fso-answer-question-text" data-cy-test="answer-page-question-text">

@@ -47,7 +47,7 @@ app.use("/question", questionController);
 app.use("/tag", tagController);
 app.use("/answer", answerController);
 app.use("/user", authController);
-app.use("/vote", voteController)
+app.use("/vote", voteController);
 
 let server = app.listen(port, () => {
     console.log(`Server starts at http://localhost:${port}`);

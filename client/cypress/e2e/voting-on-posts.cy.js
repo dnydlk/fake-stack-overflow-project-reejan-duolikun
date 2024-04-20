@@ -11,8 +11,6 @@ describe("Home Page Should load correctly", () => {
         cy.visit("/home");
     });
 
-    
-
     // // Main - Content - Questions
     // it("successfully shows all questions", () => {
     //     const qTitles = [
@@ -124,7 +122,7 @@ describe("Home Page Should load correctly", () => {
     //     cy.getDataCyTest("post-title").each(($el, index) => {
     //         cy.wrap($el).should("contain.text", qTitles[index]);
     //     });
-        
+
     // });
 
     // it("Add a new answer", () => {

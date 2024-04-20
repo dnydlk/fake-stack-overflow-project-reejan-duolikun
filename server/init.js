@@ -80,7 +80,7 @@ function voteCreate(user, answer, voteType) {
 }
 
 // Push vote to answer schema
-function pushVoteToAnswer(answer, vote=[]) {
+function pushVoteToAnswer(answer, vote = []) {
     Answer.findOneAndUpdate({ _id: answer }, { $push: { votes: vote } }, { new: true }, (err, doc) => {
         if (err) {
             console.log("Something wrong with pushing votes to Answer schema");

@@ -1,7 +1,7 @@
 // function getDataCyTest(selector) defined in cypress/support/commands.js
 import NewAnswer from "../../src/components/main/newAnswer";
 
-describe("<NewAnswer />", () => { 
+describe("<NewAnswer />", () => {
     it("NewAnswer shows username and answer text input fields", () => {
         const qid = "fakeQid";
         const handleAnswer = cy.stub();
@@ -9,7 +9,7 @@ describe("<NewAnswer />", () => {
         cy.get("#answerUsernameInput").should("exist");
         cy.get("#answerTextInput").should("exist");
     });
-    
+
     it("NewAnswer shows error message when username is empty", () => {
         const qid = "fakeQid";
         const handleAnswer = cy.stub();
@@ -18,7 +18,7 @@ describe("<NewAnswer />", () => {
         cy.getDataCyTest("answer-page-post-answer-button").click();
         cy.getDataCyTest("fso-input-error").should("exist");
     });
-    
+
     it("NewAnswer shows error message when answer text is empty", () => {
         const qid = "fakeQid";
         const handleAnswer = cy.stub();
@@ -27,7 +27,7 @@ describe("<NewAnswer />", () => {
         cy.getDataCyTest("answer-page-post-answer-button").click();
         cy.getDataCyTest("fso-input-error").should("exist");
     });
-    
+
     it("Click on post answer button should call handleAnswer", () => {
         const qid = "fakeQid";
         const handleAnswerSpy = cy.stub().as("handleAnswerSpy");
@@ -44,5 +44,4 @@ describe("<NewAnswer />", () => {
         cy.getDataCyTest("answer-page-post-answer-button").click();
         cy.get("@handleAnswerSpy").should("have.been.calledOnce");
     });
-
-})
+});

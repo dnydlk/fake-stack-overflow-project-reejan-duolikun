@@ -181,4 +181,16 @@ const checkKeywordInQuestion = (q, searchKeywords) => {
     return false;
 };
 
-module.exports = { addTag, getQuestionsByOrder, filterQuestionsBySearch, getNewestQuestion, getUnansweredQuestion, getActiveQuestion, parseTags, parseKeyword, checkTagInQuestion, checkKeywordInQuestion, setNewestAnswerDate };
+module.exports = {
+    addTag,
+    getQuestionsByOrder,
+    filterQuestionsBySearch,
+    getNewestQuestion,
+    getUnansweredQuestion,
+    getActiveQuestion,
+    parseTags,
+    parseKeyword,
+    checkTagInQuestion,
+    checkKeywordInQuestion,
+    setNewestAnswerDate,
+};

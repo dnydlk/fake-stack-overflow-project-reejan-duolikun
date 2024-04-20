@@ -104,7 +104,7 @@ const getUserInfo = async (req, res) => {
     }
 
     try {
-        const userId = req.user.userId; 
+        const userId = req.user.userId;
         const existingUser = await User.findById(userId);
 
         if (!existingUser) {
@@ -117,7 +117,6 @@ const getUserInfo = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-
 
 const createTokens = (user) => {
     const accessToken = sign({ userId: user._id }, JWT_SECRET);
@@ -141,7 +140,6 @@ const validateToken = (req, res, next) => {
         return res.status(400).json({ error: err });
     }
 };
-
 
 const validateUserToken = (req, res) => {
     const accessToken = req.cookies["access-token"];

@@ -5,7 +5,7 @@ import { AuthContext } from "../../../../authProvider";
 // Header for the Answer page
 const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta }) => {
     const { isTokenValid } = useContext(AuthContext) || {};
-    console.log("🚀 ~ AnswerHeader ~ ansCount:", ansCount)
+    console.log("🚀 ~ AnswerHeader ~ ansCount:", ansCount);
     return (
         <div id="answersHeader" className="fso-right-padding">
             {/*//- Question title */}

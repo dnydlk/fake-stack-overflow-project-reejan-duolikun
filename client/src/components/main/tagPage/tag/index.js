@@ -6,8 +6,7 @@ const Tag = ({ t, clickTag }) => {
             className="fso-tag-node"
             onClick={() => {
                 clickTag(t.name);
-            }}
-        >
+            }}>
             <div className="fso-tag-name">{t.name}</div>
             <div>{t.qcnt} questions</div>
         </div>

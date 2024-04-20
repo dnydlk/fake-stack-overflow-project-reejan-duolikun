@@ -9,7 +9,7 @@ const addAnswer = async (req, res) => {
     const newAnswer = await Answer.create(ans);
     await Question.findOneAndUpdate({ _id: qid }, { $push: { answers: newAnswer._id } });
     res.status(200).send(newAnswer);
-}
+};
 
 // Routers
 router.post("/addAnswer", addAnswer);

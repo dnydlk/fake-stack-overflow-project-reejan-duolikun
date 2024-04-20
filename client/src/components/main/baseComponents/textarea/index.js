@@ -1,14 +1,6 @@
 import "../input/index.css";
 
-const Textarea = ({
-    title,
-    mandatory = true,
-    hint,
-    id,
-    val,
-    setState,
-    err,
-}) => {
+const Textarea = ({ title, mandatory = true, hint, id, val, setState, err }) => {
     return (
         <div>
             <div className="fso-input-title" data-cy-test="fso-input-title">

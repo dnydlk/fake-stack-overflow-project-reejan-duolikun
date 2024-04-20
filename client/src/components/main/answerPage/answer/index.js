@@ -7,7 +7,7 @@ import { getMetaData } from "../../../../tool";
 
 // Component for the Answer Page
 const Answer = ({ answer, currentUser }) => {
-    console.log("🚀 ~ Answer ~ answer:", answer)
+    console.log("🚀 ~ Answer ~ answer:", answer);
     const [currentVotes, setCurrentVotes] = useState();
 
     const fetchCurrentVotes = async () => {

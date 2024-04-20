@@ -32,6 +32,6 @@
  * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
  * @example cy.getDataCyTest('main-page-header')
  */
-Cypress.Commands.add('getDataCyTest', (dateCyTestSelector) => {
+Cypress.Commands.add("getDataCyTest", (dateCyTestSelector) => {
     return cy.get(`[data-cy-test=${dateCyTestSelector}]`);
- })
+});

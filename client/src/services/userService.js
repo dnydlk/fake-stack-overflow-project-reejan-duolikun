@@ -23,7 +23,7 @@ const logout = async () => {
 // Get user info
 const getCurrentUser = async () => {
     try {
-        const response = await api.get(`${USER_API_URL}/get-user-info/`);
+        const response = await api.get(`${USER_API_URL}/get-user-info`);
         return response.data;
     } catch (error) {
         console.error("Failed to get user info", error);

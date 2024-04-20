@@ -10,7 +10,6 @@ const EditProfile = () => {
     const [location, setLocation] = useState("");
 
     const updateProfileDetails = async () => {
-
         //const res = await updateProfile(user);
     };
 
@@ -20,31 +19,14 @@ const EditProfile = () => {
                 <h3>Public Information</h3>
                 <Input
                     title={"Display Name"}
-                    mandatory = { false }
+                    mandatory={false}
                     id={"displayNameInput"}
                     val={displayName}
                     setState={setDisplayName}
                 />
-                <Input
-                    title={"Title"}
-                    mandatory = { false }
-                    id={"titleInput"}
-                    val={title}
-                    setState={setTitle}
-                />
-                <Textarea
-                    title={"About me"}
-                    id={"aboutMeInput"}
-                    val={aboutMe}
-                    setState={setAboutMe}
-                />
-                <Input
-                    title={"Location"}
-                    mandatory = { false }
-                    id={"location"}
-                    val={location}
-                    setState={setLocation}
-                />
+                <Input title={"Title"} mandatory={false} id={"titleInput"} val={title} setState={setTitle} />
+                <Textarea title={"About me"} id={"aboutMeInput"} val={aboutMe} setState={setAboutMe} />
+                <Input title={"Location"} mandatory={false} id={"location"} val={location} setState={setLocation} />
                 <div className="fso-btn-indicator-container">
                     <button
                         className="fso-form-post-button"
@@ -58,6 +40,6 @@ const EditProfile = () => {
             </Form>
         </div>
     );
-}
+};
 
 export default EditProfile;

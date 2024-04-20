@@ -1,0 +1,17 @@
+1. What is package.json & package-lock.json in the project, do we need it?
+
+2. cypress e2e for feature: view posts
+
+3. cypress e2e for feature: view individual posts
+
+4. cypress e2e for feature: create new posts
+
+5. cypress e2e for feature: search for existing posts
+
+6. cypress e2e for feature: commenting on posts
+
+7. cypress e2e for feature: voting on posts
+
+8. cypress e2e for feature: sign up
+
+9. cypress e2e for feature: log in

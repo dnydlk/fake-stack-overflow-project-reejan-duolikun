@@ -1,12 +1,8 @@
 .fso-sideBarNav {
-    /* display: flex;
-    flex-direction: column; */
     width: 15%;
-    /* border-right: dashed; */
     border-right: 1px solid #cccccc;
     height: 100%;
     padding: 4% 0 4% 0;
-    /* align-items: center; */
 }
 
 .fso-menu-button:first-child {

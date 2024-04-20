@@ -1,23 +1,26 @@
 // run this file to remove the fake_so database
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 async function dropDatabase() {
-  try {
-    // Connect to MongoDB
-    await mongoose.connect('mongodb://localhost:27017/fake_so', { useNewUrlParser: true, useUnifiedTopology: true });
+    try {
+        // Connect to MongoDB
+        await mongoose.connect("mongodb://localhost:27017/fake_so", {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
 
-    console.log("Connected to MongoDB");
+        console.log("Connected to MongoDB");
 
-    // Drop the database
-    await mongoose.connection.db.dropDatabase();
+        // Drop the database
+        await mongoose.connection.db.dropDatabase();
 
-    console.log("\nDatabase dropped successfully\n");
-  } catch (error) {
-    console.error("Error dropping database:", error);
-  } finally {
-    // Close the connection
-    await mongoose.connection.close();
-  }
+        console.log("\nDatabase dropped successfully\n");
+    } catch (error) {
+        console.error("Error dropping database:", error);
+    } finally {
+        // Close the connection
+        await mongoose.connection.close();
+    }
 }
 
 // Call the function

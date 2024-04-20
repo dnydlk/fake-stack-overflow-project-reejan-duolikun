@@ -1,4 +1,3 @@
-import "./index.css";
 import OrderButton from "./orderButton";
 import { AuthContext } from "../../../../authProvider";
 import { useContext } from "react";

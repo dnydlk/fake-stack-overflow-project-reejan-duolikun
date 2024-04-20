@@ -4,7 +4,7 @@ import * as userService from "./services/userService";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isTokenValid, setIsTokenValid] = useState(null); 
+    const [isTokenValid, setIsTokenValid] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
             try {
                 const response = await userService.checkAuthentication();
                 if (response.authenticated) {
-                    setIsTokenValid(response.authenticated); 
+                    setIsTokenValid(response.authenticated);
                 } else {
                     setIsTokenValid(null);
                 }

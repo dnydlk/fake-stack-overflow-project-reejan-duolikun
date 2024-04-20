@@ -1,4 +1,4 @@
-const ProfileInfo = ( { handleEditProfile }) => {
+const ProfileInfo = ({ handleEditProfile }) => {
     return (
         <div className="profile-info">
             <h3>Profile Information</h3>
@@ -20,11 +20,13 @@ const ProfileInfo = ( { handleEditProfile }) => {
                         <label htmlFor="location">Location:</label>
                         <div id="location">New York, USA</div>
                     </div>
-                        <button className="fso-blue-btn" onClick={handleEditProfile}>Edit Profile</button>
+                    <button className="fso-blue-btn" onClick={handleEditProfile}>
+                        Edit Profile
+                    </button>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default ProfileInfo;
