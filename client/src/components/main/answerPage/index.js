@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getMetaData } from "../../../tool";
 import Answer from "./answer";
 import AnswerHeader from "./header";
 import "./index.css";
 import QuestionBody from "./questionBody";
-import { getQuestionById } from "../../../services/questionService";
+import * as questionService from "../../../services/questionService";
+import { AuthContext } from "../../../authProvider";
 
 // Component for the Answers page
-const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
+const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser }) => {
+    const { isTokenValid } = useContext(AuthContext) || {};
     const [question, setQuestion] = useState({});
     useEffect(() => {
         const fetchData = async () => {
-            let res = await getQuestionById(qid);
+            let res = await questionService.getQuestionById(qid);
             setQuestion(res || {});
         };
         fetchData().catch((e) => console.log(e));
@@ -31,7 +33,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
             <QuestionBody
                 views={question && question.views}
                 text={question && question.text}
-                askBy={question && question.asked_by}
+                askBy={question && question.asked_by && question.asked_by.username}
                 meta={question && getMetaData(new Date(question.ask_date_time))}
             />
 
@@ -50,16 +52,14 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer }) => {
             {/*//- Answer list */}
             {question &&
                 question.answers &&
-                question.answers.map((a, idx) => (
-                    <Answer key={idx} answer={a}/>
-                ))}
+                question.answers.map((a, idx) => <Answer key={idx} answer={a} currentUser={currentUser} />)}
 
             {/*//- Answer Question button */}
             <button
                 className="fso-blue-btn fso-ans-button"
                 data-cy-test="answer-page-post-answer"
                 onClick={() => {
-                    handleNewAnswer();
+                    handleNewAnswer(isTokenValid);
                 }}>
                 Post Your Answer
             </button>

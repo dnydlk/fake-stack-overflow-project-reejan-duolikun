@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import "./index.css";
+import { AuthContext } from "../../../../authProvider";
 
 // Header for the Answer page
 const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta }) => {
+    const { isTokenValid } = useContext(AuthContext) || {};
     console.log("🚀 ~ AnswerHeader ~ ansCount:", ansCount)
     return (
         <div id="answersHeader" className="fso-right-padding">
@@ -15,9 +18,9 @@ const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta }) => {
                     className="fso-blue-btn"
                     data-cy-test="ask-question-btn"
                     onClick={() => {
-                        handleNewQuestion();
+                        handleNewQuestion(isTokenValid);
                     }}>
-                    Ask Question
+                    Ask a Question
                 </button>
             </div>
             <div className="d-flex">

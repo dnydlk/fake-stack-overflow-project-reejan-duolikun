@@ -26,7 +26,7 @@ describe("<AnswerHeader />", () => {
     it("AnswerHeader shows Ask a Question button", () => { 
         const handleNewQuestionSpy = cy.spy().as("handleNewQuestion");
         cy.mount(<AnswerHeader handleNewQuestion={handleNewQuestionSpy} />);
-        cy.getDataCyTest("ask-question-btn").should("have.text", "Ask Question");
+        cy.getDataCyTest("ask-question-btn").should("have.text", "Ask a Question");
     })
 
     it("AnswerHeader calls handleNewQuestion on Ask a Question button click", () => { 

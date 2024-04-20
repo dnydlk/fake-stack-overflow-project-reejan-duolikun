@@ -1,9 +1,8 @@
-import React, { useState, useContext} from "react";
-import { registerUser } from "../../services/userService";
+import React, { useState} from "react";
+import * as userService from "../../services/userService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../../stylesheets/auth.css";
-import { AuthContext } from "../authContext";
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -14,7 +13,6 @@ const SignupPage = () => {
   const [errorMessage, setErrorMessage] = useState(""); 
   const [isValid, setIsValid] = useState(true);
   const [emailError, setEmailError] = useState('');
-  const { setToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
     // Function to handle signup action
@@ -38,7 +36,7 @@ const SignupPage = () => {
       };
   
       // Send a POST request to the backend with the signup data
-      const response = await registerUser(signupData);
+      const response = await userService.signup(signupData);
   
       // Check if the request was successful
       if (response.status == 200) {
@@ -52,14 +50,9 @@ const SignupPage = () => {
         setSuccessMessage("Signup successful! Redirecting to the login page...");
         // Navigate to the home page after a delay
         setTimeout(() => {
-           // Save the jwtToken in the context
-          setToken(response.data.token);
-          localStorage.setItem("jwtToken", response.data.token);
-          localStorage.setItem("userId", response.data.userId);
           navigate("/home");
-        }, 500); // Adjust delay as needed
+        }, 1000); 
       } else {
-        // If the request fails, throw an error or handle it accordingly
         throw new Error(response.response.data.message);
       }
     } catch (error) {

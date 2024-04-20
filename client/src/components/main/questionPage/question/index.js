@@ -39,7 +39,7 @@ const Question = ({ q, clickTag, handleAnswer }) => {
           </div>
         </div>
         <div className="fso-last-activity me-2" data-cy-test="last-activity">
-          <div className="fso-question-author">{q.asked_by}</div>
+          <div className="fso-question-author">{q.asked_by.username}</div>
           <div>&nbsp;</div>
           <div className="fso-question-meta">asked {getMetaData(new Date(q.ask_date_time))}</div>
         </div>

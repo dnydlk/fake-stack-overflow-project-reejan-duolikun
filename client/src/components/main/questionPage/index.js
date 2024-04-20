@@ -15,6 +15,7 @@ const QuestionPage = ({
 }) => {
 
     const [qlist, setQlist] = useState([]);
+    console.log("🚀 ~ qlist:", qlist)
     useEffect(() => {
         const fetchData = async () => {
             let res = await getQuestionsByFilter(order, search);

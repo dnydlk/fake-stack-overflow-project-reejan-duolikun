@@ -16,7 +16,20 @@ const getQuestionsByFilter = async (req, res) => {
 // To get Questions by Id
 const getQuestionById = async (req, res) => {
     const { qid } = req.params;
-    const question = await Question.findOneAndUpdate({ _id: qid }, { $inc: { views: 1 } }).populate("answers");
+    const question = await Question.findOneAndUpdate({ _id: qid }, { $inc: { views: 1 } }, { new: true })
+        .populate({
+            path: "answers",
+            populate: {
+                path: "ans_by",
+                select: "username",
+            },
+        })
+        .populate({
+            path: "asked_by",
+            select: "username",
+        });
+
+    console.log("🚀 ~ getQuestionById ~ question:", question);
     res.json(question);
 };
 

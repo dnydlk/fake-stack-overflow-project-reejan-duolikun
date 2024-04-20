@@ -1,12 +1,12 @@
 import "./index.css";
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../authContext";
+import { AuthContext } from "../../authProvider";
+import * as userService from "../../services/userService";
 
 const Header = ({ search, setQuestionPage }) => {
-    // set the value of the search bar to the search state
     const [value, setValue] = useState(search);
-    const { token, setToken } = useContext(AuthContext);
+    const { isTokenValid, setIsTokenValid } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -14,11 +14,10 @@ const Header = ({ search, setQuestionPage }) => {
     };
 
     const handleLogout = () => {
-        setToken(null);
-        localStorage.removeItem("jwtToken");
+        setIsTokenValid(null);
+        userService.logout();
         navigate("/");
     };
-    console.log("🚀 ~ handleLogout ~ handleLogout:", handleLogout)
 
     const handleProfile = () => {
         navigate('/profile');
@@ -54,7 +53,7 @@ const Header = ({ search, setQuestionPage }) => {
             />
 
             <div>
-                {token ? (
+                {isTokenValid ? (
                     <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
                         <button className="fso-user-profile" onClick={handleProfile}>
                             Profile
@@ -67,7 +66,7 @@ const Header = ({ search, setQuestionPage }) => {
                     </button>
                 )}
             </div>
-            {token && (
+            {isTokenValid && (
                 // Display logout button if logged in
                 <div>
                     <button className="logout-button" onClick={handleLogout}>

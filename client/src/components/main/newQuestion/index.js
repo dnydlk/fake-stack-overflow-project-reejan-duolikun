@@ -10,7 +10,7 @@ const NewQuestion = ({ handleQuestions, currentUser }) => {
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
     const [tag, setTag] = useState("");
-    const [userName, setUserName] = useState(currentUser?.userName || "");
+    const [userName, setUserName] = useState(currentUser?.username || "");
 
     const [titleErr, setTitleErr] = useState("");
     const [textErr, setTextErr] = useState("");

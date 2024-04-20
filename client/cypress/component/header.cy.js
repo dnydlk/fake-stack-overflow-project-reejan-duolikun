@@ -1,7 +1,6 @@
 // function getDataCyTest(selector) defined in cypress/support/commands.js
-
 import Header from "../../src/components/header";
-import { AuthContext } from "../../src/components/authContext";
+import { AuthContext } from "../../src/authProvider";
 import { MemoryRouter } from "react-router-dom";
 
 describe("<Header />", () => {
@@ -10,10 +9,10 @@ describe("<Header />", () => {
     const setQuestionPageSpy = cy.spy().as("setQuestionPageSpy");
     const search = "";
     // Provide mocked context values
-    const token = 'fakeToken';
-    const setToken = cy.stub();
+    const isTokenValid = 'fakeToken';
+    const setIsTokenValid = cy.stub();
     cy.mount(
-      <AuthContext.Provider value={{ token, setToken }}>
+      <AuthContext.Provider value={{ isTokenValid, setIsTokenValid }}>
         <MemoryRouter>
           <Header search={search} setQuestionPage={setQuestionPageSpy} />
         </MemoryRouter>
@@ -28,10 +27,10 @@ describe("<Header />", () => {
     const setQuestionPageSpy = cy.spy().as("setQuestionPageSpy");
     const search = "test";
     // Provide mocked context values
-    const token = 'fakeToken';
-    const setToken = cy.stub();
+    const isTokenValid = 'fakeToken';
+    const setIsTokenValid = cy.stub();
     cy.mount(
-      <AuthContext.Provider value={{ token, setToken }}>
+      <AuthContext.Provider value={{ isTokenValid, setIsTokenValid }}>
         <MemoryRouter>
           <Header search={search} setQuestionPage={setQuestionPageSpy} />
         </MemoryRouter>
@@ -43,10 +42,10 @@ describe("<Header />", () => {
   it("setQuestionPage called when enter is pressed in search", () => {
     const setQuestionPageSpy = cy.spy().as("setQuestionPageSpy");
     const search = "";
-    const token = "fakeToken";
-    const setToken = cy.stub();
+    const isTokenValid = "fakeToken";
+    const setIsTokenValid = cy.stub();
     cy.mount(
-      <AuthContext.Provider value={{ token, setToken }}>
+      <AuthContext.Provider value={{ isTokenValid, setIsTokenValid }}>
         <MemoryRouter>
           <Header search={search} setQuestionPage={setQuestionPageSpy} />
         </MemoryRouter>

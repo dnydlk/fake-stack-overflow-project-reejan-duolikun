@@ -6,7 +6,7 @@ const { sign, verify } = require("jsonwebtoken");
 
 const router = express.Router();
 
-const registerUser = async (req, res) => {
+const signup = async (req, res) => {
     try {
         const { email, password, userName } = req.body;
 
@@ -39,17 +39,6 @@ const registerUser = async (req, res) => {
 
             // save new user into the database
             newUser.save().then((result) => {
-                //! Commented out for signing JWT in login process
-                // // Create JWT token
-                // const token = jwt.sign(
-                //     {
-                //         userId: newUser._id,
-                //         userEmail: newUser.email,
-                //         userName: newUser.userName,
-                //     },
-                //     JWT_SECRET,
-                //     { expiresIn: "24h" }
-                // );
                 res.status(200).json("Registration successful");
             });
         });
@@ -63,7 +52,7 @@ const registerUser = async (req, res) => {
     }
 };
 
-const loginUser = async (req, res) => {
+const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -110,14 +99,25 @@ const loginUser = async (req, res) => {
 };
 
 const getUserInfo = async (req, res) => {
+    if (!req.user) {
+        return res.status(400).json({ error: "User information not available" });
+    }
+
     try {
-        const { userId } = req.params;
+        const userId = req.user.userId; 
         const existingUser = await User.findById(userId);
-        res.send(existingUser);
+
+        if (!existingUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.json(existingUser); // Send user information back to client
     } catch (err) {
-        res.json({ error: "User not found" });
+        console.error("Database error: ", err);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
 
 const createTokens = (user) => {
     const accessToken = sign({ userId: user._id }, JWT_SECRET);
@@ -130,9 +130,10 @@ const validateToken = (req, res, next) => {
         return res.status(400).json({ error: "User not authenticated" });
     }
     try {
-        const validToken = verify(accessToken, JWT_SECRET);
-        if (validToken) {
+        const decodedToken = verify(accessToken, JWT_SECRET);
+        if (decodedToken) {
             req.authenticated = true;
+            req.user = decodedToken;
             console.log("Token validated");
             return next();
         }
@@ -141,31 +142,38 @@ const validateToken = (req, res, next) => {
     }
 };
 
-const getCookies = (req, res) => {
+const fetchCookies = (req, res) => {
     res.send(req.cookies);
 };
 
-const validateUserToken = (req, res) => { 
+const validateUserToken = (req, res) => {
     const accessToken = req.cookies["access-token"];
     if (!accessToken) {
-        return res.status(401).json({ authenticated: false});
+        console.log("🚀 ~ validateUserToken ~ !accessToken:", accessToken);
+        return res.status(401).json({ authenticated: false });
     }
     try {
         const validToken = verify(accessToken, JWT_SECRET);
         if (validToken) {
+            console.log("🚀 ~ validateUserToken ~ validToken:", validToken);
             return res.status(200).json({ authenticated: true });
         }
     } catch (err) {
         return res.status(401).json({ authenticated: false, error: "Token is invalid" });
     }
+};
 
-}
+const logout = (req, res) => {
+    res.clearCookie("access-token");
+    res.status(200).json({ message: "Logout successful" });
+};
 
 // Routers
-router.post("/registerUser", registerUser);
-router.post("/loginUser", loginUser);
-router.get("/get-user-info/:userId", validateToken, getUserInfo);
-router.get("/fetch-cookies", getCookies);
+router.post("/register", signup);
+router.post("/login", login);
+router.post("/logout", logout);
+router.get("/get-user-info", validateToken, getUserInfo);
+router.get("/fetch-cookies", fetchCookies);
 router.get("/validate-token", validateUserToken);
 
 module.exports = router;

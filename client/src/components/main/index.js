@@ -6,7 +6,7 @@ import AnswerPage from "./answerPage";
 import { useNavigate } from "react-router-dom";
 import NewQuestion from "./newQuestion";
 import NewAnswer from "./newAnswer";
-import * as userService from "../../services/userService"
+import * as userService from "../../services/userService";
 
 const Main = ({ search = "", title, setQuestionPage }) => {
     const [page, setPage] = useState("home");
@@ -14,13 +14,7 @@ const Main = ({ search = "", title, setQuestionPage }) => {
     const [qid, setQid] = useState("");
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState();
-    console.log("🚀 ~ Main ~ currentUser:", currentUser)
 
-    const fetchCurrentUser = async () => { 
-        const response = await userService.getUserInfo(localStorage.getItem("userId"));
-        setCurrentUser(response);
-    }
-    
     let selected = "";
     let content = null;
 
@@ -43,16 +37,20 @@ const Main = ({ search = "", title, setQuestionPage }) => {
         setPage("home");
     };
 
-    const handleNewQuestion = (token) => {
-        if (token) {
+    const handleNewQuestion = (isTokenValid) => {
+        if (isTokenValid) {
             setPage("newQuestion");
         } else {
-            navigate("/login")
+            navigate("/login");
         }
     };
 
-    const handleNewAnswer = () => {
-        setPage("newAnswer");
+    const handleNewAnswer = (isTokenValid) => {
+        if (isTokenValid) {
+            setPage("newAnswer");
+        } else {
+            navigate("/login");
+        }
     };
 
     const getQuestionPage = (order = "newest", search = "") => {
@@ -82,7 +80,14 @@ const Main = ({ search = "", title, setQuestionPage }) => {
         }
         case "answer": {
             selected = "";
-            content = <AnswerPage qid={qid} handleNewQuestion={handleNewQuestion} handleNewAnswer={handleNewAnswer} />;
+            content = (
+                <AnswerPage
+                    qid={qid}
+                    handleNewQuestion={handleNewQuestion}
+                    handleNewAnswer={handleNewAnswer}
+                    currentUser={currentUser}
+                />
+            );
             break;
         }
         case "newQuestion": {
@@ -102,13 +107,24 @@ const Main = ({ search = "", title, setQuestionPage }) => {
     }
 
     useEffect(() => {
+        const fetchCurrentUser = async () => {
+            try {
+                console.log("🚀 ~ fetching CurrentUser");
+                const user = await userService.getCurrentUser();
+                setCurrentUser(user);
+                console.log("🚀 ~ fetchCurrentUser ~ currentUser:", user);
+            } catch (error) {
+                console.error("Failed to get user info", error);
+            }
+        };
+
         fetchCurrentUser();
-    }, [])
+    }, []);
 
     return (
         <div id="main-content" className="fso-main ">
             {/*//- Sidebar Navigation  */}
-                <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} />
+            <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} />
             {/*//- Right Main Content  */}
             <div id="right_main" className="fso-right-main">
                 {content}

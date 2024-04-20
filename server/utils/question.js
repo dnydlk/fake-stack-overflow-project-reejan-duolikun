@@ -78,7 +78,12 @@ const filterQuestionsBySearch = (qlist, search) => {
 // Get all questions sorted by newest ask_date_time
 const getNewestQuestion = async () => {
     try {
-        const questions = await Question.find({}).populate("tags answers").exec();
+        // const questions = await Question.find().populate("tags answers").exec();
+        const questions = await Question.find()
+            .populate("tags") // Populate all tag details
+            .populate("answers") // Populate all answer details
+            .populate({ path: "asked_by", select: "username" }) // Populate only the username from the User document
+            .exec();
         return questions.sort((a, b) => {
             if (a.ask_date_time > b.ask_date_time) {
                 return -1;

@@ -11,12 +11,12 @@ const testQuestion = {
         {
             _id: "66220a7b7d06af88a828eec2",
             text: "test",
-            ans_by: "test",
+            ans_by: {username: "test"},
             ans_date_time: "2024-04-19T06:08:59.512Z",
             votes: ["66220a837d06af88a828eee1"],
         },
     ],
-    asked_by: "test",
+    asked_by: {username: "test"},
     ask_date_time: "2024-01-19T06:08:54.948Z",
     views: 6,
     __v: 0,
@@ -40,7 +40,7 @@ describe("<AnswerPage />", () => {
     it("successfully renders with fetched data", () => {
         cy.getDataCyTest("answer-page-question-title").should("contain.text", testQuestion.title);
         cy.getDataCyTest("answer-page-question-text").should("contain.text", testQuestion.text);
-        cy.getDataCyTest("answer-page-question-asked-by").should("contain.text", testQuestion.asked_by);
+        cy.getDataCyTest("answer-page-question-asked-by").should("contain.text", testQuestion.asked_by.username);
         cy.getDataCyTest("answer-page-question-asked-meta").should(
             "contain.text",
             getMetaData(new Date(testQuestion.ask_date_time))
@@ -50,7 +50,7 @@ describe("<AnswerPage />", () => {
     it("successfully renders answers", () => {
         cy.getDataCyTest("answer-page-answer").should("have.length", 1);
         cy.getDataCyTest("answer-page-answer").should("contain.text", testQuestion.answers[0].text);
-        cy.getDataCyTest("answer-page-answer-by").should("contain.text", testQuestion.answers[0].ans_by);
+        cy.getDataCyTest("answer-page-answer-by").should("contain.text", testQuestion.answers[0].ans_by.username);
         cy.getDataCyTest("answer-page-answer-meta").should(
             "contain.text",
             getMetaData(new Date(testQuestion.answers[0].ans_date_time))

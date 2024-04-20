@@ -6,7 +6,7 @@ import { validateHyperlink } from "../../../tool";
 import { addAnswer } from "../../../services/answerService";
 
 const NewAnswer = ({ qid, handleAnswer, currentUser }) => {
-    const [userName, setUserName] = useState(currentUser?.userName || "");
+    const [userName, setUserName] = useState(currentUser?.username || "");
     const [answerText, setAnswerText] = useState("");
     const [userNameErr, setUserNameErr] = useState("");
     const [answerTextErr, setAnswerTextErr] = useState("");
