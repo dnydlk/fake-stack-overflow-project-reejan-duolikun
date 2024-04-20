@@ -22,17 +22,6 @@ const vote = async (userId, answerId, voteType) => {
     }
 };
 
-// // To get votes
-// const fetchVoteStatus = async (userId, answerId) => {
-//     try {
-//         const response = await api.get(`${Vote_API_URL}/status`, { params: { userId, answerId } });
-//         return response.data;
-//     } catch (error) {
-//         console.error("Fetch vote status error:", error.response ? error.response.data : error.message);
-//         throw new Error("Failed to fetch vote status. Please try again.");
-//     }
-// };
-
 // To get current votes
 const fetchCurrentVotes = async (answerId) => {
     try {
@@ -44,8 +33,4 @@ const fetchCurrentVotes = async (answerId) => {
     }
 };
 
-export {
-    addAnswer, vote,
-    // fetchVoteStatus,
-    fetchCurrentVotes
-};
+export { addAnswer, vote, fetchCurrentVotes };

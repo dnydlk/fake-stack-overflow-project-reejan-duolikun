@@ -1,11 +1,12 @@
 import "./index.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBarNav from "./sideBarNav";
 import QuestionPage from "./questionPage";
 import AnswerPage from "./answerPage";
 import { useNavigate } from "react-router-dom";
 import NewQuestion from "./newQuestion";
 import NewAnswer from "./newAnswer";
+import * as userService from "../../services/userService";
 import ProfilePage from "./profilePage";
 
 const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
@@ -13,7 +14,8 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
     const [questionOrder, setQuestionOrder] = useState("newest");
     const [qid, setQid] = useState("");
     const navigate = useNavigate();
-    
+    const [currentUser, setCurrentUser] = useState();
+
     let selected = "";
     let content = null;
 
@@ -40,18 +42,21 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
         navigate("/");
     };
 
-    const handleNewQuestion = (token) => {
-        if (token) {
+    const handleNewQuestion = (isTokenValid) => {
+        if (isTokenValid) {
             setPage("newQuestion");
             navigate("/");
         } else {
-            navigate("/login")
+            navigate("/login");
         }
     };
 
-    const handleNewAnswer = () => {
-        setPage("newAnswer");
-        navigate("/");
+    const handleNewAnswer = (isTokenValid) => {
+        if (isTokenValid) {
+            setPage("newAnswer");
+        } else {
+            navigate("/login");
+        }
     };
 
     const getQuestionPage = (order = "newest", search = "") => {
@@ -81,17 +86,29 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
         }
         case "answer": {
             selected = "";
-            content = <AnswerPage qid={qid} handleNewQuestion={handleNewQuestion} handleNewAnswer={handleNewAnswer} />;
+            content = (
+                <AnswerPage
+                    qid={qid}
+                    handleNewQuestion={handleNewQuestion}
+                    handleNewAnswer={handleNewAnswer}
+                    currentUser={currentUser}
+                />
+            );
             break;
         }
         case "newQuestion": {
             selected = "";
-            content = <NewQuestion handleQuestions={handleQuestions} />;
+            content = <NewQuestion handleQuestions={handleQuestions} currentUser={currentUser} />;
             break;
         }
         case "newAnswer": {
             selected = "";
-            content = <NewAnswer qid={qid} handleAnswer={handleAnswer} />;
+            content = <NewAnswer qid={qid} handleAnswer={handleAnswer} currentUser={currentUser} />;
+            break;
+        }
+        case "profile": {
+            selected = "";
+            content = <ProfilePage />
             break;
         }
         case "profile": {
@@ -105,10 +122,25 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
             break;
     }
 
+    useEffect(() => {
+        const fetchCurrentUser = async () => {
+            try {
+                console.log("🚀 ~ fetching CurrentUser");
+                const user = await userService.getCurrentUser();
+                setCurrentUser(user);
+                console.log("🚀 ~ fetchCurrentUser ~ currentUser:", user);
+            } catch (error) {
+                console.error("Failed to get user info", error);
+            }
+        };
+
+        fetchCurrentUser();
+    }, []);
+
     return (
         <div id="main-content" className="fso-main ">
             {/*//- Sidebar Navigation  */}
-                <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} />
+            <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} />
             {/*//- Right Main Content  */}
             <div id="right_main" className="fso-right-main">
                 {content}

@@ -1,11 +1,11 @@
 import "./index.css";
 import OrderButton from "./orderButton";
-import { AuthContext } from "../../../authContext";
+import { AuthContext } from "../../../../authProvider";
 import { useContext } from "react";
 
 const QuestionHeader = ({ title_text, qcnt, setQuestionOrder, handleNewQuestion }) => {
     // added || {} in order to prevent error in testing
-    const { token } = useContext(AuthContext) || {};
+    const { isTokenValid } = useContext(AuthContext) || {};
 
     return (
         <div>
@@ -17,7 +17,7 @@ const QuestionHeader = ({ title_text, qcnt, setQuestionOrder, handleNewQuestion 
                     className="fso-blue-btn"
                     data-cy-test="ask-question-btn"
                     onClick={() => {
-                        handleNewQuestion(token);
+                        handleNewQuestion(isTokenValid);
                     }}>
                     Ask a Question
                 </button>

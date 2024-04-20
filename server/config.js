@@ -5,9 +5,11 @@
 const MONGO_URL = "mongodb://localhost:27017/fake_so";
 const CLIENT_URL = "http://localhost:3000";
 const port = 8000;
+const JWT_SECRET = "RANDOM-TOKEN"
 
 module.exports = {
     MONGO_URL,
     CLIENT_URL,
-    port
+    port,
+    JWT_SECRET
 };

@@ -6,6 +6,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 // Use cors to allow cross-origin requests
 const cors = require("cors");
+// User cookie-parser to parse cookies
+const cookieParser = require("cookie-parser");
 
 // Import the configuration settings
 const { MONGO_URL, port, CLIENT_URL } = require("./config");
@@ -26,8 +28,7 @@ app.use(
 // Parse incoming requests with JSON payloads
 app.use(express.json());
 
-// Parse incoming requests with JSON payloads
-app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (_, res) => {
     res.send("Fake SO Server Dummy Endpoint");

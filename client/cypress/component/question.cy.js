@@ -101,7 +101,7 @@ describe("<Question />", () => {
       tags: [],
       answers: [],
       views: 0,
-      asked_by: "Test User",
+      asked_by: { username: "Test User"},
       ask_date_time: new Date(),
     };
     const clickTagSpy = cy.spy().as("clickTagSpy");

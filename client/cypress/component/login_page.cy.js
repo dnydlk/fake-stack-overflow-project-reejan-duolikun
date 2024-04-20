@@ -1,14 +1,14 @@
 import Login from "../../src/components/loginPage";
-import { AuthContext } from "../../src/components/authContext";
+import { AuthContext } from "../../src/authProvider";
 import { MemoryRouter } from "react-router-dom";
 
 describe("<Login />", () => {
 
   it("displays the login form correctly", () => {
 
-    const setToken = cy.stub();
+    const setIsTokenValid = cy.stub();
     cy.mount(
-      <AuthContext.Provider value={{ setToken }}>
+      <AuthContext.Provider value={{ setIsTokenValid }}>
         <MemoryRouter>
           <Login />
         </MemoryRouter>
@@ -31,9 +31,9 @@ describe("<Login />", () => {
   });
 
   it("displays error message when no email or password provided", () => {
-    const setToken = cy.stub();
+    const setIsTokenValid = cy.stub();
     cy.mount(
-      <AuthContext.Provider value={{ setToken }}>
+      <AuthContext.Provider value={{ setIsTokenValid }}>
         <MemoryRouter>
           <Login />
         </MemoryRouter>
@@ -47,10 +47,10 @@ describe("<Login />", () => {
   });
 
   it("displays error message for invalid login", () => {
-    const setToken = cy.stub();
+    const setIsTokenValid = cy.stub();
 
     cy.mount(
-      <AuthContext.Provider value={{ setToken }}>
+      <AuthContext.Provider value={{ setIsTokenValid }}>
         <MemoryRouter>
           <Login />
         </MemoryRouter>
