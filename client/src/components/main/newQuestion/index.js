@@ -65,7 +65,7 @@ const NewQuestion = ({ handleQuestions, currentUser }) => {
             title: title,
             text: text,
             tags: tags,
-            asked_by: userName,
+            asked_by: currentUser,
             ask_date_time: new Date(),
         };
         const res = await addQuestion(question);
@@ -106,6 +106,7 @@ const NewQuestion = ({ handleQuestions, currentUser }) => {
                 val={userName}
                 setState={setUserName}
                 err={userNameErr}
+                isReadOnly={true}
             />
             <div className="fso-btn-indicator-container">
                 <button

@@ -1,6 +1,6 @@
 import "./index.css";
 
-const Input = ({ title, hint, id, mandatory = true, val, setState, err }) => {
+const Input = ({ title, hint, id, mandatory = true, val, setState, err, isReadOnly }) => {
     return (
         <div>
             <div className="fso-input-title" data-cy-test="fso-input-title">
@@ -20,6 +20,7 @@ const Input = ({ title, hint, id, mandatory = true, val, setState, err }) => {
                 onChange={(e) => {
                     setState(e.target.value);
                 }}
+                readOnly={isReadOnly}
             />
             {err && (
                 <div className="fso-input-error" data-cy-test="fso-input-error">

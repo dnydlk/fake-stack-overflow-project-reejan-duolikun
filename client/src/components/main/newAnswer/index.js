@@ -34,7 +34,7 @@ const NewAnswer = ({ qid, handleAnswer, currentUser }) => {
         }
         const answer = {
             text: answerText,
-            ans_by: userName,
+            ans_by: currentUser,
             ans_date_time: new Date(),
         };
 
@@ -51,6 +51,7 @@ const NewAnswer = ({ qid, handleAnswer, currentUser }) => {
                 val={userName}
                 setState={setUserName}
                 err={userNameErr}
+                isReadOnly={true}
             />
             <Textarea
                 title={"Answer Text"}
