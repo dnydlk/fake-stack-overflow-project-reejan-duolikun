@@ -41,4 +41,9 @@ const checkAuthentication = async () => {
     }
 };
 
-export { signup, login, getCurrentUser, logout, checkAuthentication };
+const updateUserInfo = async (user) => {
+    const response = await api.put(`${USER_API_URL}/update-user-info`, user);
+    return response.data;
+};
+
+export { signup, login, getCurrentUser, logout, checkAuthentication, updateUserInfo };

@@ -163,11 +163,55 @@ const logout = (req, res) => {
     res.status(200).json({ message: "Logout successful" });
 };
 
+const updateUser = async (req, res) => {
+    if (!req.user) {
+        return res.status(400).json({ error: "User information not available" });
+    }
+
+    try {
+        const userId = req.user.userId;
+        const existingUser = await User.findById(userId);
+
+        if (!existingUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const { userName, location, title, aboutMe, link } = req.body;
+
+        if (userName) {
+            existingUser.userName = userName;
+        }
+
+        if (location) {
+            existingUser.location = location;
+        }
+
+        if (title) {
+            existingUser.title = title;
+        }
+
+        if (aboutMe) {
+            existingUser.aboutMe = aboutMe;
+        }
+
+        if (link) {
+            existingUser.link = link;
+        }
+
+        await existingUser.save();
+        res.json(existingUser); // Send user information back to client
+    } catch (err) {
+        console.error("Database error: ", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
 // Routers
 router.post("/register", signup);
 router.post("/login", login);
 router.post("/logout", logout);
 router.get("/get-user-info", validateToken, getUserInfo);
 router.get("/validate-token", validateUserToken);
+router.put("/update-user-info", validateToken, updateUser);
 
 module.exports = router;

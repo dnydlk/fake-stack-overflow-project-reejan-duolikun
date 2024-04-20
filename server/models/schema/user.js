@@ -22,6 +22,26 @@ module.exports = mongoose.Schema(
             type: String,
             max: 25,
         },
+        location: {
+            type: String,
+            max: 50,
+            default: "Location not provided",
+        },
+        title: {
+            type: String,
+            max: 50,
+            default: "Title not provided",
+        },
+        aboutMe: {
+            type: String,
+            max: 1000,
+            default: "About me not provided",
+        },
+        link: {
+            type: String,
+            max: 100,
+            default: "Link not provided",
+        },
     },
     { collection: "User" }
 );
