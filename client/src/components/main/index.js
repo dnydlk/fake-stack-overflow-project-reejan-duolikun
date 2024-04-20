@@ -30,6 +30,11 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
         navigate("/");
     };
 
+    const handleProfile = () => {
+        setPage("profile");
+        navigate("/");
+    };
+
     const handleAnswer = (qid) => {
         setQid(qid);
         setPage("answer");
@@ -84,6 +89,11 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
             // content = <TagPage clickTag={clickTag} handleNewQuestion={handleNewQuestion} />;
             break;
         }
+        case "profile": {
+            selected = "p";
+            content = <ProfilePage currentUser={currentUser }/>;
+            break;
+        }
         case "answer": {
             selected = "";
             content = (
@@ -104,11 +114,6 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
         case "newAnswer": {
             selected = "";
             content = <NewAnswer qid={qid} handleAnswer={handleAnswer} currentUser={currentUser} />;
-            break;
-        }
-        case "profile": {
-            selected = "";
-            content = <ProfilePage />;
             break;
         }
         default:
@@ -135,7 +140,7 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
     return (
         <div id="main-content" className="fso-main ">
             {/*//- Sidebar Navigation  */}
-            <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} />
+            <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} handleProfile={handleProfile} />
             {/*//- Right Main Content  */}
             <div id="right_main" className="fso-right-main">
                 {content}

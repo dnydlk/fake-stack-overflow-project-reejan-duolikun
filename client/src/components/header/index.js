@@ -19,9 +19,9 @@ const Header = ({ search, setQuestionPage }) => {
         navigate("/");
     };
 
-    const handleProfile = () => {
-        navigate('/profile');
-    }
+    // const handleProfile = () => {
+    //     navigate('/profile');
+    // }
     
     return (
         <div id="fso-header" className="fso-header d-flex align-items-center justify-content-around">
@@ -54,9 +54,14 @@ const Header = ({ search, setQuestionPage }) => {
 
             <div>
                 {isTokenValid ? (
-                    <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
-                        <button className="fso-user-profile" onClick={handleProfile}>
-                            Profile
+                    // <div id="fso-user-profile" className="m-1" data-cy-test="user-profile">
+                    //     <button className="fso-user-profile" onClick={handleProfile}>
+                    //         Profile
+                    //     </button>
+                    // </div>
+                    <div>
+                        <button className="logout-button" onClick={handleLogout}>
+                            Log Out
                         </button>
                     </div>
                 ) : (
@@ -66,14 +71,14 @@ const Header = ({ search, setQuestionPage }) => {
                     </button>
                 )}
             </div>
-            {isTokenValid && (
+            {/* {isTokenValid && (
                 // Display logout button if logged in
                 <div>
                     <button className="logout-button" onClick={handleLogout}>
                         Log Out
                     </button>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

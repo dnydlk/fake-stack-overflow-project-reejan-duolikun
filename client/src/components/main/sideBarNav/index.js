@@ -2,9 +2,18 @@ import "./index.css";
 import React from "react";
 
 
-const SideBarNav = ({ selected = "", handleQuestions, handleTags }) => {
+const SideBarNav = ({ selected = "", handleQuestions, handleTags, handleProfile }) => {
     return (
         <div id="sideBarNav" className="fso-sideBarNav d-flex flex-column align-items-center">
+            <div
+                id="menu-profile"
+                data-cy-test="nav-tag"
+                className={`fso-menu-button ${selected === "p" ? "fso-menu-selected" : ""}`}
+                onClick={() => {
+                    handleProfile();
+                }}>
+                Profile
+            </div>
             <div
                 id="menu-question"
                 data-cy-test="nav-question"
@@ -12,7 +21,7 @@ const SideBarNav = ({ selected = "", handleQuestions, handleTags }) => {
                 onClick={() => {
                     handleQuestions();
                 }}>
-                    Questions
+                Questions
             </div>
             <div
                 id="menu-tag"
