@@ -50,10 +50,6 @@ const LoginPage = () => {
         }
     };
 
-    // const handleLogoClick = () => {
-    //   navigate("/");
-    // };
-
     return (
         <div className="login-container" data-cy-test="login-container">
             <Link to="/">

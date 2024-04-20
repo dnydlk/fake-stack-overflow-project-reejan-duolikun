@@ -9,7 +9,7 @@ import NewAnswer from "./newAnswer";
 import * as userService from "../../services/userService";
 import ProfilePage from "./profilePage";
 
-const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
+const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => {
     const [page, setPage] = useState(currentPage);
     const [questionOrder, setQuestionOrder] = useState("newest");
     const [qid, setQid] = useState("");
@@ -108,7 +108,7 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
         }
         case "profile": {
             selected = "";
-            content = <ProfilePage />
+            content = <ProfilePage />;
             break;
         }
         default:
