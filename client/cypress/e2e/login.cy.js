@@ -24,5 +24,25 @@ describe("Login Page Should load correctly", () => {
 		cy.get('#password').type("q1234567");
 		cy.getDataCyTest("loginBtn").click();
 		cy.get("#logOut").should('exist');
+		cy.contains('Profile');
+		cy.contains('Questions');
+		cy.contains('Tags');
 	});
+
+	it("Test for incorrect Email", () => {
+		cy.visit("/login");
+		cy.get('#email').type("testt@test.com");
+		cy.get('#password').type("q1234567");
+		cy.getDataCyTest("loginBtn").click();
+		cy.contains("User with the email doesn't exist.");
+	});
+
+	it("Test for incorrect Password", () => {
+		cy.visit("/login");
+		cy.get('#email').type("test@test.com");
+		cy.get('#password').type("q12345678");
+		cy.getDataCyTest("loginBtn").click();
+		cy.contains("Invalid password.");
+	});
+
 });
