@@ -111,11 +111,6 @@ const Main = ({ search = "", title, setQuestionPage, currentPage="home"}) => {
             content = <ProfilePage />
             break;
         }
-        case "profile": {
-            selected = "";
-            content = <ProfilePage />
-            break;
-        }
         default:
             selected = "q";
             content = getQuestionPage();

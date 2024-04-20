@@ -31,12 +31,6 @@ const getCurrentUser = async () => {
     }
 };
 
-// fetch Cookies
-const fetchCookies = async () => {
-    const response = await api.get(`${USER_API_URL}/fetch-cookies`);
-    return response.data;
-};
-
 const checkAuthentication = async () => {
     try {
         const response = await api.get(`${USER_API_URL}/validate-token`);
@@ -47,4 +41,4 @@ const checkAuthentication = async () => {
     }
 };
 
-export { signup, login, getCurrentUser, fetchCookies, logout, checkAuthentication };
+export { signup, login, getCurrentUser, logout, checkAuthentication };

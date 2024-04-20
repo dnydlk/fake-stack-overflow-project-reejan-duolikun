@@ -14,7 +14,7 @@ const ProfilePage = () => {
 
     const handleEditProfile = async () => {
         setActiveLink("edit-profile");
-    }
+    } 
 
     return (
         <div className="profile-container">

@@ -142,9 +142,6 @@ const validateToken = (req, res, next) => {
     }
 };
 
-const fetchCookies = (req, res) => {
-    res.send(req.cookies);
-};
 
 const validateUserToken = (req, res) => {
     const accessToken = req.cookies["access-token"];
@@ -173,7 +170,6 @@ router.post("/register", signup);
 router.post("/login", login);
 router.post("/logout", logout);
 router.get("/get-user-info", validateToken, getUserInfo);
-router.get("/fetch-cookies", fetchCookies);
 router.get("/validate-token", validateUserToken);
 
 module.exports = router;

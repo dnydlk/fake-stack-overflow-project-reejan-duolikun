@@ -36,7 +36,6 @@ const LoginPage = () => {
                 setPassword("");
 
                 // Save the jwtToken in the context
-                // const isTokenValid = await fetchCookies();
                 const response = await userService.checkAuthentication();
                 setIsTokenValid(response.authenticated);
                 console.log("🚀 ~ handleLogin ~ response:", response);
