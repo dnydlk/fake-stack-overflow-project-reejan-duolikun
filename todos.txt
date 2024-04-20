@@ -15,3 +15,19 @@
 8. cypress e2e for feature: sign up
 
 9. cypress e2e for feature: log in
+
+10. cypress e2e for feature: threat to Log in (Token validation)
+
+11. cypress e2e for feature: threat to Create new posts (Tampering, XSS, SQL Injection)
+
+12. cypress e2e for feature: threat to Voting on posts
+
+13. cypress component test for each component in src 
+
+14. Jest unit test for each server endpoint
+
+15. Jest unit test for each service function
+
+16. Code coverage report for all tests that are at least 80%
+
+17. Update README.md
