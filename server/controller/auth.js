@@ -1,13 +1,14 @@
 const express = require("express");
 const User = require("../models/user.js");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../config");
+const { sign, verify } = require("jsonwebtoken");
 
 const router = express.Router();
 
-const registerUser = async(req, res) => {
-  try {
-      const { email, password, userName } = req.body;
+const registerUser = async (req, res) => {
+    try {
+        const { email, password, userName } = req.body;
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
@@ -16,7 +17,7 @@ const registerUser = async(req, res) => {
                 status: "failed",
                 message: "This email is already registered. Please try logging in instead.",
             });
-        
+
         // Check if username already exists if provided
         if (userName && userName != "") {
             const existingUsername = await User.findOne({ userName });
@@ -30,34 +31,26 @@ const registerUser = async(req, res) => {
         // hash the password
         bcrypt.hash(password, 10).then((hashedPwd) => {
             // create an instance of a user
-          const newUser = new User({
-            email : email,
-            password : hashedPwd,
-            userName: userName != "" ? userName : email.split('@')[0],
-          });
+            const newUser = new User({
+                email: email,
+                password: hashedPwd,
+                userName: userName != "" ? userName : email.split("@")[0],
+            });
 
-          // save new user into the database
-          newUser
-            .save()
-            .then ((result) => {
-               // Create JWT token
-            const token = jwt.sign(
-                {
-                    userId: newUser._id,
-                    userEmail: newUser.email,
-                    userName: newUser.userName,
-                },
-                "RANDOM-TOKEN",
-                { expiresIn: "24h" }
-        );
-              res.status(200).json({
-                status: "success",
-                email: newUser.email,
-                userId: newUser._id,
-                message:
-                    "Your account has been successfully created.",
-                token
-              });
+            // save new user into the database
+            newUser.save().then((result) => {
+                //! Commented out for signing JWT in login process
+                // // Create JWT token
+                // const token = jwt.sign(
+                //     {
+                //         userId: newUser._id,
+                //         userEmail: newUser.email,
+                //         userName: newUser.userName,
+                //     },
+                //     JWT_SECRET,
+                //     { expiresIn: "24h" }
+                // );
+                res.status(200).json("Registration successful");
             });
         });
     } catch (err) {
@@ -95,30 +88,22 @@ const loginUser = async (req, res) => {
         }
 
         // Create JWT token
-        const token = jwt.sign(
-            {
-                userId: existingUser._id,
-                userEmail: existingUser.email,
-                userName: existingUser.userName,
-            },
-            "RANDOM-TOKEN",
-            { expiresIn: "24h" }
-        );
+        const accessToken = createTokens(existingUser);
+
+        // store the token in cookie
+        res.cookie("access-token", accessToken, {
+            // cookies will expires after 24 hours
+            maxAge: 1000 * 60 * 60 * 24,
+            httpOnly: true,
+        });
 
         // If user exists and password is correct, login successful
-        res.status(200).json({
-            status: "success",
-            email: existingUser.email,
-            userId: existingUser._id,
-            message: "Login successful.",
-            token,
-        });
+        res.status(200).json({ message: "Login successful" });
     } catch (err) {
         console.error(err);
         res.status(500).json({
             status: "error",
             code: 500,
-            data: [],
             message: "Internal Server Error",
         });
     }
@@ -126,17 +111,61 @@ const loginUser = async (req, res) => {
 
 const getUserInfo = async (req, res) => {
     try {
-        const {userId} = req.params;
+        const { userId } = req.params;
         const existingUser = await User.findById(userId);
         res.send(existingUser);
     } catch (err) {
         res.json({ error: "User not found" });
     }
+};
+
+const createTokens = (user) => {
+    const accessToken = sign({ userId: user._id }, JWT_SECRET);
+    return accessToken;
+};
+
+const validateToken = (req, res, next) => {
+    const accessToken = req.cookies["access-token"];
+    if (!accessToken) {
+        return res.status(400).json({ error: "User not authenticated" });
+    }
+    try {
+        const validToken = verify(accessToken, JWT_SECRET);
+        if (validToken) {
+            req.authenticated = true;
+            console.log("Token validated");
+            return next();
+        }
+    } catch (err) {
+        return res.status(400).json({ error: err });
+    }
+};
+
+const getCookies = (req, res) => {
+    res.send(req.cookies);
+};
+
+const validateUserToken = (req, res) => { 
+    const accessToken = req.cookies["access-token"];
+    if (!accessToken) {
+        return res.status(401).json({ authenticated: false});
+    }
+    try {
+        const validToken = verify(accessToken, JWT_SECRET);
+        if (validToken) {
+            return res.status(200).json({ authenticated: true });
+        }
+    } catch (err) {
+        return res.status(401).json({ authenticated: false, error: "Token is invalid" });
+    }
+
 }
 
 // Routers
 router.post("/registerUser", registerUser);
 router.post("/loginUser", loginUser);
-router.get("/get-user-info/:userId", getUserInfo);
+router.get("/get-user-info/:userId", validateToken, getUserInfo);
+router.get("/fetch-cookies", getCookies);
+router.get("/validate-token", validateUserToken);
 
 module.exports = router;
