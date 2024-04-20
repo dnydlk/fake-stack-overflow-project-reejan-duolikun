@@ -8,6 +8,7 @@ import NewQuestion from "./newQuestion";
 import NewAnswer from "./newAnswer";
 import * as userService from "../../services/userService";
 import ProfilePage from "./profilePage";
+import TagPage from "./tagPage";
 
 const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => {
     const [page, setPage] = useState(currentPage);
@@ -86,12 +87,12 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
         }
         case "tag": {
             selected = "t";
-            // content = <TagPage clickTag={clickTag} handleNewQuestion={handleNewQuestion} />;
+            content = <TagPage clickTag={clickTag} handleNewQuestion={handleNewQuestion} currentUser={currentUser} />;
             break;
         }
         case "profile": {
             selected = "p";
-            content = <ProfilePage currentUser={currentUser }/>;
+            content = <ProfilePage currentUser={currentUser} />;
             break;
         }
         case "answer": {
@@ -140,7 +141,12 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
     return (
         <div id="main-content" className="fso-main ">
             {/*//- Sidebar Navigation  */}
-            <SideBarNav selected={selected} handleQuestions={handleQuestions} handleTags={handleTags} handleProfile={handleProfile} />
+            <SideBarNav
+                selected={selected}
+                handleQuestions={handleQuestions}
+                handleTags={handleTags}
+                handleProfile={handleProfile}
+            />
             {/*//- Right Main Content  */}
             <div id="right_main" className="fso-right-main">
                 {content}
