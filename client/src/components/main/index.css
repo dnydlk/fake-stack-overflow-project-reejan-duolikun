@@ -26,7 +26,7 @@
 }
 
 .fso-blue-btn {
-    background: hsl(210, 77%, 46%);
+    background: #1b75d0;
     color: #ffffff;
     border: hsl(210, 77%, 46%) 1px solid;
     border-radius: 5px;
@@ -36,11 +36,57 @@
 }
 
 .fso-blue-btn:hover {
-    background: hsl(210, 77%, 51%);
+    background: #2282e2;
 }
 
 .fso-blue-btn:active {
-    background: hsl(210, 77%, 46%);
+    background: #1b75d0;
+}
+
+.fso-yellow-btn {
+    background: #efac4d;
+    color: #ffffff;
+    border: #f0ad4e 1px solid;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 9px 12px 9px 12px;
+    margin-right: 5%;
+}
+
+.fso-yellow-btn:hover {
+    background: #f3bd72;
+}
+
+.fso-yellow-btn:active {
+    background: #efac4d;
+}
+
+.fso-flagged-text {
+    color: #f0ad4e;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: auto;
+    margin-right: 5%;
+}
+
+.fso-user-profile {
+    width: 80px;
+    height: 40px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #1b75d0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.fso-user-profile:hover {
+    background: #2282e2;
+}
+
+.fso-user-profile:active {
+    background: #1b75d0;
 }
 
 .fso-btn-indicator-container {
@@ -50,13 +96,17 @@
     width: 100%;
 }
 
-.fso-form-postBtn {
-    background: #3090e2;
+.fso-form-post-button {
+    background: #1b75d0;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.fso-form-post-button:hover {
+    background: #2282e2;
 }
 
 .fso-mandatory-indicator {

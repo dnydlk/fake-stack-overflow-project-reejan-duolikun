@@ -1,0 +1,33 @@
+1. What is package.json & package-lock.json in the project, do we need it?
+
+2. cypress e2e for feature: view posts
+
+3. cypress e2e for feature: view individual posts
+
+4. cypress e2e for feature: create new posts
+
+5. cypress e2e for feature: search for existing posts
+
+6. cypress e2e for feature: commenting on posts
+
+7. cypress e2e for feature: voting on posts
+
+8. cypress e2e for feature: sign up
+
+9. cypress e2e for feature: log in
+
+10. cypress e2e for feature: threat to Log in (Token validation)
+
+11. cypress e2e for feature: threat to Create new posts (Tampering, XSS, SQL Injection)
+
+12. cypress e2e for feature: threat to Voting on posts
+
+13. cypress component test for each component in src 
+
+14. Jest unit test for each server endpoint
+
+15. Jest unit test for each service function
+
+16. Code coverage report for all tests that are at least 80%
+
+17. Update README.md
