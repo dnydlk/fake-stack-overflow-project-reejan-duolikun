@@ -29,6 +29,7 @@ const Profile = ({ currentUser, setCurrentUser }) => {
                 type="text"
                 id="displayname"
                 className="form-control w-50 mb-2"
+                data-cy-test="displayname"
                 value={username}
                 onChange={(e) => {
                     setUsername(e.target.value);
@@ -39,6 +40,7 @@ const Profile = ({ currentUser, setCurrentUser }) => {
                 type="text"
                 id="location"
                 className="form-control w-50 mb-2"
+                data-cy-test="location"
                 value={location}
                 onChange={(e) => {
                     setLocation(e.target.value);
@@ -49,6 +51,7 @@ const Profile = ({ currentUser, setCurrentUser }) => {
                 type="text"
                 id="title"
                 className="form-control w-50 mb-2"
+                data-cy-test="title"
                 value={title}
                 onChange={(e) => {
                     setTitle(e.target.value);
@@ -59,6 +62,7 @@ const Profile = ({ currentUser, setCurrentUser }) => {
                 type="text"
                 id="about-me"
                 className="form-control w-50 mb-2"
+                data-cy-test="about-me"
                 value={aboutMe}
                 onChange={(e) => {
                     setAboutMe(e.target.value);
@@ -69,12 +73,13 @@ const Profile = ({ currentUser, setCurrentUser }) => {
                 type="text"
                 id="link"
                 className="form-control w-50 mb-3"
+                data-cy-test="link"
                 value={link}
                 onChange={(e) => {
                     setLink(e.target.value);
                 }}
             />
-            <button className="fso-blue-btn" onClick={() => handleUpdateProfile()}>
+            <button className="fso-blue-btn" onClick={() => handleUpdateProfile()} data-cy-test="update-profile-button">
                 Update Profile
             </button>
         </>
