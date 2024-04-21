@@ -260,7 +260,8 @@ const init = async () => {
         mackson3332,
         new Date("2023-02-22T17:19:00")
     );
-    let a8 = await answerCreate("Store data in a SQLLite database.", ihba001, new Date("2023-03-22T21:17:53"));
+	let a8 = await answerCreate("Store data in a SQLLite database.", ihba001, new Date("2023-03-22T21:17:53"));
+    let a9 = await answerCreate("test answer for testing", testUser1, new Date("2023-04-20T21:17:53"));
 
     // Create questions
     let q1 = await questionCreate(
@@ -303,7 +304,7 @@ const init = async () => {
         "test question for flagging",
         "test question for flagging",
         [t1, t2],
-        [],
+        [a9],
         testUser1,
         new Date("2024-04-10T14:28:01"),
         5,
@@ -332,6 +333,7 @@ const init = async () => {
     let v18 = await voteCreate(ihba001, a7, true);
     let v19 = await voteCreate(JojiJohn, a8, true);
     let v20 = await voteCreate(saltyPeter, a8, true);
+    let v21 = await voteCreate(testUser1, a9, true);
 
     // Push votes to answer schema
     await pushVoteToAnswer(a1, v1);
@@ -356,6 +358,7 @@ const init = async () => {
     await pushVoteToAnswer(a7, v18);
     await pushVoteToAnswer(a8, v19);
     await pushVoteToAnswer(a8, v20);
+    await pushVoteToAnswer(a9, v21);
 
     // Push user asked questions to user schema
     await pushAskedQuestionToUser(JojiJohn, q1);
@@ -373,6 +376,7 @@ const init = async () => {
     await pushAnsweredQuestionToUser(abhi3241, a6);
     await pushAnsweredQuestionToUser(mackson3332, a7);
     await pushAnsweredQuestionToUser(ihba001, a8);
+    await pushAnsweredQuestionToUser(testUser1, a9);
 
     // Push user voted answers to user schema
     await pushVotedAnswerToUser(hamkalo, v1);
@@ -394,7 +398,8 @@ const init = async () => {
     await pushVotedAnswerToUser(ihba001, v17);
     await pushVotedAnswerToUser(ihba001, v18);
     await pushVotedAnswerToUser(JojiJohn, v19);
-    await pushVotedAnswerToUser(saltyPeter, v20);
+	await pushVotedAnswerToUser(saltyPeter, v20);
+    await pushVotedAnswerToUser(testUser1, v21);
 
     // Close the database connection if it is open
     if (db) db.close();
