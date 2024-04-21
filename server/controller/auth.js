@@ -114,37 +114,42 @@ const getUserInfo = async (req, res) => {
 	}
 
 	try {
-		const userId = req.user.userId;
-		// populate("askedQuestion answeredQuestion votedAnswer");
-		// const existingUser = await User.findById(userId).populate("askedQuestion answeredQuestion votedAnswer");
-		const existingUser = await User.findById(userId)
-			.populate({
-				path: "askedQuestion",
-				populate: [
-					{ path: "tags", model: "Tag" },
-					{ path: "answers", model: "Answer" },
-				],
-			})
-			.populate({
-				path: "answeredQuestion",
-				populate: {
-					path: "ans_by", // Assuming 'ans_by' is the field name in answeredQuestion
-					model: "User", // Assuming the model name for user data is 'User'
-				},
-			})
-			.populate("votedAnswer"); // Continue populating other fields as needed
+        const userId = req.user.userId;
+        // populate("askedQuestion answeredQuestion votedAnswer");
+        // const existingUser = await User.findById(userId).populate("askedQuestion answeredQuestion votedAnswer");
+        const existingUser = await User.findById(userId)
+            .populate({
+                path: "askedQuestion",
+                populate: [
+                    { path: "tags", model: "Tag" },
+                    { path: "answers", model: "Answer" },
+                    { path: "asked_by", model: "User" },
+                ],
+            })
+            .populate({
+                path: "answeredQuestion",
+                populate: {
+                    path: "ans_by",
+                    model: "User",
+                },
+            })
+            .populate({
+                path: "votedAnswer",
+                populate: {
+                    path: "answer",
+                    model: "Answer",
+                },
+            });
 
-		// .populate("answeredQuestion votedAnswer");
+        if (!existingUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
 
-		if (!existingUser) {
-			return res.status(404).json({ error: "User not found" });
-		}
-
-		res.json(existingUser); // Send user information back to client
-	} catch (err) {
-		console.error("Database error: ", err);
-		res.status(500).json({ error: "Internal Server Error" });
-	}
+        res.json(existingUser); // Send user information back to client
+    } catch (err) {
+        console.error("Database error: ", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 };
 
 const createTokens = (user) => {
