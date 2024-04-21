@@ -31,9 +31,13 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
         navigate("/");
     };
 
-    const handleProfile = () => {
-        setPage("profile");
-        navigate("/");
+	const handleProfile = () => {
+        if (currentUser) {
+            setPage("profile");
+            navigate("/");
+        } else {
+            navigate("/login");
+        }
     };
 
     const handleAnswer = (qid) => {
