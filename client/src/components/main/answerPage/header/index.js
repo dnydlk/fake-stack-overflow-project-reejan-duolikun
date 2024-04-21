@@ -31,7 +31,9 @@ const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta, questio
                 </div>
                 {/*//- View Count */}
                 <div className="fso-answer-title-detail me-1">Viewed</div>
-                <div className="fso-answer-title-detail-text">{views} times</div>
+                <div className="fso-answer-title-detail-text" data-cy-test="fso-answer-title-detail-text">
+                    {views} times
+                </div>
                 {question.isFlagged && <div className="fso-flagged-text">This question has been flagged</div>}
             </div>
         </div>
