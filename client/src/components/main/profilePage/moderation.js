@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as questionService from "../../../services/questionService";
 
 const Moderation = ({ currentUser, handleAnswer }) => {
-    console.log("🚀 ~ Activities ~ currentUser:", currentUser);
-
+    console.log("🚀 ~ Moderation ~ currentUser:", currentUser);
     const [flaggedQuestions, setFlaggedQuestions] = useState([]);
 
     const handleClickOnQuestionTitle = async (questionId) => {
@@ -11,17 +10,9 @@ const Moderation = ({ currentUser, handleAnswer }) => {
     };
 
     const handleDelete = async (questionId) => {
-        console.log("🚀 ~ handleDelete ~ questionId:", questionId);
-        // Ask for confirmation
-        const response = window.confirm("Are you sure you want to delete this question?");
-        if (!response) {
-            return;
-        } else {
-            // Delete the question
-            await questionService.deleteQuestion(questionId).then(() => {
-                setFlaggedQuestions(flaggedQuestions.filter((q) => q._id !== questionId));
-            });
-        }
+        await questionService.deleteQuestion(questionId).then(() => {
+            setFlaggedQuestions(flaggedQuestions.filter((q) => q._id !== questionId));
+        });
     };
 
     useEffect(() => {
