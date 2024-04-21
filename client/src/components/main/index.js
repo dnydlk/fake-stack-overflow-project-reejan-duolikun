@@ -114,6 +114,7 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
                     handleNewQuestion={handleNewQuestion}
                     handleNewAnswer={handleNewAnswer}
                     currentUser={currentUser}
+                    setPage={setPage}
                 />
             );
             break;

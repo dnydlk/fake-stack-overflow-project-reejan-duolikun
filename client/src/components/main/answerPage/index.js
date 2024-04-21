@@ -6,14 +6,17 @@ import "./index.css";
 import QuestionBody from "./questionBody";
 import * as questionService from "../../../services/questionService";
 import { AuthContext } from "../../../authProvider";
+import { useNavigate } from "react-router";
 
 // Component for the Answers page
-const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser }) => {
+const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser, setPage }) => {
     const { isTokenValid } = useContext(AuthContext) || {};
 
     const [question, setQuestion] = useState({});
 
     const [flagText, setFlagText] = useState("Flag as inappropriate");
+
+    const navigate = useNavigate();
 
     const handleFlag = async () => {
         if (!isTokenValid) {
@@ -43,6 +46,21 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser }) =>
                 setQuestion(updatedQuestion.question);
                 setFlagText("Unflag");
             }
+        }
+    };
+
+    const handleDelete = async (questionId) => {
+        console.log("🚀 ~ handleDelete ~ questionId:", questionId);
+        // Ask for confirmation
+        const response = window.confirm("Are you sure you want to delete this question?");
+        if (!response) {
+            return;
+        } else {
+            // Delete the question
+            await questionService.deleteQuestion(questionId).then(() => {
+                setPage("home");
+                navigate("/");
+            });
         }
     };
 
@@ -100,10 +118,22 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser }) =>
                     }}>
                     Post Your Answer
                 </button>
-                <button className="fso-yellow-btn ms-2" onClick={() => handleFlag()}>
-                    {flagText}
-                </button>
+                {currentUser && (
+                    <button className="fso-yellow-btn ms-2" onClick={() => handleFlag()}>
+                        {flagText}
+                    </button>
+                )}
             </div>
+            {currentUser && currentUser.role && currentUser.role === "moderator" ? (
+                <div className="fso-space-between">
+                    <div></div>
+                    <button className="fso-delete-btn ms-2" onClick={() => handleDelete(qid)}>
+                        Delete Question
+                    </button>
+                </div>
+            ) : (
+                ""
+            )}
             {/* <pre>
                 <code>{JSON.stringify(question, null, 2)}</code>
             </pre>

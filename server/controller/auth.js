@@ -148,7 +148,7 @@ const getUserInfo = async (req, res) => {
 };
 
 const createTokens = (user) => {
-    const accessToken = sign({ userId: user._id }, JWT_SECRET);
+    const accessToken = sign({ userId: user._id, role: user.role }, JWT_SECRET);
     return accessToken;
 };
 

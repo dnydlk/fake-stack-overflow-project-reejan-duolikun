@@ -21,14 +21,18 @@ const addQuestion = async (q) => {
 };
 
 const flagQuestion = async (ids) => {
-	const response = await api.patch(`${QUESTION_API_URL}/flagQuestion`, ids);
-	return response.data;
+    const response = await api.patch(`${QUESTION_API_URL}/flagQuestion`, ids);
+    return response.data;
 };
 
-export { getQuestionsByFilter, getQuestionById, addQuestion, flagQuestion };
+const getFlaggedQuestion = async () => {
+    const response = await api.get(`${QUESTION_API_URL}/getFlaggedQuestions`);
+    return response.data;
+};
 
-/**
-router.get("/getFlaggedQuestion/:qid", validateToken, checkRole("moderator"), getFlaggedQuestion);
-router.delete("/deleteQuestion/:qid", validateToken, checkRole("moderator"), deleteQuestion);
-router.patch("/flagQuestion/:qid", validateToken, flagQuestion);
- */
+const deleteQuestion = async (qid) => {
+    const response = await api.delete(`${QUESTION_API_URL}/deleteQuestion/${qid}`);
+    return response.data;
+};
+
+export { getQuestionsByFilter, getQuestionById, addQuestion, flagQuestion, getFlaggedQuestion, deleteQuestion };

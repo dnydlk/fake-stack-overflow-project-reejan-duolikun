@@ -13,11 +13,11 @@ const Header = ({ search, setQuestionPage }) => {
 		navigate("/login");
 	};
 
-	const handleLogout = () => {
-		setIsTokenValid(null);
-		userService.logout();
-		navigate("/");
-	};
+	const handleLogout = async () => {
+        setIsTokenValid(null);
+        await userService.logout();
+        navigate("/");
+    };
 
 	return (
 		<div id="fso-header" className="fso-header d-flex align-items-center justify-content-around">
