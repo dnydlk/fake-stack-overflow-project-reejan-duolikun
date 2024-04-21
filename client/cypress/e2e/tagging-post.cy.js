@@ -85,4 +85,22 @@ describe("Tagging Post", () => {
         cy.contains("test1-tag1").click();
         cy.contains("Test Question A");
     });
+	
+	it("Clicks on a tag and verifies the tag is displayed", () => {
+        const tagNames = "javascript";
+        cy.contains("Tags").click();
+        cy.contains(tagNames).click();
+        cy.getDataCyTest("question-tags").each(($el, index, $list) => {
+            cy.wrap($el).should("contain", tagNames);
+        });
+    });
+
+    it("Clicks on a tag in homepage and verifies the questions related tag is displayed", () => {
+        const tagNames = "storage";
+        //clicks the 3rd tag associated with the question.
+        cy.get(".fso-question-tag-button").eq(4).click();
+        cy.get(".fso-question-tags").each(($el, index, $list) => {
+            cy.wrap($el).should("contain", tagNames);
+        });
+    });
 });
