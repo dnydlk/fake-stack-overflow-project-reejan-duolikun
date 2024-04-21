@@ -47,10 +47,13 @@ const Moderation = ({ currentUser, handleAnswer }) => {
                 {flaggedQuestions &&
                     flaggedQuestions.map((q, index) => (
                         <div className="d-flex" key={q._id}>
-                            <div className="m-2 me-4">{index + 1}</div>
+                            <div className="m-2 me-4" data-cy-test="index">
+                                {index + 1}
+                            </div>
                             <div className="m-2 w-75">
                                 <div
                                     className="fso-moderator-link"
+                                    data-cy-test="question-link"
                                     onClick={() => {
                                         handleClickOnQuestionTitle(q._id);
                                     }}>
@@ -60,7 +63,8 @@ const Moderation = ({ currentUser, handleAnswer }) => {
                             <div className="m-2 ms-auto fso-question-author">{q.flaggedBy.username}</div>
                             <div className="m-2">
                                 <button
-                                    className=" fso-red-btn"
+                                    className="fso-red-btn"
+                                    data-cy-test="delete-button"
                                     onClick={() => {
                                         handleDelete(q._id);
                                     }}>
@@ -70,7 +74,7 @@ const Moderation = ({ currentUser, handleAnswer }) => {
                         </div>
                     ))}
             </div>
-            <pre>
+            {/* <pre>
                 <code>
                     {JSON.stringify(
                         flaggedQuestions.map((q) => q),
@@ -82,7 +86,7 @@ const Moderation = ({ currentUser, handleAnswer }) => {
             <div className="fso-bold-title">Who:</div>
             <pre>
                 <code>{JSON.stringify(currentUser, null, 2)}</code>
-            </pre>
+            </pre> */}
         </>
     );
 };
