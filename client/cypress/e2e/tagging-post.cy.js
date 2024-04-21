@@ -27,7 +27,7 @@ describe("Tagging Post", () => {
         cy.contains("Ask a Question").click();
         cy.get("#formTitleInput").type("Test Question 1");
         cy.get("#formTextInput").type(
-            "New Question Body New Question BodyNew Question BodyNew Question BodyNew Question BodyNew New Question BodyNew Question BodyNew Question BodyNew Question BodyNew Question BodyQuestion BodyNew New Question BodyNew Question BodyQuestion BodyNew Question BodyNew Question Body"
+            "Test Question 1 Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
         );
         cy.get("#formTagInput").type("javascript t1 t2");
         cy.window().then((win) => {
@@ -105,7 +105,7 @@ describe("Tagging Post", () => {
         cy.contains("Ask a Question").click();
         cy.get("#formTitleInput").type("Test Question A");
         cy.get("#formTextInput").type(
-            "New Question Body New Question BodyNew Question BodyNew Question BodyNew Question BodyNew New Question BodyNew Question BodyNew Question BodyNew Question BodyNew Question BodyQuestion BodyNew New Question BodyNew Question BodyQuestion BodyNew Question BodyNew Question Body"
+            "Test Question 1 Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
         );
         cy.get("#formTagInput").type("test1-tag1 react");
         cy.window().then((win) => {
@@ -143,7 +143,7 @@ describe("Tagging Post", () => {
         cy.contains("Ask a Question").click();
         cy.get("#formTitleInput").type("Test Question 1");
         cy.get("#formTextInput").type(
-            "New Question Body New Question BodyNew Question BodyNew Question BodyNew Question BodyNew New Question BodyNew Question BodyNew Question BodyNew Question BodyNew Question BodyQuestion BodyNew New Question BodyNew Question BodyQuestion BodyNew Question BodyNew Question Body"
+            "Test Question 1 Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
         );
         cy.get("#formTagInput").type("test-tag test-tag test-tag");
         cy.window().then((win) => {
