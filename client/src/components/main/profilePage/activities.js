@@ -21,19 +21,26 @@ const Activities = ({ currentUser, clickTag, handleAnswer }) => {
     return (
         <>
             <div className="fso-bold-title">Question:</div>
-            {currentUser.askedQuestion.map((question) => (
-                <Question key={question.qid} q={question} clickTag={clickTag} handleAnswer={handleAnswer} />
-            ))}
+            <div data-cy-test="asked">
+                {currentUser.askedQuestion &&
+                    currentUser.askedQuestion.map((question) => (
+                        <Question key={question.qid} q={question} clickTag={clickTag} handleAnswer={handleAnswer} />
+                    ))}
+            </div>
             {currentUser.askedQuestion.length === 0 && <div className="mb-2">No Questions</div>}
             <div className="fso-bold-title">Answer:</div>
-            {currentUser.answeredQuestion.map((answer) => (
-                <Answer key={answer.aid} answer={answer} currentUser={currentUser} />
-            ))}
+            <div data-cy-test="answered">
+                {currentUser.answeredQuestion &&
+                    currentUser.answeredQuestion.map((answer) => (
+                        <Answer key={answer.aid} answer={answer} currentUser={currentUser} />
+                    ))}
+            </div>
             {currentUser.answeredQuestion.length === 0 && <div className="mb-2">No Answers</div>}
             <div className="fso-bold-title mt-2">Vote:</div>
-            {votedAnswers.map((answer) => (
-                <Answer key={answer.aid} answer={answer} currentUser={currentUser} />
-            ))}
+            <div data-cy-test="voted">
+                {votedAnswers &&
+                    votedAnswers.map((answer) => <Answer key={answer.aid} answer={answer} currentUser={currentUser} />)}
+            </div>
             {currentUser.votedAnswer.length === 0 && <div className="mb-2">No Votes</div>}
         </>
     );
