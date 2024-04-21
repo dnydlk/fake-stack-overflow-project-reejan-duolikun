@@ -24,7 +24,7 @@ describe("View Posts", () => {
 		});
 	});
 	it("successfully shows all questions' answers count & view count", () => {
-		const qAnswers = ["0 answer", "1 answer", "2 answers", "3 answers", "2 answers"];
+		const qAnswers = ["1 answer", "1 answer", "2 answers", "3 answers", "2 answers"];
 		const qViews = ["5 views", "103 views", "200 views", "121 views", "10 views"];
 		cy.getDataCyTest("post-stats").each(($el, index) => {
 			cy.wrap($el).should("contain.text", qAnswers[index]);
@@ -63,9 +63,9 @@ describe("View Posts", () => {
 		const qTitles = [
 			"Programmatically navigate using React router",
 			"android studio save string shared preference, start activity and load the saved string",
+			"test question for flagging",
 			"Quick question about storage on android",
-			"Object storage for a web application",
-			"test question for flagging"
+			"Object storage for a web application"
 		];
 		cy.getDataCyTest("order-btn-Active").click();
 		cy.getDataCyTest("post-title").each(($el, index) => {
@@ -74,6 +74,56 @@ describe("View Posts", () => {
 	});
 	it("successfully shows all questions in unanswered order", () => {
 		cy.getDataCyTest("order-btn-Unanswered").click();
-		cy.getDataCyTest("question-count").should("contain.text", "1 questions");
+		cy.getDataCyTest("question-count").should("contain.text", "0 questions");
 	});
+
+	// Individual post tests
+	it("View Individual Post as an unauthenicated user", () => {
+		const qTitles = [
+			"test question for flagging",
+			"Quick question about storage on android",
+			"Object storage for a web application",
+			"android studio save string shared preference, start activity and load the saved string",
+			"Programmatically navigate using React router",
+		];
+		cy.getDataCyTest("post-title").contains("Quick question about storage on android").click();
+		cy.getDataCyTest("answer-page-question-title").contains("Quick question about storage on android");
+		cy.getDataCyTest("ask-question-btn").click();
+		cy.url().should('eq', 'http://localhost:3000/login');
+	});
+
+	it("View Individual Post as an authenicated user and cast upvote", () => {
+		const qTitles = [
+			"test question for flagging",
+			"Quick question about storage on android",
+			"Object storage for a web application",
+			"android studio save string shared preference, start activity and load the saved string",
+			"Programmatically navigate using React router",
+		];
+		cy.getDataCyTest("headerLogin").click();
+		cy.getDataCyTest("loginEmail").type("test@test.com");
+		cy.getDataCyTest("loginPassword").type("q1234567");
+		cy.getDataCyTest("loginBtn").click();
+		cy.getDataCyTest("post-title").contains("Quick question about storage on android").click();
+		cy.getDataCyTest("answer-page-up-vote-button").click();
+		cy.getDataCyTest("answer-page-current-votes").should("contain.text", "5");
+	});
+
+	it("View Individual Post as an authenicated user and cast down vote", () => {
+		const qTitles = [
+			"test question for flagging",
+			"Quick question about storage on android",
+			"Object storage for a web application",
+			"android studio save string shared preference, start activity and load the saved string",
+			"Programmatically navigate using React router",
+		];
+		cy.getDataCyTest("headerLogin").click();
+		cy.getDataCyTest("loginEmail").type("test@test.com");
+		cy.getDataCyTest("loginPassword").type("q1234567");
+		cy.getDataCyTest("loginBtn").click();
+		cy.getDataCyTest("post-title").contains("Quick question about storage on android").click();
+		cy.getDataCyTest("answer-page-down-vote-button").click();
+		cy.getDataCyTest("answer-page-current-votes").should("contain.text", "3");
+	});
+
 });

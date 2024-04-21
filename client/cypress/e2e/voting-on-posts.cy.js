@@ -30,7 +30,7 @@ describe("Home Page Should load correctly", () => {
 
 	it("Voting test down-vote", () => {
 		const qTitles = [
-			"New Question Title",
+			"test question for flagging",
 			"Quick question about storage on android",
 			"Object storage for a web application",
 			"android studio save string shared preference, start activity and load the saved string",
