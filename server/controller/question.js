@@ -1,5 +1,6 @@
 const express = require("express");
 const Question = require("../models/questions");
+const User = require("../models/user");
 // const Answer = require("../models/answers")
 const { addTag, getQuestionsByOrder, filterQuestionsBySearch } = require("../utils/question");
 
@@ -40,6 +41,8 @@ const addQuestion = async (req, res) => {
     question.tags = await Promise.all(question.tags.map((tagName) => addTag(tagName)));
     // create the question in the database
     const result = await Question.create(question);
+    // update the user's askedQuestion array
+    await User.findOneAndUpdate({ _id: question.asked_by }, { $push: { askedQuestion: result._id } });
     res.status(200).json(result);
 };
 

@@ -1,7 +1,7 @@
 import { REACT_APP_API_URL, api } from "./config";
 
 const ANSWER_API_URL = `${REACT_APP_API_URL}/answer`;
-const Vote_API_URL = `${REACT_APP_API_URL}/vote`;
+const VOTE_API_URL = `${REACT_APP_API_URL}/vote`;
 
 // To add answer
 const addAnswer = async (qid, ans) => {
@@ -14,7 +14,7 @@ const addAnswer = async (qid, ans) => {
 const vote = async (userId, answerId, voteType) => {
     const data = { userId, answerId, voteType };
     try {
-        const response = await api.post(`${Vote_API_URL}/`, data);
+        const response = await api.post(`${VOTE_API_URL}/`, data);
         return response.data;
     } catch (error) {
         console.error("Vote API error:", error.response ? error.response.data : error.message);
@@ -25,7 +25,7 @@ const vote = async (userId, answerId, voteType) => {
 // To get current votes
 const fetchCurrentVotes = async (answerId) => {
     try {
-        const response = await api.get(`${Vote_API_URL}/current-vote`, { params: { answerId } });
+        const response = await api.get(`${VOTE_API_URL}/current-vote`, { params: { answerId } });
         return response.data;
     } catch (error) {
         console.error("Fetch current votes error:", error.response ? error.response.data : error.message);
@@ -33,4 +33,10 @@ const fetchCurrentVotes = async (answerId) => {
     }
 };
 
-export { addAnswer, vote, fetchCurrentVotes };
+// To get voted answers
+const getAnswersByUser = async (userId) => {
+    const response = await api.get(`${ANSWER_API_URL}/getAnswer/`, { params: { userId } });
+    return response.data;
+};
+
+export { addAnswer, vote, fetchCurrentVotes, getAnswersByUser };

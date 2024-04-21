@@ -46,22 +46,6 @@ const vote = async (req, res) => {
     }
 };
 
-// // Fetch vote status
-// const fetchVoteStatus = async (req, res) => {
-//     const { userId, answerId } = req.query;
-//     try {
-//         const vote = await Vote.findOne({ user: userId, answer: answerId });
-//         if (vote) {
-//             res.status(200).send(vote.voteType);
-//         } else {
-//             res.status(200).send({ message: "No vote found" });
-//         }
-//     } catch (error) {
-//         console.error("Error fetching vote:", error);
-//         res.status(500).send({ error: "Failed to fetch the vote status" });
-//     }
-// }
-
 // Fetch current vote
 const fetchCurrentVote = async (req, res) => {
     const { answerId } = req.query;
@@ -86,7 +70,6 @@ const fetchCurrentVote = async (req, res) => {
 
 // Router
 router.post("/", vote);
-// router.get("/status", fetchVoteStatus);
 router.get("/current-vote", fetchCurrentVote);
 
 module.exports = router;
