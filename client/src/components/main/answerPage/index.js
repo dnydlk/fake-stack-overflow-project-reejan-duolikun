@@ -135,10 +135,10 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser, setP
             ) : (
                 ""
             )}
-            <pre>
+            {/*<pre>
                 <code>{JSON.stringify(question, null, 2)}</code>
             </pre>
-            {/* <pre>
+             <pre>
                 <code>{JSON.stringify(currentUser._id, null, 2)}</code>
             </pre> */}
         </div>

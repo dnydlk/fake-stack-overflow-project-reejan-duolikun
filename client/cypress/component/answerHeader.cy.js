@@ -7,19 +7,31 @@ describe("<AnswerHeader />", () => {
     const views = 7;
     const meta = "Test Meta";
     const question = {
-        _id: "66253fed6ecad17926e040a9",
+        _id: "66254fa7dfdded16371bff65",
         title: "test question for flagging",
         text: "test question for flagging",
-        tags: ["66253fed6ecad17926e04065", "66253fed6ecad17926e04069"],
-        answers: [],
+        tags: ["66254fa7dfdded16371bff1f", "66254fa7dfdded16371bff23"],
+        answers: [
+            {
+                _id: "66254fa7dfdded16371bff5b",
+                text: "test answer for testing",
+                ans_by: {
+                    _id: "66254fa7dfdded16371bff2f",
+                    username: "testUser1",
+                },
+                ans_date_time: "2023-04-21T01:17:53.000Z",
+                votes: ["66254fa7dfdded16371bff8f"],
+                __v: 0,
+            },
+        ],
         asked_by: {
-            _id: "66253fed6ecad17926e04075",
+            _id: "66254fa7dfdded16371bff2f",
             username: "testUser1",
         },
         ask_date_time: "2024-04-10T18:28:01.000Z",
-        views: 6,
+        views: 13,
         isFlagged: true,
-        flaggedBy: "66253fed6ecad17926e0408f",
+        flaggedBy: "66254fa7dfdded16371bff2f",
         __v: 0,
     };
     it("AnswerHeader shows title correctly", () => {

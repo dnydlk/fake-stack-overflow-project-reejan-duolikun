@@ -1,24 +1,34 @@
 // function getDataCyTest(selector) defined in cypress/support/commands.js
+import { BrowserRouter as Router } from "react-router-dom";
 import AnswerPage from "../../src/components/main/answerPage";
 import { getMetaData } from "../../src/tool";
 
 const testQuestion = {
-    _id: "66220a767d06af88a828eebc",
-    title: "test",
-    text: "test",
-    tags: ["66220a767d06af88a828eeba"],
+    _id: "66254fa7dfdded16371bff65",
+    title: "test question for flagging",
+    text: "test question for flagging",
+    tags: ["66254fa7dfdded16371bff1f", "66254fa7dfdded16371bff23"],
     answers: [
         {
-            _id: "66220a7b7d06af88a828eec2",
-            text: "test",
-            ans_by: { username: "test" },
-            ans_date_time: "2024-04-19T06:08:59.512Z",
-            votes: ["66220a837d06af88a828eee1"],
+            _id: "66254fa7dfdded16371bff5b",
+            text: "test answer for testing",
+            ans_by: {
+                _id: "66254fa7dfdded16371bff2f",
+                username: "testUser1",
+            },
+            ans_date_time: "2023-04-21T01:17:53.000Z",
+            votes: ["66254fa7dfdded16371bff8f"],
+            __v: 0,
         },
     ],
-    asked_by: { username: "test" },
-    ask_date_time: "2024-01-19T06:08:54.948Z",
-    views: 6,
+    asked_by: {
+        _id: "66254fa7dfdded16371bff2f",
+        username: "testUser1",
+    },
+    ask_date_time: "2024-04-10T18:28:01.000Z",
+    views: 13,
+    isFlagged: true,
+    flaggedBy: "66254fa7dfdded16371bff2f",
     __v: 0,
 };
 
@@ -26,6 +36,86 @@ describe("<AnswerPage />", () => {
     beforeEach(() => {
         const handleNewQuestion = cy.spy().as("handleNewQuestionSpy");
         const handleNewAnswer = cy.spy().as("handleNewAnswerSpy");
+        const currentUser = {
+            _id: "66254fa7dfdded16371bff2f",
+            email: "test@test.com",
+            username: "testUser1",
+            location: "Location not provided",
+            title: "Title not provided",
+            aboutMe: "About me not provided",
+            link: "Link not provided",
+            askedQuestion: [
+                {
+                    _id: "66254fa7dfdded16371bff65",
+                    title: "test question for flagging",
+                    text: "test question for flagging",
+                    tags: [
+                        {
+                            _id: "66254fa7dfdded16371bff1f",
+                            name: "react",
+                            __v: 0,
+                        },
+                        {
+                            _id: "66254fa7dfdded16371bff23",
+                            name: "javascript",
+                            __v: 0,
+                        },
+                    ],
+                    answers: [
+                        {
+                            _id: "66254fa7dfdded16371bff5b",
+                            text: "test answer for testing",
+                            ans_by: "66254fa7dfdded16371bff2f",
+                            ans_date_time: "2023-04-21T01:17:53.000Z",
+                            votes: ["66254fa7dfdded16371bff8f"],
+                            __v: 0,
+                        },
+                    ],
+                    asked_by: "66254fa7dfdded16371bff2f",
+                    ask_date_time: "2024-04-10T18:28:01.000Z",
+                    views: 5,
+                    isFlagged: true,
+                    flaggedBy: "66254fa7dfdded16371bff49",
+                    __v: 0,
+                },
+            ],
+            answeredQuestion: [
+                {
+                    _id: "66254fa7dfdded16371bff5b",
+                    text: "test answer for testing",
+                    ans_by: {
+                        _id: "66254fa7dfdded16371bff2f",
+                        email: "test@test.com",
+                        username: "testUser1",
+                        location: "Location not provided",
+                        title: "Title not provided",
+                        aboutMe: "About me not provided",
+                        link: "Link not provided",
+                        askedQuestion: ["66254fa7dfdded16371bff65"],
+                        answeredQuestion: ["66254fa7dfdded16371bff5b"],
+                        votedAnswer: ["66254fa7dfdded16371bff8f"],
+                        role: "user",
+                        __v: 0,
+                    },
+                    ans_date_time: "2023-04-21T01:17:53.000Z",
+                    votes: ["66254fa7dfdded16371bff8f"],
+                    __v: 0,
+                },
+            ],
+            votedAnswer: [
+                {
+                    _id: "66254fa7dfdded16371bff8f",
+                    user: "66254fa7dfdded16371bff2f",
+                    answer: "66254fa7dfdded16371bff5b",
+                    voteType: true,
+                    createdAt: "2024-04-21T17:40:55.958Z",
+                    updatedAt: "2024-04-21T17:40:55.958Z",
+                    __v: 0,
+                },
+            ],
+            role: "user",
+            __v: 0,
+        };
 
         cy.intercept("GET", "http://localhost:8000/question/getQuestionById/1", { body: testQuestion }).as(
             "getQuestionById"
@@ -34,7 +124,16 @@ describe("<AnswerPage />", () => {
             currentVotes: 2,
         });
 
-        cy.mount(<AnswerPage qid="1" handleNewQuestion={handleNewQuestion} handleNewAnswer={handleNewAnswer} />);
+        cy.mount(
+            <Router>
+                <AnswerPage
+                    qid="1"
+                    handleNewQuestion={handleNewQuestion}
+                    handleNewAnswer={handleNewAnswer}
+                    currentUser={currentUser}
+                />
+            </Router>
+        );
     });
 
     it("successfully renders with fetched data", () => {
