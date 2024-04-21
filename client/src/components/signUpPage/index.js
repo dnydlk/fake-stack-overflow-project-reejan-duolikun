@@ -35,7 +35,7 @@ const SignupPage = () => {
 			const signupData = {
 				email: email,
 				password: password,
-				username: userName,
+				userName: userName,
 			};
 
 			// Send a POST request to the backend with the signup data
