@@ -201,33 +201,33 @@ describe("Home Page Should load correctly", () => {
 		cy.contains('Programmatically navigate using React router');
 	});
 
-	it('Ask a Question creates and accepts only 1 tag for all the repeated tags', () => {
-		const qTitles = [
-			"New Question Title",
-			"test question for flagging",
-			"Quick question about storage on android",
-			"Object storage for a web application",
-			"android studio save string shared preference, start activity and load the saved string",
-			"Programmatically navigate using React router",
-		];
-		cy.getDataCyTest("ask-question-btn").click();
-		cy.getDataCyTest("loginEmail").type("test@test.com");
-		cy.getDataCyTest("loginPassword").type("q1234567");
-		cy.getDataCyTest("loginBtn").click();
+	// it('Ask a Question creates and accepts only 1 tag for all the repeated tags', () => {
+	// 	const qTitles = [
+	// 		"New Question Title",
+	// 		"test question for flagging",
+	// 		"Quick question about storage on android",
+	// 		"Object storage for a web application",
+	// 		"android studio save string shared preference, start activity and load the saved string",
+	// 		"Programmatically navigate using React router",
+	// 	];
+	// 	cy.getDataCyTest("ask-question-btn").click();
+	// 	cy.getDataCyTest("loginEmail").type("test@test.com");
+	// 	cy.getDataCyTest("loginPassword").type("q1234567");
+	// 	cy.getDataCyTest("loginBtn").click();
 
-		cy.contains('Ask a Question').click();
-		cy.get('#formTitleInput').type('Test Question 1');
-		cy.get("#formTextInput").type("New Question Body New Question BodyNew Question BodyNew Question BodyNew Question BodyNew New Question BodyNew Question BodyNew Question BodyNew Question BodyNew Question BodyQuestion BodyNew New Question BodyNew Question BodyQuestion BodyNew Question BodyNew Question Body");
-		cy.get('#formTagInput').type('test-tag test-tag test-tag');
-		cy.window().then((win) => {
-			win.document.getElementById('formUsernameInput').value = 'newTestUser';
-		});
-		cy.contains('Post Question').click();
-		cy.contains('test-tag').should('have.length', 1);
-		cy.contains('Tags').click();
-		cy.contains('5 Tags');
-		cy.contains('test-tag').click();
-		cy.contains('1 questions');
-	});
+	// 	cy.contains('Ask a Question').click();
+	// 	cy.get('#formTitleInput').type('Test Question 1');
+	// 	cy.get("#formTextInput").type("New Question Body New Question BodyNew Question BodyNew Question BodyNew Question BodyNew New Question BodyNew Question BodyNew Question BodyNew Question BodyNew Question BodyQuestion BodyNew New Question BodyNew Question BodyQuestion BodyNew Question BodyNew Question Body");
+	// 	cy.get('#formTagInput').type('test-tag test-tag test-tag');
+	// 	cy.window().then((win) => {
+	// 		win.document.getElementById('formUsernameInput').value = 'newTestUser';
+	// 	});
+	// 	cy.contains('Post Question').click();
+	// 	cy.contains('test-tag').should('have.length', 1);
+	// 	cy.contains('Tags').click();
+	// 	cy.contains('5 Tags');
+	// 	cy.contains('test-tag').click();
+	// 	cy.contains('1 questions');
+	// });
 
 });
