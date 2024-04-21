@@ -61,6 +61,11 @@ module.exports = mongoose.Schema(
                 ref: "Vote",
             },
         ],
+        role: {
+            type: String,
+            enum: ["user", "moderator"],
+            default: "user",
+        },
     },
     { collection: "User" }
 );

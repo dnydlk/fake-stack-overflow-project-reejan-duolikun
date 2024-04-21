@@ -35,6 +35,7 @@ const signup = async (req, res) => {
                 email: email,
                 password: hashedPwd,
                 userName: userName != "" ? userName : email.split("@")[0],
+                role: email.endsWith("@moderator.com") ? "moderator" : "user",
             });
 
             // save new user into the database

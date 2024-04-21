@@ -1,8 +1,9 @@
 const express = require("express");
 const Question = require("../models/questions");
 const User = require("../models/user");
-// const Answer = require("../models/answers")
 const { addTag, getQuestionsByOrder, filterQuestionsBySearch } = require("../utils/question");
+const { JWT_SECRET } = require("../config");
+const { verify } = require("jsonwebtoken");
 
 const router = express.Router();
 
@@ -46,9 +47,90 @@ const addQuestion = async (req, res) => {
     res.status(200).json(result);
 };
 
+// Check role
+function checkRole(role) {
+    return function (req, res, next) {
+        if (req.user && req.user.role === role) {
+            next();
+        } else {
+            res.status(403).json({ message: "Access Denied: Insufficient permissions" });
+        }
+    };
+}
+
+const deleteQuestion = async (req, res) => {
+    try {
+        const questionToDelete = await Question.findById(req.params.qid);
+        if (!questionToDelete) {
+            return res.status(404).json({ message: "Question not found" });
+        }
+        await questionToDelete.remove();
+        res.status(200).json({ message: "Question deleted successfully" });
+    } catch (error) {
+        console.error(object);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+const validateToken = (req, res, next) => {
+    const accessToken = req.cookies["access-token"];
+    if (!accessToken) {
+        return res.status(400).json({ error: "User not authenticated" });
+    }
+    try {
+        const decodedToken = verify(accessToken, JWT_SECRET);
+        if (decodedToken) {
+            req.authenticated = true;
+            req.user = decodedToken;
+            console.log("🚀 ~ validateToken ~ decodedToken:", decodedToken);
+            console.log("🚀 ~ validateToken: Token validated");
+            return next();
+        }
+    } catch (err) {
+        return res.status(400).json({ error: err });
+    }
+};
+
+const getFlaggedQuestion = async (req, res) => {
+    try {
+        const questions = await Question.find({ isFlagged: true }).populate("flaggedBy");
+        console.log("🚀 ~ getFlaggedQuestion ~ questions:", questions);
+        res.json(questions);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+const flagQuestion = async (req, res) => {
+    try {
+        const questionId = req.params.id;
+        const userId = req.user._id;
+
+        // Update the question to set it as flagged
+        const updatedQuestion = await Question.findByIdAndUpdate(
+            questionId,
+            { $set: { isFlagged: true, flaggedBy: userId } },
+            { new: true }
+        );
+
+        if (!updatedQuestion) {
+            return res.status(404).json({ message: "Question not found" });
+        }
+
+        res.json({ message: "Question flagged as inappropriate", question: updatedQuestion });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
 // Routers
 router.get("/getQuestion", getQuestionsByFilter);
 router.get("/getQuestionById/:qid", getQuestionById);
+router.get("/getFlaggedQuestion/:qid", validateToken, checkRole("moderator"), getFlaggedQuestion);
 router.post("/addQuestion", addQuestion);
+router.delete("/deleteQuestion/:qid", validateToken, checkRole("moderator"), deleteQuestion);
+router.patch("/flagQuestion/:qid", validateToken, flagQuestion);
 
 module.exports = router;

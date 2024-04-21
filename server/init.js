@@ -42,7 +42,17 @@ function answerCreate(text, ans_by, ans_date_time, votes = []) {
 }
 
 // Create a question
-function questionCreate(title, text, tags, answers, asked_by, ask_date_time, views) {
+function questionCreate(
+    title,
+    text,
+    tags,
+    answers,
+    asked_by,
+    ask_date_time,
+    views,
+    isFlagged = false,
+    flaggedBy = false
+) {
     questionDetail = {
         title: title,
         text: text,
@@ -52,17 +62,20 @@ function questionCreate(title, text, tags, answers, asked_by, ask_date_time, vie
     if (answers != false) questionDetail.answers = answers;
     if (ask_date_time != false) questionDetail.ask_date_time = ask_date_time;
     if (views != false) questionDetail.views = views;
+    if (isFlagged != false) questionDetail.isFlagged = isFlagged;
+    if (flaggedBy != false) questionDetail.flaggedBy = flaggedBy;
 
     let newQuestion = new Question(questionDetail);
     return newQuestion.save();
 }
 
 // Create a user
-function userCreate(email, password, username) {
+function userCreate(email, password, username, role = "user") {
     userDetail = {
         email: email,
         password: password,
         username: username,
+        role: role,
     };
     let newUser = new User(userDetail);
     return newUser.save();
@@ -147,6 +160,11 @@ const init = async () => {
         "test@test.com",
         "$2b$10$KstvxSoZMucELhIvvlKF8OXg2jZS8LcNtGytDzQ9B1Y50.ROfSUcS", // password: q1234567
         "testUser1"
+    );
+    let moderator = await userCreate(
+        "m@moderator.com",
+        "$2b$10$KstvxSoZMucELhIvvlKF8OXg2jZS8LcNtGytDzQ9B1Y50.ROfSUcS", // password: q1234567
+        "moderator"
     );
     let hamkalo = await userCreate(
         "hamkalo@test.com",
@@ -280,6 +298,17 @@ const init = async () => {
         new Date("2023-03-10T14:28:01"),
         103
     );
+    let q5 = await questionCreate(
+        "test question for flagging",
+        "test question for flagging",
+        [t1, t2],
+        [],
+        testUser1,
+        new Date("2023-03-10T14:28:01"),
+        5,
+        true,
+        elephantCDE
+    );
 
     // Create votes
     let v1 = await voteCreate(hamkalo, a1, true);
@@ -324,12 +353,15 @@ const init = async () => {
     await pushVoteToAnswer(a7, v16);
     await pushVoteToAnswer(a8, v17);
     await pushVoteToAnswer(a7, v18);
+    await pushVoteToAnswer(a8, v19);
+    await pushVoteToAnswer(a8, v20);
 
     // Push user asked questions to user schema
     await pushAskedQuestionToUser(JojiJohn, q1);
     await pushAskedQuestionToUser(saltyPeter, q2);
     await pushAskedQuestionToUser(monkeyABC, q3);
     await pushAskedQuestionToUser(elephantCDE, q4);
+    await pushAskedQuestionToUser(testUser1, q5);
 
     // Push user answered questions to user schema
     await pushAnsweredQuestionToUser(hamkalo, a1);
