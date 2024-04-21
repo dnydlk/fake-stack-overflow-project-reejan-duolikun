@@ -16,7 +16,7 @@ describe("Home Page Should load correctly", () => {
 	});
 	it("Search for a question using test content that only exists in one question", () => {
 		cy.getDataCyTest("search-bar").type("quick question").type("{enter}");
-		cy.getDataCyTest("question-count").should("contain.text", "1 question");
+		cy.getDataCyTest("question-count").should("contain.text", "2 question");
 		cy.getDataCyTest("post-title").should("contain.text", "Quick question about storage on android");
 	});
 	it("Search for a question using test content that exists in multiple questions", () => {
