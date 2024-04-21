@@ -43,6 +43,32 @@
     background: #1b75d0;
 }
 
+.fso-yellow-btn {
+    background: #efac4d;
+    color: #ffffff;
+    border: #f0ad4e 1px solid;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 9px 12px 9px 12px;
+    margin-right: 5%;
+}
+
+.fso-yellow-btn:hover {
+    background: #f3bd72;
+}
+
+.fso-yellow-btn:active {
+    background: #efac4d;
+}
+
+.fso-flagged-text {
+    color: #f0ad4e;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: auto;
+    margin-right: 5%;
+}
+
 .fso-user-profile {
     width: 80px;
     height: 40px;

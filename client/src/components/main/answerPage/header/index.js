@@ -3,7 +3,7 @@ import "./index.css";
 import { AuthContext } from "../../../../authProvider";
 
 // Header for the Answer page
-const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta }) => {
+const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta, question }) => {
     const { isTokenValid } = useContext(AuthContext) || {};
     console.log("🚀 ~ AnswerHeader ~ ansCount:", ansCount);
     return (
@@ -32,6 +32,7 @@ const AnswerHeader = ({ ansCount, title, handleNewQuestion, views, meta }) => {
                 {/*//- View Count */}
                 <div className="fso-answer-title-detail me-1">Viewed</div>
                 <div className="fso-answer-title-detail-text">{views} times</div>
+                {question.isFlagged && <div className="fso-flagged-text">This question has been flagged</div>}
             </div>
         </div>
     );

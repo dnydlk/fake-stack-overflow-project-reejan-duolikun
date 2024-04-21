@@ -51,7 +51,7 @@ function questionCreate(
     ask_date_time,
     views,
     isFlagged = false,
-    flaggedBy = false
+    flaggedBy = null
 ) {
     questionDetail = {
         title: title,
@@ -304,7 +304,7 @@ const init = async () => {
         [t1, t2],
         [],
         testUser1,
-        new Date("2023-03-10T14:28:01"),
+        new Date("2024-04-10T14:28:01"),
         5,
         true,
         elephantCDE

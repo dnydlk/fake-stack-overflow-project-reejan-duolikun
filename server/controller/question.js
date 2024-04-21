@@ -104,21 +104,59 @@ const getFlaggedQuestion = async (req, res) => {
 
 const flagQuestion = async (req, res) => {
     try {
-        const questionId = req.params.id;
-        const userId = req.user._id;
+        const questionId = req.body.questionId;
+        console.log("🚀 ~ flagQuestion ~ questionId:", questionId);
+        const userId = req.body.userId;
+        console.log("🚀 ~ flagQuestion ~ userId:", userId);
 
-        // Update the question to set it as flagged
-        const updatedQuestion = await Question.findByIdAndUpdate(
-            questionId,
-            { $set: { isFlagged: true, flaggedBy: userId } },
-            { new: true }
-        );
-
-        if (!updatedQuestion) {
-            return res.status(404).json({ message: "Question not found" });
+        // Check if the question is already flagged
+        const question = await Question.findById(questionId);
+        console.log("🚀 ~ flagQuestion ~ question:", question);
+        if (question.isFlagged) {
+            const updatedQuestion = await Question.findByIdAndUpdate(
+                questionId,
+                { $set: { isFlagged: false, flaggedBy: null } },
+                { new: true }
+            )
+                .populate({
+                    path: "answers",
+                    populate: {
+                        path: "ans_by",
+                        select: "username",
+                    },
+                })
+                .populate({
+                    path: "asked_by",
+                    select: "username",
+                });
+            if (!updatedQuestion) {
+                return res.status(404).json({ message: "Question not found" });
+            }
+            res.json({ message: "Question unflagged", question: updatedQuestion });
+            return;
+        } else if (!question.isFlagged) {
+            const updatedQuestion = await Question.findByIdAndUpdate(
+                questionId,
+                { $set: { isFlagged: true, flaggedBy: userId } },
+                { new: true }
+            )
+                .populate({
+                    path: "answers",
+                    populate: {
+                        path: "ans_by",
+                        select: "username",
+                    },
+                })
+                .populate({
+                    path: "asked_by",
+                    select: "username",
+                });
+            if (!updatedQuestion) {
+                return res.status(404).json({ message: "Question not found" });
+            }
+            res.json({ message: "Question flagged as inappropriate", question: updatedQuestion });
+            return;
         }
-
-        res.json({ message: "Question flagged as inappropriate", question: updatedQuestion });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Internal server error" });
@@ -131,6 +169,6 @@ router.get("/getQuestionById/:qid", getQuestionById);
 router.get("/getFlaggedQuestion/:qid", validateToken, checkRole("moderator"), getFlaggedQuestion);
 router.post("/addQuestion", addQuestion);
 router.delete("/deleteQuestion/:qid", validateToken, checkRole("moderator"), deleteQuestion);
-router.patch("/flagQuestion/:qid", validateToken, flagQuestion);
+router.patch("/flagQuestion", validateToken, flagQuestion);
 
 module.exports = router;

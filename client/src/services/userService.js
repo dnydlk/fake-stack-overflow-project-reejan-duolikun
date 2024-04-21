@@ -26,9 +26,15 @@ const getCurrentUser = async () => {
 		const response = await api.get(`${USER_API_URL}/get-user-info`);
 		return response.data;
 	} catch (error) {
-		console.error("Failed to get user info", error);
-		return { authenticated: false };
-	}
+        // console.error("Failed to get user info", error);
+        // return { authenticated: false };
+        if (error.response && error.response.status === 400) {
+            console.error("No current user info available", error.response.data);
+        } else {
+            console.error("Failed to get user info", error);
+        }
+        return { authenticated: false };
+    }
 };
 
 const checkAuthentication = async () => {

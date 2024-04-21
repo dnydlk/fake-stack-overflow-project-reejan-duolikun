@@ -179,7 +179,6 @@ const validateUserToken = (req, res) => {
     try {
         const validToken = verify(accessToken, JWT_SECRET);
         if (validToken) {
-            console.log("🚀 ~ validateUserToken ~ validToken:", validToken);
             return res.status(200).json({ authenticated: true });
         }
     } catch (err) {

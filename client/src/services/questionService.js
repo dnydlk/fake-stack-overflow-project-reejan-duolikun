@@ -20,4 +20,15 @@ const addQuestion = async (q) => {
     return response.data;
 };
 
-export { getQuestionsByFilter, getQuestionById, addQuestion };
+const flagQuestion = async (ids) => {
+	const response = await api.patch(`${QUESTION_API_URL}/flagQuestion`, ids);
+	return response.data;
+};
+
+export { getQuestionsByFilter, getQuestionById, addQuestion, flagQuestion };
+
+/**
+router.get("/getFlaggedQuestion/:qid", validateToken, checkRole("moderator"), getFlaggedQuestion);
+router.delete("/deleteQuestion/:qid", validateToken, checkRole("moderator"), deleteQuestion);
+router.patch("/flagQuestion/:qid", validateToken, flagQuestion);
+ */

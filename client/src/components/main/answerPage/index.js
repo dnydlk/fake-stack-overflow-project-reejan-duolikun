@@ -10,7 +10,42 @@ import { AuthContext } from "../../../authProvider";
 // Component for the Answers page
 const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser }) => {
     const { isTokenValid } = useContext(AuthContext) || {};
+
     const [question, setQuestion] = useState({});
+
+    const [flagText, setFlagText] = useState("Flag as inappropriate");
+
+    const handleFlag = async () => {
+        if (!isTokenValid) {
+            alert("You must be logged in to flag a question");
+            return;
+        } else {
+            if (question.isFlagged) {
+                const updatedQuestion = await questionService.flagQuestion({
+                    questionId: qid,
+                    userId: currentUser._id,
+                });
+                if (!updatedQuestion) {
+                    alert("Question not found");
+                    return;
+                }
+                setQuestion(updatedQuestion.question);
+                setFlagText("Flag as inappropriate");
+            } else {
+                const updatedQuestion = await questionService.flagQuestion({
+                    questionId: qid,
+                    userId: currentUser._id,
+                });
+                if (!updatedQuestion) {
+                    alert("Question not found");
+                    return;
+                }
+                setQuestion(updatedQuestion.question);
+                setFlagText("Unflag");
+            }
+        }
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             let res = await questionService.getQuestionById(qid);
@@ -28,6 +63,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser }) =>
                 handleNewQuestion={handleNewQuestion}
                 views={question && question.views}
                 meta={question && getMetaData(new Date(question.ask_date_time))}
+                question={question}
             />
             {/*//- Question text */}
             <QuestionBody
@@ -55,14 +91,25 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser }) =>
                 question.answers.map((a, idx) => <Answer key={idx} answer={a} currentUser={currentUser} />)}
 
             {/*//- Answer Question button */}
-            <button
-                className="fso-blue-btn fso-ans-button"
-                data-cy-test="answer-page-post-answer"
-                onClick={() => {
-                    handleNewAnswer(isTokenValid);
-                }}>
-                Post Your Answer
-            </button>
+            <div className="fso-space-between">
+                <button
+                    className="fso-blue-btn fso-ans-button"
+                    data-cy-test="answer-page-post-answer"
+                    onClick={() => {
+                        handleNewAnswer(isTokenValid);
+                    }}>
+                    Post Your Answer
+                </button>
+                <button className="fso-yellow-btn ms-2" onClick={() => handleFlag()}>
+                    {flagText}
+                </button>
+            </div>
+            {/* <pre>
+                <code>{JSON.stringify(question, null, 2)}</code>
+            </pre>
+            <pre>
+                <code>{JSON.stringify(currentUser._id, null, 2)}</code>
+            </pre> */}
         </div>
     );
 };
