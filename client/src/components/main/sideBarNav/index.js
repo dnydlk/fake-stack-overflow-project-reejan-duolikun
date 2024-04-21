@@ -6,7 +6,7 @@ const SideBarNav = ({ selected = "", handleQuestions, handleTags, handleProfile 
         <div id="sideBarNav" className="fso-sideBarNav d-flex flex-column align-items-center">
             <div
                 id="menu-profile"
-                data-cy-test="nav-tag"
+                data-cy-test="nav-profile"
                 className={`fso-menu-button ${selected === "p" ? "fso-menu-selected" : ""}`}
                 onClick={() => {
                     handleProfile();
