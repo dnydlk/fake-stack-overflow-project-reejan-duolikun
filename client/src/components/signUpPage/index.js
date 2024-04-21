@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as userService from "../../services/userService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../authProvider";
 import "../../stylesheets/auth.css";
 
 const SignupPage = () => {
@@ -13,7 +14,9 @@ const SignupPage = () => {
 	const [errorMessage, setErrorMessage] = useState("");
 	const [isValid, setIsValid] = useState(true);
 	const [emailError, setEmailError] = useState("");
+	const { setIsTokenValid } = useContext(AuthContext);
 	const navigate = useNavigate();
+
 
 	// Function to handle signup action
 	const handleSubmit = async () => {
@@ -46,11 +49,17 @@ const SignupPage = () => {
 				setConfirmPassword("");
 				setErrorMessage("");
 				setUserName("");
+
+				// Save the jwtToken in the context
+				const response = await userService.checkAuthentication();
+				setIsTokenValid(response.authenticated);
+				console.log("🚀 ~ handleLogin ~ response:", response);
 				// Set success message
 				setSuccessMessage("Signup successful! Redirecting to the login page...");
+
 				// Navigate to the home page after a delay
 				setTimeout(() => {
-					navigate("/home");
+					navigate("/");
 				}, 1000);
 			} else {
 				throw new Error(response.response.data.message);
