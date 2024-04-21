@@ -60,14 +60,15 @@ function checkRole(role) {
 
 const deleteQuestion = async (req, res) => {
     try {
-        const questionToDelete = await Question.findById(req.params.qid);
+        const { qid } = req.params;
+        const questionToDelete = await Question.findById(qid);
         if (!questionToDelete) {
             return res.status(404).json({ message: "Question not found" });
         }
-        await questionToDelete.remove();
+        await Question.findByIdAndDelete(qid);
         res.status(200).json({ message: "Question deleted successfully" });
     } catch (error) {
-        console.error(object);
+        console.error(error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
@@ -91,7 +92,7 @@ const validateToken = (req, res, next) => {
     }
 };
 
-const getFlaggedQuestion = async (req, res) => {
+const getFlaggedQuestions = async (req, res) => {
     try {
         const questions = await Question.find({ isFlagged: true }).populate("flaggedBy");
         console.log("🚀 ~ getFlaggedQuestion ~ questions:", questions);
@@ -166,7 +167,7 @@ const flagQuestion = async (req, res) => {
 // Routers
 router.get("/getQuestion", getQuestionsByFilter);
 router.get("/getQuestionById/:qid", getQuestionById);
-router.get("/getFlaggedQuestion/:qid", validateToken, checkRole("moderator"), getFlaggedQuestion);
+router.get("/getFlaggedQuestions", validateToken, checkRole("moderator"), getFlaggedQuestions);
 router.post("/addQuestion", addQuestion);
 router.delete("/deleteQuestion/:qid", validateToken, checkRole("moderator"), deleteQuestion);
 router.patch("/flagQuestion", validateToken, flagQuestion);

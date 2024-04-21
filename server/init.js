@@ -164,6 +164,7 @@ const init = async () => {
     let moderator = await userCreate(
         "m@moderator.com",
         "$2b$10$KstvxSoZMucELhIvvlKF8OXg2jZS8LcNtGytDzQ9B1Y50.ROfSUcS", // password: q1234567
+        "moderator",
         "moderator"
     );
     let hamkalo = await userCreate(

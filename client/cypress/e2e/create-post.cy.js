@@ -60,7 +60,7 @@ describe("Home Page Should load correctly", () => {
 		cy.contains("Title cannot be more than 100 characters");
 		cy.get("#formTextInput").type("Atleast 220 characters");
 		cy.getDataCyTest("fso-form-post-button").click();
-		cy.contains("Question text must be atleast 220 characters");
+		cy.contains("Question text must be at least 220 characters");
 	});
 
 	// Add Question/ creating post

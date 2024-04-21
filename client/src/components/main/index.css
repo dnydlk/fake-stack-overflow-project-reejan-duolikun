@@ -61,8 +61,45 @@
     background: #efac4d;
 }
 
+.fso-delete-btn {
+    background: #d9534f;
+    color: #ffffff;
+    border: #d9534f 1px solid;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 9px 12px 9px 12px;
+    margin-right: 5%;
+}
+
+.fso-delete-btn:hover {
+    background: #e06b6a;
+}
+
+.fso-delete-btn:active {
+    background: #d9534f;
+}
+
+.fso-red-btn {
+    background: #d9534f;
+    color: #ffffff;
+    border: #d9534f 1px solid;
+    border-radius: 5px;
+    font-size: 10px;
+    padding: 7px 12px 7px 12px;
+    margin-right: 5%;
+}
+
+.fso-red-btn:hover {
+    background: #e06b6a;
+}
+
+.fso-red-btn:active {
+    background: #d9534f;
+}
+
 .fso-flagged-text {
     color: #f0ad4e;
+    font-size: 16px;
     font-weight: bold;
     font-style: italic;
     margin-left: auto;
@@ -113,4 +150,13 @@
     font-size: 0.8rem;
     color: red;
     margin-top: 10px;
+}
+
+.fso-moderator-link {
+    color: #1b75d0;
+    cursor: pointer;
+}
+
+.fso-moderator-link:hover {
+    text-decoration: underline;
 }

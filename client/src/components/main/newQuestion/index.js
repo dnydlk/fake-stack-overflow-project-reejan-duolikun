@@ -37,7 +37,7 @@ const NewQuestion = ({ handleQuestions, currentUser }) => {
 			setTextErr("Question text cannot be empty");
 			isValid = false;
 		} else if (text.length < 220) {
-			setTextErr("Question text must be atleast 220 characters");
+			setTextErr("Question text must be at least 220 characters");
 			isValid = false;
 		}
 		// Hyperlink validation
