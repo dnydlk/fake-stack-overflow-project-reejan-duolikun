@@ -105,83 +105,90 @@ const SignupPage = () => {
 	};
 
 	return (
-		<div className="signup-container" data-cy-test="signup-container">
-			<Link to="/">
-				<img
-					src="logo_stack_overflow.png"
-					alt="icon of fake stack overflow"
-					className="fso-logo mb-2"
-					data-cy-test="logo"
-				/>
-			</Link>
-			<h2>Sign Up</h2>
-			{successMessage && <div className="success-message">{successMessage}</div>}
-			{errorMessage && (
-				<div className="error-message" data-cy-test="errMsg">
-					{errorMessage}
-				</div>
-			)}
-			<div className="signup-form">
-				<div className="form-group">
-					<label htmlFor="email">Email:</label>
-					<input
-						type="email"
-						id="email"
-						value={email}
-						onChange={handleEmailChange}
-						data-cy-test="signUpEmail"
-						required
-					/>
-				</div>
-				{emailError && <span style={{ color: "red" }}>{emailError}</span>}
-				<div className="form-group">
-					<label htmlFor="password">Password:</label>
-					<input
-						type="password"
-						id="password"
-						value={password}
-						onChange={handlePwdChange}
-						data-cy-test="signUpPassword"
-						required
-					/>
-					{!isValid && (
-						<p style={{ color: "red" }}>
-							Password must contain at least eight characters, including at least one letter and one
-							number.
-						</p>
-					)}
-				</div>
-				<div className="form-group">
-					<label htmlFor="confirmPassword">Confirm Password:</label>
-					<input
-						type="password"
-						id="confirmPassword"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						data-cy-test="signUpConfirmPwd"
-						required
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="userName">User Name:</label>
-					<input
-						type="text"
-						id="userName"
-						value={userName}
-						onChange={handleUserNameChange}
-						data-cy-test="signUpUserName"
-						placeholder="optional"
-					/>
-				</div>
-				<button className="signup-button" onClick={handleSubmit} data-cy-test="signUpBtn">
-					Sign Up
-				</button>
-			</div>
-			<div className="login-link" >
-				Already have an account? <Link to="/login" data-cy-test="login-link">Login here</Link>
-			</div>
-		</div>
-	);
+        <div className="signup-container" data-cy-test="signup-container">
+            <Link to="/">
+                <img
+                    src="logo_stack_overflow.png"
+                    alt="icon of fake stack overflow"
+                    className="fso-logo mb-2"
+                    data-cy-test="logo"
+                />
+            </Link>
+            <h2>Sign Up</h2>
+            {successMessage && (
+                <div className="success-message" data-cy-test="success-message">
+                    {successMessage}
+                </div>
+            )}
+            {errorMessage && (
+                <div className="error-message" data-cy-test="errMsg">
+                    {errorMessage}
+                </div>
+            )}
+            <div className="signup-form">
+                <div className="form-group">
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                        data-cy-test="signUpEmail"
+                        required
+                    />
+                </div>
+                {emailError && <span style={{ color: "red" }}>{emailError}</span>}
+                <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={handlePwdChange}
+                        data-cy-test="signUpPassword"
+                        required
+                    />
+                    {!isValid && (
+                        <p style={{ color: "red" }}>
+                            Password must contain at least eight characters, including at least one letter and one
+                            number.
+                        </p>
+                    )}
+                </div>
+                <div className="form-group">
+                    <label htmlFor="confirmPassword">Confirm Password:</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        data-cy-test="signUpConfirmPwd"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="userName">User Name:</label>
+                    <input
+                        type="text"
+                        id="userName"
+                        value={userName}
+                        onChange={handleUserNameChange}
+                        data-cy-test="signUpUserName"
+                        placeholder="optional"
+                    />
+                </div>
+                <button className="signup-button" onClick={handleSubmit} data-cy-test="signUpBtn">
+                    Sign Up
+                </button>
+            </div>
+            <div className="login-link">
+                Already have an account?{" "}
+                <Link to="/login" data-cy-test="login-link">
+                    Login here
+                </Link>
+            </div>
+        </div>
+    );
 };
 
 export default SignupPage;
