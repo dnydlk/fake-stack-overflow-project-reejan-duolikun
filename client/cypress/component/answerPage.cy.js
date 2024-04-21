@@ -146,6 +146,29 @@ describe("<AnswerPage />", () => {
         );
     });
 
+    it("shows flag button when currentUser is user", () => {
+        cy.getDataCyTest("answer-page-flag").should("exist");
+    });
+
+    it("shows flag button when currentUser is moderator", () => {
+        const moderator = {
+            role: "moderator",
+        };
+        const handleNewQuestionSpy = cy.spy().as("handleNewQuestionSpy");
+        const handleNewAnswerSpy = cy.spy().as("handleNewAnswerSpy");
+        cy.mount(
+            <Router>
+                <AnswerPage
+                    qid="1"
+                    handleNewQuestion={handleNewQuestionSpy}
+                    handleNewAnswer={handleNewAnswerSpy}
+                    currentUser={moderator}
+                />
+            </Router>
+        );
+        cy.getDataCyTest("answer-page-flag").should("exist");
+    });
+
     it("successfully renders answers", () => {
         cy.getDataCyTest("answer-page-answer").should("have.length", 1);
         cy.getDataCyTest("answer-page-answer").should("contain.text", testQuestion.answers[0].text);

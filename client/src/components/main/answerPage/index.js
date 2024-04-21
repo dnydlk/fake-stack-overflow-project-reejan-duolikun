@@ -120,7 +120,10 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser, setP
                     Post Your Answer
                 </button>
                 {currentUser && (
-                    <button className="fso-yellow-btn ms-2" onClick={() => handleFlag()}>
+                    <button
+                        className="fso-yellow-btn ms-2"
+                        data-cy-test="answer-page-flag"
+                        onClick={() => handleFlag()}>
                         {flagText}
                     </button>
                 )}
@@ -128,7 +131,10 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser, setP
             {currentUser && currentUser.role && currentUser.role === "moderator" ? (
                 <div className="fso-space-between">
                     <div></div>
-                    <button className="fso-delete-btn ms-2" onClick={() => handleDelete(qid)}>
+                    <button
+                        className="fso-delete-btn ms-2"
+                        data-cy-test="answer-page-delete"
+                        onClick={() => handleDelete(qid)}>
                         Delete Question
                     </button>
                 </div>
