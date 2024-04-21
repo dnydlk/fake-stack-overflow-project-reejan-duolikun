@@ -70,6 +70,6 @@ describe("<Login />", () => {
 
         // Wait for the login request to complete and check if error message is displayed
         // cy.wait("@loginRequest");
-        // cy.getDataCyTest("errMsg").should("exist").should("contain", "Login failed");
+        cy.getDataCyTest("errMsg").should("exist").should("contain", "Login failed");
     });
 });
