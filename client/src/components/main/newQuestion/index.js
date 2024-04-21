@@ -31,11 +31,17 @@ const NewQuestion = ({ handleQuestions, currentUser }) => {
             isValid = false;
         }
         if (!text) {
-            setTextErr("Question text cannot be empty");
+            setTextErr( else if (title.length < 15) {
+			setTitleErr("Title must be at least 15 characters");
+			isValid = false;
+		}"Question text cannot be empty");
             isValid = false;
         }
         // Hyperlink validation
-        if (!validateHyperlink(text)) {
+        if ( else if (text.length < 220) {
+			setTextErr("Question text must be atleast 220 characters");
+			isValid = false;
+		}!validateHyperlink(text)) {
             setTextErr("Invalid hyperlink format.");
             isValid = false;
         }
