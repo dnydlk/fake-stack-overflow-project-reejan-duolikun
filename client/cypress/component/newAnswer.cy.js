@@ -2,38 +2,30 @@
 import NewAnswer from "../../src/components/main/newAnswer";
 
 describe("<NewAnswer />", () => {
+    const currentUser = { username: "testUser" };
+    const qid = "fakeQid";
+
     it("NewAnswer shows username and answer text input fields", () => {
-        const qid = "fakeQid";
         const handleAnswer = cy.stub();
-        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswer} />);
+        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswer} currentUser={currentUser} />);
         cy.get("#answerUsernameInput").should("exist");
         cy.get("#answerTextInput").should("exist");
     });
 
-    it("NewAnswer shows error message when username is empty", () => {
-        const qid = "fakeQid";
+    it("NewAnswer shows username from currentUser", () => {
         const handleAnswer = cy.stub();
-        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswer} />);
-        cy.get("#answerTextInput").type("test");
-        cy.getDataCyTest("answer-page-post-answer-button").click();
-        cy.getDataCyTest("fso-input-error").should("exist");
+        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswer} currentUser={currentUser} />);
+        cy.get("#answerUsernameInput").should("have.value", "testUser");
     });
 
     it("NewAnswer shows error message when answer text is empty", () => {
-        const qid = "fakeQid";
         const handleAnswer = cy.stub();
-        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswer} />);
-        cy.get("#answerUsernameInput").type("test");
+        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswer} currentUser={currentUser} />);
         cy.getDataCyTest("answer-page-post-answer-button").click();
         cy.getDataCyTest("fso-input-error").should("exist");
     });
 
     it("Click on post answer button should call handleAnswer", () => {
-        const qid = "fakeQid";
-        const handleAnswerSpy = cy.stub().as("handleAnswerSpy");
-        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswerSpy} />);
-        cy.get("#answerUsernameInput").type("test");
-        cy.get("#answerTextInput").type("test");
         cy.intercept("POST", "http://localhost:8000/answer/addAnswer", {
             statusCode: 200,
             body: {
@@ -41,6 +33,12 @@ describe("<NewAnswer />", () => {
                 message: "Answer added successfully",
             },
         }).as("addAnswer");
+
+        const handleAnswerSpy = cy.spy().as("handleAnswerSpy");
+        cy.mount(<NewAnswer qid={qid} handleAnswer={handleAnswerSpy} currentUser={currentUser} />);
+        // cy.get("#answerUsernameInput").type("test");
+        cy.get("#answerTextInput").type("test");
+
         cy.getDataCyTest("answer-page-post-answer-button").click();
         cy.get("@handleAnswerSpy").should("have.been.calledOnce");
     });
