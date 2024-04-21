@@ -105,7 +105,26 @@ const getUserInfo = async (req, res) => {
 
     try {
         const userId = req.user.userId;
-        const existingUser = await User.findById(userId);
+        // populate("askedQuestion answeredQuestion votedAnswer");
+        // const existingUser = await User.findById(userId).populate("askedQuestion answeredQuestion votedAnswer");
+        const existingUser = await User.findById(userId)
+            .populate({
+                path: "askedQuestion",
+                populate: [
+                    { path: "tags", model: "Tag" },
+                    { path: "answers", model: "Answer" },
+                ],
+            })
+            .populate({
+                path: "answeredQuestion",
+                populate: {
+                    path: "ans_by", // Assuming 'ans_by' is the field name in answeredQuestion
+                    model: "User", // Assuming the model name for user data is 'User'
+                },
+            })
+            .populate("votedAnswer"); // Continue populating other fields as needed
+
+        // .populate("answeredQuestion votedAnswer");
 
         if (!existingUser) {
             return res.status(404).json({ error: "User not found" });

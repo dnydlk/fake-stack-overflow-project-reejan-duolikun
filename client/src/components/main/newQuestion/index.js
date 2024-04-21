@@ -3,7 +3,7 @@ import Form from "../baseComponents/form";
 import Input from "../baseComponents/input";
 import Textarea from "../baseComponents/textarea";
 import { validateHyperlink } from "../../../tool";
-import { addQuestion } from "../../../services/questionService";
+import * as questionService from "../../../services/questionService";
 
 const NewQuestion = ({ handleQuestions, currentUser }) => {
     console.log("🚀 ~ NewQuestion ~ currentUser:", currentUser);
@@ -68,7 +68,7 @@ const NewQuestion = ({ handleQuestions, currentUser }) => {
             asked_by: currentUser,
             ask_date_time: new Date(),
         };
-        const res = await addQuestion(question);
+        const res = await questionService.addQuestion(question);
         if (res && res._id) {
             handleQuestions();
         }

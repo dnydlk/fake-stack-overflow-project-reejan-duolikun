@@ -92,7 +92,14 @@ const Main = ({ search = "", title, setQuestionPage, currentPage = "home" }) => 
         }
         case "profile": {
             selected = "p";
-            content = <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
+            content = (
+                <ProfilePage
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                    clickTag={clickTag}
+                    handleAnswer={handleAnswer}
+                />
+            );
             break;
         }
         case "answer": {

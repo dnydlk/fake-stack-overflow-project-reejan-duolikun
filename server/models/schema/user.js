@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const user = require("../user");
+const votes = require("../votes");
 
 // Schema for answers
 module.exports = mongoose.Schema(
@@ -42,6 +43,24 @@ module.exports = mongoose.Schema(
             max: 100,
             default: "Link not provided",
         },
+        askedQuestion: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Question",
+            },
+        ],
+        answeredQuestion: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Answer",
+            },
+        ],
+        votedAnswer: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Vote",
+            },
+        ],
     },
     { collection: "User" }
 );

@@ -80,13 +80,55 @@ function voteCreate(user, answer, voteType) {
 }
 
 // Push vote to answer schema
-function pushVoteToAnswer(answer, vote = []) {
-    Answer.findOneAndUpdate({ _id: answer }, { $push: { votes: vote } }, { new: true }, (err, doc) => {
-        if (err) {
-            console.log("Something wrong with pushing votes to Answer schema");
-        }
-        console.log(doc);
-    });
+async function pushVoteToAnswer(answerId, vote) {
+    try {
+        const updatedDoc = await Answer.findOneAndUpdate({ _id: answerId }, { $push: { votes: vote } }, { new: true });
+        console.log(updatedDoc);
+    } catch (err) {
+        console.log("Something wrong with pushing votes to Answer schema:", err);
+    }
+}
+
+// Push user asked questions to user schema
+async function pushAskedQuestionToUser(userId, questionId) {
+    try {
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: userId },
+            { $push: { askedQuestion: questionId } },
+            { new: true }
+        );
+        console.log("Updated user with new asked question:", updatedUser);
+    } catch (err) {
+        console.log("Error updating user with new asked question:", err);
+    }
+}
+
+// Push user answered questions to user schema
+async function pushAnsweredQuestionToUser(userId, answerId) {
+    try {
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: userId },
+            { $push: { answeredQuestion: answerId } },
+            { new: true }
+        );
+        console.log("Updated user with new answered question:", updatedUser);
+    } catch (err) {
+        console.log("Error updating user with new answered question:", err);
+    }
+}
+
+// Push user voted answers to user schema
+async function pushVotedAnswerToUser(userId, voteId) {
+    try {
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: userId },
+            { $push: { votedAnswer: voteId } },
+            { new: true }
+        );
+        console.log("Updated user with new voted answer:", updatedUser);
+    } catch (err) {
+        console.log("Error updating user with new voted answer:", err);
+    }
 }
 
 const init = async () => {
@@ -202,7 +244,7 @@ const init = async () => {
     let a8 = await answerCreate("Store data in a SQLLite database.", ihba001, new Date("2023-03-22T21:17:53"));
 
     // Create questions
-    await questionCreate(
+    let q1 = await questionCreate(
         "Programmatically navigate using React router",
         "the alert shows the proper index for the li clicked, and when I alert the variable within the last function Im calling, moveToNextImage(stepClicked), the same value shows but the animation isnt happening. This works many other ways, but Im trying to pass the index value of the list item clicked to use for the math to calculate.",
         [t1, t2],
@@ -211,7 +253,7 @@ const init = async () => {
         new Date("2022-01-20T03:00:00"),
         10
     );
-    await questionCreate(
+    let q2 = await questionCreate(
         "android studio save string shared preference, start activity and load the saved string",
         "I am using bottom navigation view but am using custom navigation, so my fragments are not recreated every time i switch to a different view. I just hide/show my fragments depending on the icon selected. The problem i am facing is that whenever a config change happens (dark/light theme), my app crashes. I have 2 fragments in this activity and the below code is what i am using to refrain them from being recreated.",
         [t3, t4, t2],
@@ -220,7 +262,7 @@ const init = async () => {
         new Date("2023-01-10T11:24:30"),
         121
     );
-    await questionCreate(
+    let q3 = await questionCreate(
         "Object storage for a web application",
         "I am currently working on a website where, roughly 40 million documents and images should be served to its users. I need suggestions on which method is the most suitable for storing content with subject to these requirements.",
         [t5, t6],
@@ -229,7 +271,7 @@ const init = async () => {
         new Date("2023-02-18T01:02:15"),
         200
     );
-    await questionCreate(
+    let q4 = await questionCreate(
         "Quick question about storage on android",
         "I would like to know the best way to go about storing an array on an android phone so that even when the app/activity ended the data remains",
         [t3, t4, t5],
@@ -241,6 +283,85 @@ const init = async () => {
 
     // Create votes
     let v1 = await voteCreate(hamkalo, a1, true);
+    let v3 = await voteCreate(azad, a1, true);
+    let v2 = await voteCreate(hamkalo, a2, false);
+    let v4 = await voteCreate(azad, a2, false);
+    let v5 = await voteCreate(abaya, a3, true);
+    let v6 = await voteCreate(abaya, a4, false);
+    let v7 = await voteCreate(abaya, a5, false);
+    let v8 = await voteCreate(alia, a3, true);
+    let v9 = await voteCreate(alia, a6, false);
+    let v10 = await voteCreate(alia, a7, true);
+    let v11 = await voteCreate(sana, a6, false);
+    let v12 = await voteCreate(sana, a7, true);
+    let v13 = await voteCreate(abhi3241, a6, false);
+    let v14 = await voteCreate(abhi3241, a7, true);
+    let v15 = await voteCreate(mackson3332, a8, true);
+    let v16 = await voteCreate(mackson3332, a7, true);
+    let v17 = await voteCreate(ihba001, a8, true);
+    let v18 = await voteCreate(ihba001, a7, true);
+    let v19 = await voteCreate(JojiJohn, a8, true);
+    let v20 = await voteCreate(saltyPeter, a8, true);
+
+    // Push votes to answer schema
+    await pushVoteToAnswer(a1, v1);
+    await pushVoteToAnswer(a2, v2);
+    await pushVoteToAnswer(a1, v3);
+    await pushVoteToAnswer(a2, v4);
+    await pushVoteToAnswer(a3, v5);
+    await pushVoteToAnswer(a4, v6);
+    await pushVoteToAnswer(a5, v7);
+    await pushVoteToAnswer(a3, v8);
+    await pushVoteToAnswer(a6, v9);
+    await pushVoteToAnswer(a7, v10);
+    await pushVoteToAnswer(a6, v11);
+    await pushVoteToAnswer(a7, v12);
+    await pushVoteToAnswer(a6, v13);
+    await pushVoteToAnswer(a7, v14);
+    await pushVoteToAnswer(a1, v1);
+    await pushVoteToAnswer(a2, v2);
+    await pushVoteToAnswer(a8, v15);
+    await pushVoteToAnswer(a7, v16);
+    await pushVoteToAnswer(a8, v17);
+    await pushVoteToAnswer(a7, v18);
+
+    // Push user asked questions to user schema
+    await pushAskedQuestionToUser(JojiJohn, q1);
+    await pushAskedQuestionToUser(saltyPeter, q2);
+    await pushAskedQuestionToUser(monkeyABC, q3);
+    await pushAskedQuestionToUser(elephantCDE, q4);
+
+    // Push user answered questions to user schema
+    await pushAnsweredQuestionToUser(hamkalo, a1);
+    await pushAnsweredQuestionToUser(azad, a2);
+    await pushAnsweredQuestionToUser(abaya, a3);
+    await pushAnsweredQuestionToUser(alia, a4);
+    await pushAnsweredQuestionToUser(sana, a5);
+    await pushAnsweredQuestionToUser(abhi3241, a6);
+    await pushAnsweredQuestionToUser(mackson3332, a7);
+    await pushAnsweredQuestionToUser(ihba001, a8);
+
+    // Push user voted answers to user schema
+    await pushVotedAnswerToUser(hamkalo, v1);
+    await pushVotedAnswerToUser(azad, v3);
+    await pushVotedAnswerToUser(hamkalo, v2);
+    await pushVotedAnswerToUser(azad, v4);
+    await pushVotedAnswerToUser(abaya, v5);
+    await pushVotedAnswerToUser(abaya, v6);
+    await pushVotedAnswerToUser(abaya, v7);
+    await pushVotedAnswerToUser(alia, v8);
+    await pushVotedAnswerToUser(alia, v9);
+    await pushVotedAnswerToUser(alia, v10);
+    await pushVotedAnswerToUser(sana, v11);
+    await pushVotedAnswerToUser(sana, v12);
+    await pushVotedAnswerToUser(abhi3241, v13);
+    await pushVotedAnswerToUser(abhi3241, v14);
+    await pushVotedAnswerToUser(mackson3332, v15);
+    await pushVotedAnswerToUser(mackson3332, v16);
+    await pushVotedAnswerToUser(ihba001, v17);
+    await pushVotedAnswerToUser(ihba001, v18);
+    await pushVotedAnswerToUser(JojiJohn, v19);
+    await pushVotedAnswerToUser(saltyPeter, v20);
 
     // Close the database connection if it is open
     if (db) db.close();
