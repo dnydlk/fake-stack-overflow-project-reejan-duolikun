@@ -14,7 +14,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser, setP
 
     const [question, setQuestion] = useState({});
 
-    const [flagText, setFlagText] = useState("Flag as inappropriate");
+    const [flagText, setFlagText] = useState("");
 
     const navigate = useNavigate();
 
@@ -68,6 +68,7 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser, setP
         const fetchData = async () => {
             let res = await questionService.getQuestionById(qid);
             setQuestion(res || {});
+            setFlagText(res.isFlagged ? "Unflag" : "Flag as inappropriate");
         };
         fetchData().catch((e) => console.log(e));
     }, [qid]);
@@ -134,10 +135,10 @@ const AnswerPage = ({ qid, handleNewQuestion, handleNewAnswer, currentUser, setP
             ) : (
                 ""
             )}
-            {/* <pre>
+            <pre>
                 <code>{JSON.stringify(question, null, 2)}</code>
             </pre>
-            <pre>
+            {/* <pre>
                 <code>{JSON.stringify(currentUser._id, null, 2)}</code>
             </pre> */}
         </div>
