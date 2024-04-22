@@ -8,9 +8,16 @@ All the features you have implemented.
 
 | Feature   | Description     | E2E Tests      | Component Tests | Jest Tests     |
 |-----------|-----------------|----------------|-----------------|----------------|
-| Feature 1 | This is feature 1. | /path/to/test | path/to/test    | path/to/test   |
-| Feature 2 | This is feature 2. | /path/to/test | path/to/test    | path/to/test   |
+| View posts | Allow users to view all the questions on the platform | /path/to/test | path/to/test    | path/to/test   |
+| Create new posts | This is feature 2. | /path/to/test | path/to/test    | path/to/test   |
+| Search for existing posts | This is feature 2. | /path/to/test | path/to/test    | path/to/test   |
+| Commenting on posts | This is feature 2. | /path/to/test | path/to/test    | path/to/test   |
+| Voting on posts | This is feature 2. | /path/to/test | path/to/test    | path/to/test   |
+| Tagging posts | This is feature 2. | /path/to/test | path/to/test    | path/to/test   |
+| User profiles | This is feature 2. | /path/to/test | path/to/test    | path/to/test   |
+| Post moderation | This is feature 2. | /path/to/test | path/to/test    | path/to/test   |
 . . .
+
 
 ## Instructions to generate and view coverage report 
 
@@ -20,6 +27,6 @@ $ npx cypress run
 
 $ npx cypress run --component 
 
-code coverage report will be located at [text](client/coverage/lcov-report/index.html)
+code coverage report will be located at [client/coverage/lcov-report/index.html](client/coverage/lcov-report/index.html)
 
 ## Extra Credit Section (if applicable)
