@@ -125,6 +125,17 @@ describe("Questions API", () => {
         expect(response.body.error).toEqual("User not authenticated");
     });
 
+    // it.only("should allow access with a valid token", async () => {
+    //     const validToken = generateToken({ id: "123", role: "moderator" });
+
+    //     const response = await supertest(server)
+    //         .get("/question/getFlaggedQuestions")
+    //         .set("Cookie", `access-token=${validToken}`);
+
+    //     expect(response.status).toBe(200);
+    //     expect(response.body).toBeDefined();
+    // });
+
     it("should return 401 for access without a valid token", async () => {
         const response = await supertest(server).get("/question/getFlaggedQuestions");
 
