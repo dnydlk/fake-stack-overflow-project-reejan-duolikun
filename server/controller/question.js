@@ -79,33 +79,34 @@ const deleteQuestion = async (req, res) => {
 };
 
 const validateToken = (req, res, next) => {
-	const accessToken = req.cookies["access-token"];
-	if (!accessToken) {
-		return res.status(400).json({ error: "User not authenticated" });
-	}
-	try {
-		const decodedToken = verify(accessToken, JWT_SECRET);
-		if (decodedToken) {
-			req.authenticated = true;
-			req.user = decodedToken;
-			console.log("🚀 ~ validateToken ~ decodedToken:", decodedToken);
-			console.log("🚀 ~ validateToken: Token validated");
-			return next();
-		}
-	} catch (err) {
-		return res.status(400).json({ error: err });
-	}
+    const accessToken = req.cookies["access-token"];
+    if (!accessToken) {
+        return res.status(400).json({ error: "User not authenticated" });
+    }
+    try {
+        const decodedToken = verify(accessToken, JWT_SECRET);
+        if (decodedToken) {
+            req.user = decodedToken;
+            req.authenticated = true;
+            console.log("🚀 ~ validateToken ~ decodedToken:", decodedToken);
+            console.log("🚀 ~ validateToken: Token validated");
+            return next();
+        }
+    } catch (err) {
+        return res.status(401).json({ error: "Invalid token" });
+    }
 };
 
 const getFlaggedQuestions = async (req, res) => {
-	try {
-		const questions = await Question.find({ isFlagged: true }).populate("flaggedBy");
-		console.log("🚀 ~ getFlaggedQuestion ~ questions:", questions);
-		res.json(questions);
-	} catch (err) {
-		console.error(err);
-		res.status(500).json({ message: "Internal server error" });
-	}
+    try {
+        const questions = await Question.find({ isFlagged: true }).populate("flaggedBy");
+        console.log("🚀 ~ getFlaggedQuestion ~ questions:", questions);
+        res.json(questions);
+    } catch (err) {
+        console.error(err);
+        console.log("🚀 ~ getFlaggedQuestions ~ err:", err);
+        res.status(500).json({ message: "Internal server error" });
+    }
 };
 
 const flagQuestion = async (req, res) => {
