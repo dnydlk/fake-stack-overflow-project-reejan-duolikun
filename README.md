@@ -4,7 +4,7 @@ Login with your Northeastern credentials and read the project description [here]
 
 ## List of features
 
-All the features you have implemented.
+All the features you have implemented. 
 
 | Feature                   | Description                                                                                                     | E2E Tests                                | Component Tests          | Jest Tests                               |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------------------------ | ---------------------------------------- |
