@@ -14,4 +14,12 @@ All the features you have implemented.
 
 ## Instructions to generate and view coverage report 
 
+npm install on client folder
+
+$ npx cypress run
+
+$ npx cypress run --component 
+
+code coverage report will be located at [text](client/coverage/lcov-report/index.html)
+
 ## Extra Credit Section (if applicable)
