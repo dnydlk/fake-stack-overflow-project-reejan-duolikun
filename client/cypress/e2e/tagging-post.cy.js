@@ -146,9 +146,6 @@ describe("Tagging Post", () => {
             "Test Question 1 Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
         );
         cy.get("#formTagInput").type("test-tag test-tag test-tag");
-        cy.window().then((win) => {
-            win.document.getElementById("formUsernameInput").value = "newTestUser";
-        });
         cy.contains("Post Question").click();
         cy.contains("test-tag").should("have.length", 1);
         cy.contains("Tags").click();
