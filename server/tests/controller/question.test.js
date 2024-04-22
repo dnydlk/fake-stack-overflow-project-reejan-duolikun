@@ -5,21 +5,24 @@ const User = require("../../models/user");
 const { verify } = require("jsonwebtoken");
 const { addTag, getQuestionsByOrder, filterQuestionsBySearch } = require("../../utils/question");
 
-jest.mock("../models/questions");
-jest.mock("../models/user");
-jest.mock("../utils/question");
+jest.mock("../../models/questions");
+jest.mock("../../models/user");
+jest.mock("../../utils/question");
 jest.mock("jsonwebtoken", () => ({
     verify: jest.fn().mockImplementation((token, secret) => {
-        if (secret === "RANDOM-TOKEN") {
+        if (
+            token ===
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjI1YTIzZTEwMDMxNjRhNGI4MjE2NjAiLCJyb2xlIjoibW9kZXJhdG9yIiwiaWF0IjoxNzEzNzUwNDk1fQ.S2ssKzKBghhP9-dm0n2grqd4riNAHI18Ji1KUNEhfNA" &&
+            secret === "RANDOM-TOKEN"
+        ) {
             return { id: "userid", role: "moderator" };
+        } else {
+            return { id: "userid", role: "user" };
         }
-        throw new Error("Invalid token");
     }),
 }));
 
 let server;
-let validToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjI1YTIzZTEwMDMxNjRhNGI4MjE2NjAiLCJyb2xlIjoibW9kZXJhdG9yIiwiaWF0IjoxNzEzNzUwNDk1fQ.S2ssKzKBghhP9-dm0n2grqd4riNAHI18Ji1KUNEhfNA";
 
 beforeAll(() => {
     server = require("../../server");
@@ -96,20 +99,29 @@ describe("Questions API", () => {
 
         const response = await supertest(server)
             .delete(`/question/deleteQuestion/${qid}`)
-            .set("Cookie", `access-token=${validToken}`);
+            .set(
+                "Cookie",
+                `access-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjI1YTIzZTEwMDMxNjRhNGI4MjE2NjAiLCJyb2xlIjoibW9kZXJhdG9yIiwiaWF0IjoxNzEzNzUwNDk1fQ.S2ssKzKBghhP9-dm0n2grqd4riNAHI18Ji1KUNEhfNA`
+            );
 
         expect(response.status).toBe(200);
         expect(response.body.message).toEqual("Question deleted successfully");
     });
 
-    it("should return 400 if user is not a moderator", async () => {
+    it("should return 403 if user is not a moderator", async () => {
         const qid = "65e9b5a995b6c7045a30d823";
 
         User.findById.mockResolvedValue({ _id: "userid", role: "user" });
 
-        const response = await supertest(server).delete(`/question/deleteQuestion/${qid}`);
+        const response = await supertest(server)
+            .delete(`/question/deleteQuestion/${qid}`)
+            .set(
+                "Cookie",
+                `access-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjI1YTIzZTEwMDMxNjRhNGI4MjE2NjAiLCJyb2xlIjoibW9kZXJhdG9yIiwiaWF0IjoxNzEzNzUwNDk1fQ.S2ssKzKBghhP9-dm0n2grqd4riNAHI18Ji1KUNEhfNB`
+            );
 
-        expect(response.status).toBe(400);
+        console.log("🚀 ~ it ~ response:", response.body);
+        expect(response.status).toBe(403);
         expect(response.body.message).toEqual("Access Denied: Insufficient permissions");
     });
 
