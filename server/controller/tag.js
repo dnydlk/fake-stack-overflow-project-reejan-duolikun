@@ -6,34 +6,35 @@ const router = express.Router();
 
 // Get all tags with the number of questions associated with each tag
 const getTagsWithQuestionNumber = async (req, res) => {
-    const tags = await Tag.find();
+	try {
+		// Find all tags
+		const allTags = await Tag.find();
+		const allQuestions = await Question.find().populate('tags');
 
-    // Create a map to store the number of questions associated with each tag
-    const tagQuestionCount = new Map();
+		// Create an empty object to store tag counts
+		const tagCounts = {};
 
-    // Initialize the map with 0 for each tag
-    tags.forEach((tag) => tagQuestionCount.set(tag._id.toString(), 0));
+		// Iterate over each tag
+		for (const tag of allTags) {
+			// Find questions that have this tag
+			const questionsWithTag = allQuestions.filter(question => question.tags.some(t => t.name === tag.name));
 
-    // Get all questions and populate the tags field
-    const questions = await Question.find().populate("tags");
+			// Count the number of questions
+			const questionCount = questionsWithTag.length;
 
-    // Iterate through all questions and increment the count for each tag
-    questions.forEach((question) => {
-        question.tags.forEach((tag) => {
-            if (tagQuestionCount.has(tag._id.toString())) {
-                tagQuestionCount.set(tag._id.toString(), tagQuestionCount.get(tag._id.toString()) + 1);
-            }
-        });
-    });
+			// Add the tag and its question count to the tagCounts object
+			tagCounts[tag.name] = questionCount;
+		}
 
-    // Create an array of tags with the count of questions associated with each tag
-    const tagsWithCount = tags.map((tag) => ({
-        name: tag.name,
-        qcnt: tagQuestionCount.get(tag._id.toString()),
-    }));
+		// Convert tagCounts object to array of objects with name and qcnt properties
+		const tagsWithQuestionNumber = Object.entries(tagCounts).map(([name, qcnt]) => ({ name, qcnt }));
 
-    // return the tags sorted by the number of questions associated with each tag
-    res.json(tagsWithCount.sort((a, b) => b.qcnt - a.qcnt));
+		// Returning the tags with question numbers
+		res.json(tagsWithQuestionNumber);
+	} catch (error) {
+		console.error('Error retrieving tags with question numbers:', error);
+		res.status(500).json({ error: 'Internal server error' });
+	}
 };
 
 // Routers
