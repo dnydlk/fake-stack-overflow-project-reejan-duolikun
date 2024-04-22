@@ -39,7 +39,7 @@ const signup = async (req, res) => {
 			});
 
 			// save new user into the database
-			newUser.save().then((result) => {
+			newUser.save().then(() => {
 				// Create JWT token
 				const accessToken = createTokens(newUser);
 
@@ -114,42 +114,42 @@ const getUserInfo = async (req, res) => {
 	}
 
 	try {
-        const userId = req.user.userId;
-        // populate("askedQuestion answeredQuestion votedAnswer");
-        // const existingUser = await User.findById(userId).populate("askedQuestion answeredQuestion votedAnswer");
-        const existingUser = await User.findById(userId)
-            .populate({
-                path: "askedQuestion",
-                populate: [
-                    { path: "tags", model: "Tag" },
-                    { path: "answers", model: "Answer" },
-                    { path: "asked_by", model: "User" },
-                ],
-            })
-            .populate({
-                path: "answeredQuestion",
-                populate: {
-                    path: "ans_by",
-                    model: "User",
-                },
-            })
-            .populate({
-                path: "votedAnswer",
-                populate: {
-                    path: "answer",
-                    model: "Answer",
-                },
-            });
+		const userId = req.user.userId;
+		// populate("askedQuestion answeredQuestion votedAnswer");
+		// const existingUser = await User.findById(userId).populate("askedQuestion answeredQuestion votedAnswer");
+		const existingUser = await User.findById(userId)
+			.populate({
+				path: "askedQuestion",
+				populate: [
+					{ path: "tags", model: "Tag" },
+					{ path: "answers", model: "Answer" },
+					{ path: "asked_by", model: "User" },
+				],
+			})
+			.populate({
+				path: "answeredQuestion",
+				populate: {
+					path: "ans_by",
+					model: "User",
+				},
+			})
+			.populate({
+				path: "votedAnswer",
+				populate: {
+					path: "answer",
+					model: "Answer",
+				},
+			});
 
-        if (!existingUser) {
-            return res.status(404).json({ error: "User not found" });
-        }
+		if (!existingUser) {
+			return res.status(404).json({ error: "User not found" });
+		}
 
-        res.json(existingUser); // Send user information back to client
-    } catch (err) {
-        console.error("Database error: ", err);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
+		res.json(existingUser); // Send user information back to client
+	} catch (err) {
+		console.error("Database error: ", err);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
 };
 
 const createTokens = (user) => {
