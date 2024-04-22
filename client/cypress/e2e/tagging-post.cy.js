@@ -30,9 +30,6 @@ describe("Tagging Post", () => {
             "Test Question 1 Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
         );
         cy.get("#formTagInput").type("javascript t1 t2");
-        cy.window().then((win) => {
-            win.document.getElementById("formUsernameInput").value = "newTestUser";
-        });
         cy.contains("Post Question").click();
         cy.contains("javascript");
         cy.contains("t1");
