@@ -42,8 +42,10 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.12.35",
     "eslint": "^8.54.0",
     "eslint-plugin-react": "^7.33.2",
+    "nyc": "^15.1.0",
     "react-router-dom": "^6.22.3",
     "wait-on": "^7.2.0"
   }
