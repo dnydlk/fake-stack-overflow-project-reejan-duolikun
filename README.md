@@ -23,9 +23,9 @@ All the features you have implemented.
 
 npm install on client folder
 
-$ npx cypress run
+  $ npx cypress run
 
-$ npx cypress run --component
+  $ npx cypress run --component
 
 code coverage report will be located at [client/coverage/lcov-report/index.html](client/coverage/lcov-report/index.html)
 
