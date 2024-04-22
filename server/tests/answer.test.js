@@ -7,6 +7,7 @@ const Answer = require("../models/answers");
 const Question = require("../models/questions");
 const User = require("../models/user");
 
+
 // Mock the Answer model
 jest.mock("../models/answers");
 
@@ -73,5 +74,33 @@ describe("POST /addAnswer", () => {
 			{ _id: "dummyQuestionId" },
 			{ $push: { answers: "dummyAnswerId" } }
 		);
+	});
+
+	describe('GET /getAnswer', () => {
+		it('should return answers by user', async () => {
+			// Mock request query
+			const reqQuery = {
+				userId: 'dummyUserId'
+			};
+
+			// Mock the find method of the Answer model
+			const dummyAnswers = [
+				{ _id: 'answer1Id', text: 'Answer 1', ans_by: 'dummyUserId', votes: [] },
+				{ _id: 'answer2Id', text: 'Answer 2', ans_by: 'dummyUserId', votes: [] }
+			];
+			//Answer.find.mockResolvedValueOnce(dummyAnswers);
+			Answer.find.mockReturnValueOnce({
+				populate: jest.fn().mockResolvedValueOnce(dummyAnswers)
+			});
+
+			// Send request to the router
+			const response = await supertest(server)
+				.get('/answer/getAnswer')
+				.query(reqQuery);
+
+			// Assert response
+			expect(response.status).toBe(200);
+			expect(response.body).toEqual(dummyAnswers);
+		});
 	});
 });
