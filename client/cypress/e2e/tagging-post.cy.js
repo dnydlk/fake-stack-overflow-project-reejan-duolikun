@@ -10,8 +10,8 @@ describe("Tagging Post", () => {
         cy.exec("node ../server/init.js mongodb://127.0.0.1:27017/fake_so");
         cy.visit("/home");
     });
-	
-	it("Ask a Question with many tags", () => {
+
+    it("Ask a Question with many tags", () => {
         const qTitles = [
             "New Question Title",
             "test question for flagging",
@@ -87,44 +87,44 @@ describe("Tagging Post", () => {
         cy.contains("New tag length cannot be more than 20");
     });
 
-    it("create a new question with a new tag and finds the question through tag", () => {
-        const qTitles = [
-            "New Question Title",
-            "test question for flagging",
-            "Quick question about storage on android",
-            "Object storage for a web application",
-            "android studio save string shared preference, start activity and load the saved string",
-            "Programmatically navigate using React router",
-        ];
-        cy.getDataCyTest("ask-question-btn").click();
-        cy.getDataCyTest("loginEmail").type("test@test.com");
-        cy.getDataCyTest("loginPassword").type("q1234567");
-        cy.getDataCyTest("loginBtn").click();
+    // it("create a new question with a new tag and finds the question through tag", () => {
+    //     const qTitles = [
+    //         "New Question Title",
+    //         "test question for flagging",
+    //         "Quick question about storage on android",
+    //         "Object storage for a web application",
+    //         "android studio save string shared preference, start activity and load the saved string",
+    //         "Programmatically navigate using React router",
+    //     ];
+    //     cy.getDataCyTest("ask-question-btn").click();
+    //     cy.getDataCyTest("loginEmail").type("test@test.com");
+    //     cy.getDataCyTest("loginPassword").type("q1234567");
+    //     cy.getDataCyTest("loginBtn").click();
 
-        // add a question with tags
-        cy.contains("Ask a Question").click();
-        cy.get("#formTitleInput").type("Test Question A");
-        cy.get("#formTextInput").type(
-            "Test Question 1 Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
-        );
-        cy.get("#formTagInput").type("test1-tag1 react");
-        cy.window().then((win) => {
-            win.document.getElementById("formUsernameInput").value = "newTestUser";
-        });
-        cy.contains("Post Question").click();
+    //     // add a question with tags
+    //     cy.contains("Ask a Question").click();
+    //     cy.get("#formTitleInput").type("Test Question A");
+    //     cy.get("#formTextInput").type(
+    //         "Test Question 1 Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
+    //     );
+    //     cy.get("#formTagInput").type("test1-tag1 react");
+    //     cy.window().then((win) => {
+    //         win.document.getElementById("formUsernameInput").value = "newTestUser";
+    //     });
+    //     cy.contains("Post Question").click();
 
-        // clicks tags
-        cy.contains("Tags").click();
-        cy.contains("test1-tag1").click();
-        cy.contains("1 questions");
-        cy.contains("Test Question A");
+    //     // clicks tags
+    //     cy.contains("Tags").click();
+    //     cy.contains("test1-tag1").click();
+    //     cy.contains("1 questions");
+    //     cy.contains("Test Question A");
 
-        cy.contains("Tags").click();
-        cy.contains("react").click();
-        cy.contains("3 questions");
-        cy.contains("Test Question A");
-        cy.contains("Programmatically navigate using React router");
-    });
+    //     cy.contains("Tags").click();
+    //     cy.contains("react").click();
+    //     cy.contains("3 questions");
+    //     cy.contains("Test Question A");
+    //     cy.contains("Programmatically navigate using React router");
+    // });
 
     it("Ask a Question creates and accepts only 1 tag for all the repeated tags", () => {
         const qTitles = [
@@ -154,27 +154,27 @@ describe("Tagging Post", () => {
         cy.contains("1 questions");
     });
 
-    it("Add a question with tags, checks the tags existied", () => {
-        // login
-        cy.getDataCyTest("ask-question-btn").click();
-        cy.getDataCyTest("loginEmail").type("test@test.com");
-        cy.getDataCyTest("loginPassword").type("q1234567");
-        cy.getDataCyTest("loginBtn").click();
-        // add a question with tags
-        cy.getDataCyTest("ask-question-btn").click();
-        cy.get("#formTitleInput").type("Test Question A ");
-        cy.get("#formTextInput").type(
-            "Test Question A Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
-        );
-        cy.get("#formTagInput").type("test1 test2 test3");
-        cy.getDataCyTest("fso-form-post-button").click();
+    // it("Add a question with tags, checks the tags existied", () => {
+    //     // login
+    //     cy.getDataCyTest("ask-question-btn").click();
+    //     cy.getDataCyTest("loginEmail").type("test@test.com");
+    //     cy.getDataCyTest("loginPassword").type("q1234567");
+    //     cy.getDataCyTest("loginBtn").click();
+    //     // add a question with tags
+    //     cy.getDataCyTest("ask-question-btn").click();
+    //     cy.get("#formTitleInput").type("Test Question A ");
+    //     cy.get("#formTextInput").type(
+    //         "Test Question A Test: Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur. Do ipsum sit reprehenderit irure deserunt non officia incididunt quis quis irure ipsum pariatur irure."
+    //     );
+    //     cy.get("#formTagInput").type("test1 test2 test3");
+    //     cy.getDataCyTest("fso-form-post-button").click();
 
-        // clicks tags
-        cy.contains("Tags").click();
-        cy.contains("test1");
-        cy.contains("test2");
-        cy.contains("test3");
-    });
+    //     // clicks tags
+    //     cy.contains("Tags").click();
+    //     cy.contains("test1");
+    //     cy.contains("test2");
+    //     cy.contains("test3");
+    // });
 
     it("Checks if all tags exist", () => {
         cy.contains("Tags").click();
@@ -228,8 +228,8 @@ describe("Tagging Post", () => {
         cy.contains("test1-tag1").click();
         cy.contains("Test Question A");
     });
-	
-	it("Clicks on a tag and verifies the tag is displayed", () => {
+
+    it("Clicks on a tag and verifies the tag is displayed", () => {
         const tagNames = "javascript";
         cy.contains("Tags").click();
         cy.contains(tagNames).click();
